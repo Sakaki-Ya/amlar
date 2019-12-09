@@ -35,7 +35,7 @@ const settings = {
 const soundTest = () => {
   const alarm = ["test", "digital", "chicken", "voice"];
   const alarmNumber: number = 1;
-  const testSound = new Audio("static/sounds/" + alarm[alarmNumber] + ".mp3");
+  const testSound = new Audio("../sounds/" + alarm[alarmNumber] + ".mp3");
   testSound.play();
 };
 
