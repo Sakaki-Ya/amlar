@@ -41,7 +41,6 @@ const App: React.FC = () => {
             justify-content: center;
             text-align: center;
             min-height: 100vh;
-            padding: 2.5% 5%;
             color: white;
           }
           code {
@@ -87,7 +86,7 @@ const main = css`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   width: 100vw;
