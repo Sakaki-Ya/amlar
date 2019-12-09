@@ -10,20 +10,22 @@ import chicken from "../assets/chicken.svg";
 
 const SelectSoundSlider = () => (
   <React.Fragment>
-    <Slider {...settings}>
-      <div id="classic">
-        <img src={classic} alt="Classic Alarm Clock" css={soundIcon} />
-        <p>Classic Alarm Clock</p>
-      </div>
-      <div id="digital">
-        <img src={digital} alt="Digital Alarm Clock" css={soundIcon} />
-        <p>Digital Alarm Clock</p>
-      </div>
-      <div id="chicken">
-        <img src={chicken} alt="Chicken's Scream" css={soundIcon} />
-        <p>Chicken's Scream</p>
-      </div>
-    </Slider>
+    <div css={sounds}>
+      <Slider {...settings}>
+        <div id="classic">
+          <img src={classic} alt="Classic Alarm Clock" css={sounds__icon} />
+          <p>Classic Alarm Clock</p>
+        </div>
+        <div id="digital">
+          <img src={digital} alt="Digital Alarm Clock" css={sounds__icon} />
+          <p>Digital Alarm Clock</p>
+        </div>
+        <div id="chicken">
+          <img src={chicken} alt="Chicken's Scream" css={sounds__icon} />
+          <p>Chicken's Scream</p>
+        </div>
+      </Slider>
+    </div>
     <button onClick={soundTest} css={sounds__test}>
       Sound Test
     </button>
@@ -42,12 +44,19 @@ const soundTest = () => {
   testSound.play();
 };
 
-const soundIcon = css`
+const sounds = css`
   max-width: 120px;
   @media screen and (min-width: 480px) {
     max-width: 240px;
   }
   margin-bottom: 1em;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+`;
+
+const sounds__icon = css`
+  width: 100%;
 `;
 
 const sounds__test = css`
