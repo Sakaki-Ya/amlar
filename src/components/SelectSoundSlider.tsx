@@ -8,8 +8,22 @@ import classic from "../assets/classic.svg";
 import digital from "../assets/digital.svg";
 import chicken from "../assets/chicken.svg";
 
+const settings = {
+  afterChange: (current: any) => console.log(current)
+};
+
+const soundTest = () => {
+  const alarm = ["classic", "digital", "chicken", "voice"];
+  const alarmNumber = 0;
+  const testSound = new Audio("../assets/" + alarm[alarmNumber] + ".mp3");
+  console.log(testSound);
+  testSound.pause();
+  testSound.play();
+};
+
 const SelectSoundSlider = () => (
   <React.Fragment>
+    <h2 css={sounds__h2}>Select Alarm Sound</h2>
     <div css={sounds}>
       <Slider {...settings}>
         <div id="classic">
@@ -32,18 +46,6 @@ const SelectSoundSlider = () => (
   </React.Fragment>
 );
 
-const settings = {
-  iadaptiveHeight: true
-};
-
-const soundTest = () => {
-  const alarm = ["test", "digital", "chicken", "voice"];
-  const alarmNumber: number = 0;
-  const testSound = new Audio("../assets/" + alarm[alarmNumber] + ".mp3");
-  testSound.pause();
-  testSound.play();
-};
-
 const sounds = css`
   max-width: 120px;
   @media screen and (min-width: 480px) {
@@ -55,8 +57,15 @@ const sounds = css`
   margin: auto;
 `;
 
+const sounds__h2 = css`
+  font-weight: bold;
+  margin-bottom: 1em;
+  width: 100%;
+`;
+
 const sounds__icon = css`
   width: 100%;
+  margin-bottom: 1em;
 `;
 
 const sounds__test = css`

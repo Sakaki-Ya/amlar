@@ -1,62 +1,60 @@
 /** @jsx jsx */
-import React /* , { FC } */ from "react";
+import React, { FC } from "react";
 import emotionReset from "emotion-reset";
 import { jsx, Global, css } from "@emotion/core";
 import Header from "./components/Header";
 import Clock from "./components/Clock";
 import Footer from "./components/Footer";
 
-const App: React.FC = () => {
-  return (
-    <React.Fragment>
-      <Global
-        styles={css`
-          ${emotionReset};
+const App: React.FC = () => (
+  <React.Fragment>
+    <Global
+      styles={css`
+        ${emotionReset};
 
-          body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-              "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-              "Helvetica Neue", sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+        body {
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+            "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+            "Helvetica Neue", sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
 
-            background: linear-gradient(180deg, #0f4c81, #0e0035);
-            background-size: 400% 400%;
-            animation: bgAnime 75s ease infinite;
-            @keyframes bgAnime {
-              0% {
-                background-position: 50% 0%;
-              }
-              50% {
-                background-position: 50% 100%;
-              }
-              100% {
-                background-position: 50% 0%;
-              }
+          background: linear-gradient(180deg, #0f4c81, #0e0035);
+          background-size: 400% 400%;
+          animation: bgAnime 75s ease infinite;
+          @keyframes bgAnime {
+            0% {
+              background-position: 50% 0%;
             }
+            50% {
+              background-position: 50% 100%;
+            }
+            100% {
+              background-position: 50% 0%;
+            }
+          }
 
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            text-align: center;
-            min-height: 100vh;
-            color: white;
-          }
-          code {
-            font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-              monospace;
-          }
-        `}
-      />
-      <div css={main}>
-        <Header />
-        <Clock />
-      </div>
-      <Footer />
-    </React.Fragment>
-  );
-};
+          box-sizing: border-box;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          text-align: center;
+          min-height: 100vh;
+          color: white;
+        }
+        code {
+          font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+            monospace;
+        }
+      `}
+    />
+    <div css={main}>
+      <Header />
+      <Clock />
+    </div>
+    <Footer />
+  </React.Fragment>
+);
 
 const main = css`
   background: linear-gradient(
@@ -69,7 +67,7 @@ const main = css`
     rgba(129, 204, 69, 0.2)
   );
   background-size: 800% 800%;
-  animation: bgAnime2 112s ease infinite;
+  animation: bgAnime2 170s ease infinite;
   @keyframes bgAnime2 {
     0% {
       background-position: 0% 50%;

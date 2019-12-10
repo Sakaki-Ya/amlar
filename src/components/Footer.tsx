@@ -33,6 +33,7 @@ const footer__link = css`
   color: ${colors.green};
   text-decoration: none;
   margin-right: 1em;
+  font-weight: bold;
 `;
 
 const footer__copyright = css`
