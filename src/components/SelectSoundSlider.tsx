@@ -13,14 +13,14 @@ const settings = {
 
 const soundTest = () => {
   const alarm = ["classic", "digital", "chicken", "voice"];
-  const testSound = new Audio(alarm[alarmNumber] + ".mp3");
-  if (testSound.paused && testSound.currentTime === 0) {
-    testSound.play();
+  const alarmTest = new Audio(alarm[alarmNumber] + ".mp3");
+  if (alarmTest.paused || alarmTest.currentTime === 0) {
+    alarmTest.play();
     return;
   }
-  testSound.pause();
-  testSound.currentTime = 0;
-  testSound.play();
+  alarmTest.pause();
+  alarmTest.currentTime = 0;
+  alarmTest.play();
 };
 
 const SelectSoundSlider = () => (
