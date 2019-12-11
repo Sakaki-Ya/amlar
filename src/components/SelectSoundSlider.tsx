@@ -5,15 +5,16 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { jsx, css } from "@emotion/core";
 
+let alarmNumber: number = 0;
+
 const settings = {
-  afterChange: (current: any) => console.log(current)
+  afterChange: (current: number) => (alarmNumber = current)
 };
 
 const soundTest = () => {
   const alarm = ["classic", "digital", "chicken", "voice"];
-  const alarmNumber = 1;
   const testSound = new Audio(alarm[alarmNumber] + ".mp3");
-  if (testSound.paused) {
+  if (testSound.paused && testSound.currentTime === 0) {
     testSound.play();
     return;
   }
@@ -37,7 +38,7 @@ const SelectSoundSlider = () => (
         </div>
         <div id="chicken">
           <img src="chicken.svg" alt="Chicken's Scream" css={sounds__icon} />
-          <p>Chicken's Scream</p>
+          <p>Chicken Shout</p>
         </div>
       </Slider>
     </div>
