@@ -1,53 +1,14 @@
 /** @jsx jsx */
-import React, { FC } from "react";
+import React /* , { FC } */ from "react";
 import emotionReset from "emotion-reset";
-import { jsx, Global, css } from "@emotion/core";
+import { jsx, Global, css, SerializedStyles } from "@emotion/core";
 import Header from "./components/Header";
 import Clock from "./components/Clock";
 import Footer from "./components/Footer";
 
 const App: React.FC = () => (
   <React.Fragment>
-    <Global
-      styles={css`
-        ${emotionReset};
-
-        body {
-          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-            "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-            "Helvetica Neue", sans-serif;
-          -webkit-font-smoothing: antialiased;
-          -moz-osx-font-smoothing: grayscale;
-
-          background: linear-gradient(180deg, #0f4c81, #0e0035);
-          background-size: 400% 400%;
-          animation: bgAnime 75s ease infinite;
-          @keyframes bgAnime {
-            0% {
-              background-position: 50% 0%;
-            }
-            50% {
-              background-position: 50% 100%;
-            }
-            100% {
-              background-position: 50% 0%;
-            }
-          }
-
-          box-sizing: border-box;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          text-align: center;
-          min-height: 100vh;
-          color: white;
-        }
-        code {
-          font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-            monospace;
-        }
-      `}
-    />
+    <Global styles={global} />
     <div css={main}>
       <Header />
       <Clock />
@@ -56,7 +17,51 @@ const App: React.FC = () => (
   </React.Fragment>
 );
 
-const main = css`
+const global: SerializedStyles = css`
+  ${emotionReset};
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+      "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+      "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    background: linear-gradient(180deg, #0f4c81, #0e0035);
+    background-size: 400% 400%;
+    animation: bgAnime 75s ease infinite;
+    @keyframes bgAnime {
+      0% {
+        background-position: 50% 0%;
+      }
+      50% {
+        background-position: 50% 100%;
+      }
+      100% {
+        background-position: 50% 0%;
+      }
+    }
+
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    min-height: 100vh;
+    color: white;
+  }
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+      monospace;
+  }
+  button,
+  input,
+  a {
+    cursor: pointer;
+  }
+`;
+
+const main: SerializedStyles = css`
   background: linear-gradient(
     90deg,
     rgba(0, 0, 0, 0),

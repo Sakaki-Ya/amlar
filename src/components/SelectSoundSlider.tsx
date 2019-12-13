@@ -3,50 +3,54 @@ import React /* , { FC } */ from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { jsx, css } from "@emotion/core";
-import classic from "../assets/classic.svg";
-import digital from "../assets/digital.svg";
-import chicken from "../assets/chicken.svg";
+import { jsx, css, SerializedStyles } from "@emotion/core";
+import colors from "./Colors";
+
+const alarm: string[] = ["classic", "digital", "chicken" /* , "voice" */];
+let alarmTest: HTMLAudioElement = new Audio(alarm[0] + ".mp3");
 
 const settings = {
-  afterChange: (current: any) => console.log(current)
+  afterChange: (current: number) => {
+    alarmTest.pause();
+    alarmTest.currentTime = 0;
+    alarmTest = new Audio(alarm[current] + ".mp3");
+  }
 };
 
 const soundTest = () => {
-  const alarm = ["classic", "digital", "chicken", "voice"];
-  const alarmNumber = 0;
-  const testSound = new Audio("../assets/" + alarm[alarmNumber] + ".mp3");
-  console.log(testSound);
-  testSound.pause();
-  testSound.play();
+  if (alarmTest.paused || alarmTest.currentTime === 0) {
+    alarmTest.play();
+    return;
+  }
+  alarmTest.pause();
+  alarmTest.currentTime = 0;
+  alarmTest.play();
 };
 
 const SelectSoundSlider = () => (
   <React.Fragment>
     <h2 css={sounds__h2}>Select Alarm Sound</h2>
-    <div css={sounds}>
-      <Slider {...settings}>
-        <div id="classic">
-          <img src={classic} alt="Classic Alarm Clock" css={sounds__icon} />
-          <p>Classic Alarm Clock</p>
-        </div>
-        <div id="digital">
-          <img src={digital} alt="Digital Alarm Clock" css={sounds__icon} />
-          <p>Digital Alarm Clock</p>
-        </div>
-        <div id="chicken">
-          <img src={chicken} alt="Chicken's Scream" css={sounds__icon} />
-          <p>Chicken's Scream</p>
-        </div>
-      </Slider>
-    </div>
+    <Slider {...settings} css={sounds}>
+      <div>
+        <img src="classic.svg" alt="Classic Alarm Clock" css={sounds__icon} />
+        <p>Classic Alarm Clock</p>
+      </div>
+      <div>
+        <img src="digital.svg" alt="Digital Alarm Clock" css={sounds__icon} />
+        <p>Digital Alarm Clock</p>
+      </div>
+      <div>
+        <img src="chicken.svg" alt="Chicken's Scream" css={sounds__icon} />
+        <p>Chicken Shout</p>
+      </div>
+    </Slider>
     <button onClick={soundTest} css={sounds__test}>
-      Sound Test
+      <p>&#x25b6; Alarm Test</p>
     </button>
   </React.Fragment>
 );
 
-const sounds = css`
+const sounds: SerializedStyles = css`
   max-width: 120px;
   @media screen and (min-width: 480px) {
     max-width: 240px;
@@ -55,21 +59,33 @@ const sounds = css`
   display: flex;
   flex-direction: column;
   margin: auto;
+
+  div p {
+    padding-bottom: 1em;
+    overflow: visible;
+  }
 `;
 
-const sounds__h2 = css`
+const sounds__h2: SerializedStyles = css`
+  margin-bottom: 1em;
+  width: 100%;
+  color: ${colors.yellow};
   font-weight: bold;
-  margin-bottom: 1em;
-  width: 100%;
+  font-size: 1.25em;
 `;
 
-const sounds__icon = css`
+const sounds__icon: SerializedStyles = css`
   width: 100%;
   margin-bottom: 1em;
 `;
 
-const sounds__test = css`
-  margin: 2em 0 1em 0;
+const sounds__test: SerializedStyles = css`
+  margin: 0 auto 2em auto;
+  background-color: transparent;
+  border: 0;
+  white-space: nowrap;
+  color: ${colors.yellow};
+  font-weight: bold;
 `;
 
 export default SelectSoundSlider;

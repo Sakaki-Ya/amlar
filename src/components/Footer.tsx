@@ -24,8 +24,7 @@ const footer = css`
   justify-content: center;
   align-items: center;
   padding: 1.5em;
-  background-color: rgba(0, 0, 0, 0.6);
-
+  /* background-color: rgba(0, 0, 0, 0.6); */
   font-size: 0.75em;
 `;
 

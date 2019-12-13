@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, css } from "@emotion/core";
+import { jsx, css, SerializedStyles } from "@emotion/core";
 import SelectSoundSlider from "./SelectSoundSlider";
 
 // interface AppProps {
@@ -16,7 +16,7 @@ const Clock = () => (
   </div>
 );
 
-const clock = css`
+const clock:SerializedStyles = css`
   box-sizing: border-box;
   max-width: 760px;
   width: 100%;
@@ -26,11 +26,11 @@ const clock = css`
   padding: 0 5%;
 `;
 
-const clock__inputTime = css`
+const clock__inputTime: SerializedStyles = css`
   margin-bottom: 2em;
 `;
 
-const clock__setTime = css`
+const clock__setTime: SerializedStyles = css`
   margin: 0;
 `;
 
