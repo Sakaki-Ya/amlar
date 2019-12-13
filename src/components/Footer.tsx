@@ -17,14 +17,13 @@ const Footer = () => (
 const footer = css`
   box-sizing: border-box;
   display: flex;
-  position: absolute;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
   width: 100%;
   left: 0;
   bottom: 0;
-  justify-content: center;
-  align-items: center;
   padding: 1.5em;
-  /* background-color: rgba(0, 0, 0, 0.6); */
   font-size: 0.75em;
 `;
 
@@ -33,6 +32,13 @@ const footer__link = css`
   text-decoration: none;
   margin-right: 1em;
   font-weight: bold;
+  transition: all 0.2s ease 0s;
+  &:hover {
+    color: ${colors.lightGreen};
+  }
+  &:active {
+    color: ${colors.deepGreen};
+  }
 `;
 
 const footer__copyright = css`

@@ -86,6 +86,13 @@ const sounds__test: SerializedStyles = css`
   white-space: nowrap;
   color: ${colors.yellow};
   font-weight: bold;
+  transition: all 0.2s ease 0s;
+  &:hover {
+    color: ${colors.lightYellow};
+  }
+  &:active {
+    color: ${colors.deepYellow};
+  }
 `;
 
 export default SelectSoundSlider;
