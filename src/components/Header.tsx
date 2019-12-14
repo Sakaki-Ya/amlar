@@ -1,7 +1,8 @@
 /** @jsx jsx */
+import React /* , { FC } */ from "react";
 import { jsx, css, SerializedStyles } from "@emotion/core";
 
-const Header = () => (
+const Header: React.FC = () => (
   <header css={header}>
     <h1>Walke</h1>
   </header>

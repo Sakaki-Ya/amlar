@@ -72,7 +72,7 @@ const main: SerializedStyles = css`
     rgba(129, 204, 69, 0.2)
   );
   background-size: 800% 800%;
-  animation: bgAnime2 170s ease infinite;
+  animation: bgAnime2 120s ease infinite;
   @keyframes bgAnime2 {
     0% {
       background-position: 0% 50%;

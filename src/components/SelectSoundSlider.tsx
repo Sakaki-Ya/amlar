@@ -17,17 +17,13 @@ const settings = {
   }
 };
 
-const soundTest = () => {
-  if (alarmTest.paused || alarmTest.currentTime === 0) {
-    alarmTest.play();
-    return;
-  }
+const soundTest = (): void => {
   alarmTest.pause();
   alarmTest.currentTime = 0;
   alarmTest.play();
 };
 
-const SelectSoundSlider = () => (
+const SelectSoundSlider: React.FC = () => (
   <React.Fragment>
     <h2 css={sounds__h2}>Select Alarm Sound</h2>
     <Slider {...settings} css={sounds}>
