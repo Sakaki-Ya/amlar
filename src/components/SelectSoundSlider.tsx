@@ -25,7 +25,6 @@ const soundTest = (): void => {
 
 const SelectSoundSlider: React.FC = () => (
   <React.Fragment>
-    <h2 css={sounds__h2}>Select Alarm Sound</h2>
     <Slider {...settings} css={sounds}>
       <div>
         <img src="classic.svg" alt="Classic Alarm Clock" css={sounds__icon} />
@@ -60,14 +59,6 @@ const sounds: SerializedStyles = css`
     padding-bottom: 1em;
     overflow: visible;
   }
-`;
-
-const sounds__h2: SerializedStyles = css`
-  margin-bottom: 1em;
-  width: 100%;
-  color: ${colors.yellow};
-  font-weight: bold;
-  font-size: 1.25em;
 `;
 
 const sounds__icon: SerializedStyles = css`
