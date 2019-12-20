@@ -1,11 +1,14 @@
 export default {
   blue: "#0f4c81",
-  green: "#6dcc31",
-  lightGreen: "#baff8c",
+  lightBlue: "#b5c7d3",
+  green: "#7ec845",
+  lightGreen: "#c0d725",
   deepGreen: "#59a41d",
-  yellow: "#ffff5c",
-  lightYellow: "#ffffbf",
-  deepYellow: "#dcdc00",
-  pink: "#e95295",
-  black: "#121212"
+  orange: "#fd6a02",
+  lightOrange: "#fd9668",
+  deepOrange: "#fd3c02",
+  moreLightOrange: "#fdc2b3",
+  pink: "#f46f60",
+  white: "#f0ece3",
+  black: "#363838"
 };

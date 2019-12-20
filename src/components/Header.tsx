@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import React /* , { FC } */ from "react";
+import React from "react";
 import { jsx, css, SerializedStyles } from "@emotion/core";
 
 const Header: React.FC = () => (
@@ -15,6 +15,7 @@ const header: SerializedStyles = css`
   left: 0;
   margin-bottom: 1em;
   padding: 1em;
+  width: 100%;
 `;
 
 export default Header;

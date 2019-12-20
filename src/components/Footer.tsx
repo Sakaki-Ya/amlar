@@ -28,16 +28,16 @@ const footer = css`
 `;
 
 const footer__link = css`
-  color: ${colors.green};
+  color: ${colors.lightOrange};
   text-decoration: none;
   margin-right: 1em;
   font-weight: bold;
   transition: all 0.2s ease 0s;
   &:hover {
-    color: ${colors.lightGreen};
+    color: ${colors.moreLightOrange};
   }
   &:active {
-    color: ${colors.deepGreen};
+    color: ${colors.orange};
   }
 `;
 
