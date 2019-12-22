@@ -1,8 +1,9 @@
 /** @jsx jsx */
-import { jsx, css } from "@emotion/core";
+import React from "react";
+import { jsx, css, SerializedStyles } from "@emotion/core";
 import colors from "./Colors";
 
-const Footer = () => (
+const Footer: React.FC = () => (
   <footer css={footer}>
     <a href="/" css={footer__link}>
       &#x1f4c4; Privacy Policy
@@ -14,7 +15,7 @@ const Footer = () => (
   </footer>
 );
 
-const footer = css`
+const footer: SerializedStyles = css`
   box-sizing: border-box;
   display: flex;
   justify-content: center;
@@ -27,7 +28,7 @@ const footer = css`
   font-size: 0.75em;
 `;
 
-const footer__link = css`
+const footer__link: SerializedStyles = css`
   color: ${colors.lightOrange};
   text-decoration: none;
   margin-right: 1em;
@@ -41,7 +42,7 @@ const footer__link = css`
   }
 `;
 
-const footer__copyright = css`
+const footer__copyright: SerializedStyles = css`
   margin-left: 1em;
 `;
 

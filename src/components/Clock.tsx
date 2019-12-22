@@ -5,16 +5,29 @@ import colors from "./Colors";
 import SelectSoundSlider from "./SelectSoundSlider";
 
 const Clock: React.FC = () => {
-  const [time, setTime] = useState("");
+  const [time, setTime]: [
+    string,
+    React.Dispatch<React.SetStateAction<string>>
+  ] = useState("");
   useEffect(() => {
     const timerID: NodeJS.Timeout = setInterval(() => tick(), 1000);
     return () => clearInterval(timerID);
   });
 
-  const [currentSlide, setCunrrentSlide] = useState(0);
+  const [currentSlide, setCurrentSlide]: [
+    number,
+    React.Dispatch<React.SetStateAction<number>>
+  ] = useState(0);
+  const sounds: string[] = ["classic", "digital", "chicken"];
+  const sound: HTMLAudioElement = new Audio("classic.mp3");
+  useEffect(() => {
+    sound.src = sounds[currentSlide] + ".mp3";
+  }, [currentSlide, sound.src, sounds]);
 
   const soundTest = (): void => {
-    console.log(currentSlide);
+    sound.pause();
+    sound.currentTime = 0;
+    sound.play();
   };
 
   const getInputTime = (e: {
@@ -36,7 +49,7 @@ const Clock: React.FC = () => {
   return (
     <div css={clock}>
       <h2 css={clock__h2}>1. Select an alarm sound.</h2>
-      <SelectSoundSlider setCunrrentSlide={setCunrrentSlide} />
+      <SelectSoundSlider setCurrentSlide={setCurrentSlide} />
       <button onClick={soundTest} css={sounds__test}>
         <p>&#x25b6; Sound Test</p>
       </button>
