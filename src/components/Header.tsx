@@ -1,14 +1,21 @@
 /** @jsx jsx */
-import { jsx, css } from "@emotion/core";
+import React from "react";
+import { jsx, css, SerializedStyles } from "@emotion/core";
 
-const Header = () => (
-  <header>
-    <h1 css={header__logo}>Walke</h1>
+const Header: React.FC = () => (
+  <header css={header}>
+    <h1>Walke</h1>
   </header>
 );
 
-const header__logo = css`
+const header: SerializedStyles = css`
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
   margin-bottom: 1em;
+  padding: 1em;
+  width: 100%;
 `;
 
 export default Header;

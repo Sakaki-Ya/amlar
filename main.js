@@ -7,7 +7,7 @@ let inputTime, // 入力時刻
 document.getElementById("setTime").onclick = () => {
   inputTime = document.getElementById("inputTime").value;
   if (!isNaN(inputTime)) {
-    alert("plase.");
+    alert("please.");
     return;
   }
   const silent = new Audio("./sounds/silent.mp3");
