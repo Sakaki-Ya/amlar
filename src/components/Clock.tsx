@@ -32,7 +32,12 @@ const Clock: React.FC = () => {
 
   const getInputTime = (e: {
     target: { value: React.SetStateAction<string> };
-  }): void => setTime(e.target.value);
+  }): void => {
+    setTime(e.target.value);
+    const silent = new Audio("silnet.mp3");
+    silent.loop = true;
+    silent.play();
+  };
 
   const tick = (): void => {
     const date: Date = new Date();
