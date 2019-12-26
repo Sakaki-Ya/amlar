@@ -1,16 +1,17 @@
 /** @jsx jsx */
 import React from "react";
+import { Link } from "react-router-dom";
 import { jsx, css, SerializedStyles } from "@emotion/core";
 import colors from "./Colors";
 
 const Footer: React.FC = () => (
   <footer css={footer}>
-    <a href="/" css={footer__link}>
+    <Link to="/privacy-policy" css={footer__link}>
       &#x1f4c4; Privacy Policy
-    </a>
-    <a href="/" css={footer__link}>
+    </Link>
+    <Link to="/contact" css={footer__link}>
       &#x1f4e7; Contact
-    </a>
+    </Link>
     <p css={footer__copyright}>&copy; 2019 Walke</p>
   </footer>
 );
@@ -20,10 +21,10 @@ const footer: SerializedStyles = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed;
-  width: 100%;
-  left: 0;
+  position: absolute;
   bottom: 0;
+  left: 0;
+  width: 100%;
   padding: 1.5em;
   font-size: 0.75em;
 `;

@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { jsx, css, SerializedStyles } from "@emotion/core";
 import colors from "./Colors";
 import SelectSoundSlider from "./SelectSoundSlider";
@@ -14,15 +15,26 @@ const Clock: React.FC = () => {
     return () => clearInterval(timerID);
   });
 
-  const [currentSlide, setCurrentSlide]: [
-    number,
-    React.Dispatch<React.SetStateAction<number>>
-  ] = useState(0);
-  const sounds: string[] = ["classic", "digital", "chicken"];
+  const [silenting, setSilenting] = useState(false);
+  const getInputTime = (e: any): void => {
+    const inputTime: string = e.target.value;
+    if (inputTime.match(/^([01]?[0-9]|2[0-3]):([0-5][0-9])$/)) {
+      setTime(inputTime);
+      if (silenting === false) {
+        setSilenting(true);
+        const silent: HTMLAudioElement = new Audio("silent.mp3");
+        silent.loop = true;
+        silent.play();
+      }
+    }
+  };
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const sounds: string[] = ["classic", "digital", "chicken", "silent"];
   const sound: HTMLAudioElement = new Audio("classic.mp3");
   useEffect(() => {
     sound.src = sounds[currentSlide] + ".mp3";
-  }, [currentSlide, sound.src, sounds]);
+  });
 
   const soundTest = (): void => {
     sound.pause();
@@ -30,25 +42,20 @@ const Clock: React.FC = () => {
     sound.play();
   };
 
-  const getInputTime = (e: {
-    target: { value: React.SetStateAction<string> };
-  }): void => {
-    setTime(e.target.value);
-    const silent = new Audio("silnet.mp3");
-    silent.loop = true;
-    silent.play();
-  };
-
+  const [alarming, setAlarming] = useState(false);
+  const history = useHistory();
   const tick = (): void => {
     const date: Date = new Date();
     const hours: string = ("0" + date.getHours()).slice(-2);
     const minutes: string = ("0" + date.getMinutes()).slice(-2);
-    const checkDate: string = hours + ":" + minutes;
-    if (checkDate === time) startAlarm();
-  };
-
-  const startAlarm = (): void => {
-    console.log("a");
+    const currentTime: string = hours + ":" + minutes;
+    if (currentTime === time && alarming === false) {
+      // sound.loop = true;
+      // sound.play();
+      setAlarming(true);
+      setTime("");
+      history.push("/alarming");
+    }
   };
 
   return (

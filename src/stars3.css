@@ -1,0 +1,75 @@
+#stars3 {
+  width: 3px;
+  height: 3px;
+  background: transparent;
+  box-shadow: 463px 9161px ${Colors.white}, 1780px 1084px ${Colors.white}, 1081px 1115px ${Colors.white},
+    968px 1000px ${Colors.white}, 1902px 452px ${Colors.white}, 637px 1164px ${Colors.white}, 1165px 1142px ${Colors.white},
+    487px 537px ${Colors.white}, 1617px 1975px ${Colors.white}, 547px 758px ${Colors.white}, 1832px 1857px ${Colors.white},
+    1794px 43px ${Colors.white}, 1577px 1912px ${Colors.white}, 374px 315px ${Colors.white}, 706px 1698px ${Colors.white},
+    230px 5px ${Colors.white}, 61px 923px ${Colors.white}, 1486px 667px ${Colors.white}, 256px 727px ${Colors.white},
+    1654px 187px ${Colors.white}, 1598px 1747px ${Colors.white}, 1873px 974px ${Colors.white}, 91px 1313px ${Colors.white},
+    766px 834px ${Colors.white}, 1094px 833px ${Colors.white}, 997px 599px ${Colors.white}, 630px 1585px ${Colors.white},
+    1502px 1102px ${Colors.white}, 1119px 366px ${Colors.white}, 1471px 1710px ${Colors.white}, 644px 1200px ${Colors.white},
+    1152px 1196px ${Colors.white}, 1773px 200px ${Colors.white}, 449px 1990px ${Colors.white}, 1565px 1642px ${Colors.white},
+    1341px 1236px ${Colors.white}, 1423px 854px ${Colors.white}, 659px 1690px ${Colors.white}, 435px 1713px ${Colors.white},
+    1412px 926px ${Colors.white}, 1323px 879px ${Colors.white}, 1493px 823px ${Colors.white}, 1885px 1190px ${Colors.white},
+    1321px 1131px ${Colors.white}, 1246px 860px ${Colors.white}, 214px 867px ${Colors.white}, 4px 234px ${Colors.white},
+    1700px 849px ${Colors.white}, 1322px 1361px ${Colors.white}, 1817px 637px ${Colors.white}, 734px 1035px ${Colors.white},
+    1615px 1350px ${Colors.white}, 1539px 438px ${Colors.white}, 1053px 618px ${Colors.white}, 1939px 1383px ${Colors.white},
+    644px 796px ${Colors.white}, 1623px 407px ${Colors.white}, 742px 604px ${Colors.white}, 1451px 1656px ${Colors.white},
+    109px 1583px ${Colors.white}, 224px 104px ${Colors.white}, 253px 667px ${Colors.white}, 1355px 311px ${Colors.white},
+    1238px 1279px ${Colors.white}, 131px 389px ${Colors.white}, 270px 1800px ${Colors.white}, 589px 721px ${Colors.white},
+    818px 213px ${Colors.white}, 497px 455px ${Colors.white}, 1504px 1830px ${Colors.white}, 338px 1051px ${Colors.white},
+    1157px 444px ${Colors.white}, 1157px 304px ${Colors.white}, 276px 884px ${Colors.white}, 404px 1407px ${Colors.white},
+    666px 832px ${Colors.white}, 1844px 1521px ${Colors.white}, 1587px 555px ${Colors.white}, 593px 225px ${Colors.white},
+    1753px 119px ${Colors.white}, 1361px 1508px ${Colors.white}, 1583px 1592px ${Colors.white}, 1824px 629px ${Colors.white},
+    1310px 1838px ${Colors.white}, 29px 1999px ${Colors.white}, 585px 1692px ${Colors.white}, 1649px 390px ${Colors.white},
+    843px 406px ${Colors.white}, 1982px 1174px ${Colors.white}, 1281px 1584px ${Colors.white}, 347px 184px ${Colors.white},
+    1566px 1294px ${Colors.white}, 808px 980px ${Colors.white}, 1916px 954px ${Colors.white}, 1484px 1782px ${Colors.white},
+    56px 209px ${Colors.white}, 1773px 214px ${Colors.white}, 1135px 1533px ${Colors.white}, 808px 491px ${Colors.white},
+    1685px 690px ${Colors.white};
+  animation: animStar 150s linear infinite;
+}
+#stars3:after {
+  content: " ";
+  position: absolute;
+  top: 2000px;
+  width: 3px;
+  height: 3px;
+  background: transparent;
+  box-shadow: 463px 9161px ${Colors.white}, 1780px 1084px ${Colors.white}, 1081px 1115px ${Colors.white},
+    968px 1000px ${Colors.white}, 1902px 452px ${Colors.white}, 637px 1164px ${Colors.white}, 1165px 1142px ${Colors.white},
+    487px 537px ${Colors.white}, 1617px 1975px ${Colors.white}, 547px 758px ${Colors.white}, 1832px 1857px ${Colors.white},
+    1794px 43px ${Colors.white}, 1577px 1912px ${Colors.white}, 374px 315px ${Colors.white}, 706px 1698px ${Colors.white},
+    230px 5px ${Colors.white}, 61px 923px ${Colors.white}, 1486px 667px ${Colors.white}, 256px 727px ${Colors.white},
+    1654px 187px ${Colors.white}, 1598px 1747px ${Colors.white}, 1873px 974px ${Colors.white}, 91px 1313px ${Colors.white},
+    766px 834px ${Colors.white}, 1094px 833px ${Colors.white}, 997px 599px ${Colors.white}, 630px 1585px ${Colors.white},
+    1502px 1102px ${Colors.white}, 1119px 366px ${Colors.white}, 1471px 1710px ${Colors.white}, 644px 1200px ${Colors.white},
+    1152px 1196px ${Colors.white}, 1773px 200px ${Colors.white}, 449px 1990px ${Colors.white}, 1565px 1642px ${Colors.white},
+    1341px 1236px ${Colors.white}, 1423px 854px ${Colors.white}, 659px 1690px ${Colors.white}, 435px 1713px ${Colors.white},
+    1412px 926px ${Colors.white}, 1323px 879px ${Colors.white}, 1493px 823px ${Colors.white}, 1885px 1190px ${Colors.white},
+    1321px 1131px ${Colors.white}, 1246px 860px ${Colors.white}, 214px 867px ${Colors.white}, 4px 234px ${Colors.white},
+    1700px 849px ${Colors.white}, 1322px 1361px ${Colors.white}, 1817px 637px ${Colors.white}, 734px 1035px ${Colors.white},
+    1615px 1350px ${Colors.white}, 1539px 438px ${Colors.white}, 1053px 618px ${Colors.white}, 1939px 1383px ${Colors.white},
+    644px 796px ${Colors.white}, 1623px 407px ${Colors.white}, 742px 604px ${Colors.white}, 1451px 1656px ${Colors.white},
+    109px 1583px ${Colors.white}, 224px 104px ${Colors.white}, 253px 667px ${Colors.white}, 1355px 311px ${Colors.white},
+    1238px 1279px ${Colors.white}, 131px 389px ${Colors.white}, 270px 1800px ${Colors.white}, 589px 721px ${Colors.white},
+    818px 213px ${Colors.white}, 497px 455px ${Colors.white}, 1504px 1830px ${Colors.white}, 338px 1051px ${Colors.white},
+    1157px 444px ${Colors.white}, 1157px 304px ${Colors.white}, 276px 884px ${Colors.white}, 404px 1407px ${Colors.white},
+    666px 832px ${Colors.white}, 1844px 1521px ${Colors.white}, 1587px 555px ${Colors.white}, 593px 225px ${Colors.white},
+    1753px 119px ${Colors.white}, 1361px 1508px ${Colors.white}, 1583px 1592px ${Colors.white}, 1824px 629px ${Colors.white},
+    1310px 1838px ${Colors.white}, 29px 1999px ${Colors.white}, 585px 1692px ${Colors.white}, 1649px 390px ${Colors.white},
+    843px 406px ${Colors.white}, 1982px 1174px ${Colors.white}, 1281px 1584px ${Colors.white}, 347px 184px ${Colors.white},
+    1566px 1294px ${Colors.white}, 808px 980px ${Colors.white}, 1916px 954px ${Colors.white}, 1484px 1782px ${Colors.white},
+    56px 209px ${Colors.white}, 1773px 214px ${Colors.white}, 1135px 1533px ${Colors.white}, 808px 491px ${Colors.white},
+    1685px 690px ${Colors.white};
+}
+
+@keyframes animStar {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-2000px);
+  }
+}
