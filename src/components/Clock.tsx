@@ -1,9 +1,9 @@
 /** @jsx jsx */
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import { jsx, css, SerializedStyles } from "@emotion/core";
 import colors from "./Colors";
 import SelectSoundSlider from "./SelectSoundSlider";
+import Alarming from "./Alarming";
 
 const Clock: React.FC = () => {
   const [time, setTime]: [
@@ -31,7 +31,7 @@ const Clock: React.FC = () => {
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const sounds: string[] = ["classic", "digital", "chicken", "silent"];
-  const sound: HTMLAudioElement = new Audio("classic.mp3");
+  const sound: any = new Audio("classic.mp3");
   useEffect(() => {
     sound.src = sounds[currentSlide] + ".mp3";
   });
@@ -43,18 +43,16 @@ const Clock: React.FC = () => {
   };
 
   const [alarming, setAlarming] = useState(false);
-  const history = useHistory();
   const tick = (): void => {
     const date: Date = new Date();
     const hours: string = ("0" + date.getHours()).slice(-2);
     const minutes: string = ("0" + date.getMinutes()).slice(-2);
     const currentTime: string = hours + ":" + minutes;
     if (currentTime === time && alarming === false) {
-      // sound.loop = true;
-      // sound.play();
+      sound.loop = true;
+      sound.play();
       setAlarming(true);
       setTime("");
-      history.push("/alarming");
     }
   };
 
@@ -67,7 +65,12 @@ const Clock: React.FC = () => {
       </button>
       <div css={clock__h2Wrap}>
         <h2 css={clock__h2}>2. Set the time.</h2>
-        <input type="time" css={clock__inputTime} onChange={getInputTime} />
+        <input
+          type="time"
+          value={time}
+          css={clock__inputTime}
+          onChange={getInputTime}
+        />
       </div>
       <div css={clock__h2Wrap}>
         <h2 css={clock__h2}>3. Let's sleep.</h2>
@@ -274,6 +277,11 @@ const Clock: React.FC = () => {
           />
         </svg>
       </div>
+      {alarming === true ? (
+        <Alarming sound={sound} setAlarming={setAlarming} />
+      ) : (
+        <React.Fragment />
+      )}
     </div>
   );
 };

@@ -1,18 +1,18 @@
 /** @jsx jsx */
-import React from "react";
-import { useHistory } from "react-router-dom";
 import { jsx, css, SerializedStyles } from "@emotion/core";
 import Colors from "./Colors";
 
-const Alarming: React.FC = (/* props: any */) => {
-  const history = useHistory();
-  // const currentSlid = props.location.state.obj;
+interface AlarmingProps {
+  sound: HTMLAudioElement;
+  setAlarming: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
+const Alarming = ({ sound, setAlarming }: AlarmingProps) => {
   const stopAlarm = (): void => {
-    //console.log(currentSlid);
-    // sound.pause();
-    // sound.currentTime = 0;
-    history.push("/");
+    console.log(sound);
+    sound.pause();
+    sound.currentTime = 0;
+    setAlarming(false);
   };
 
   return (

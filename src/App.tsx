@@ -9,7 +9,7 @@ import Clock from "./components/Clock";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import Alarming from "./components/Alarming";
+// import "./style.sass";
 
 const App: React.FC = () => (
   <React.Fragment>
@@ -26,14 +26,13 @@ const App: React.FC = () => (
         <Route exact path="/contact">
           <Contact />
         </Route>
-        <Route exact path="/alarming" component={Alarming} />
         <Redirect to="/" />
       </Switch>
       <Footer />
     </BrowserRouter>
-    {/* <div css={stars} />
-    <div css={stars2} />
-     <div css={stars3} /> */}
+    {/* <div id="stars" />
+    <div id="stars2" />
+    <div id="stars3" /> */}
   </React.Fragment>
 );
 
