@@ -11,7 +11,7 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 // import "./style.sass";
 
-const App: React.FC = () => (
+const App: React.FC = (): JSX.Element => (
   <React.Fragment>
     <Global styles={global} />
     <BrowserRouter>

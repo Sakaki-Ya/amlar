@@ -5,18 +5,18 @@ import colors from "./Colors";
 import SelectSoundSlider from "./SelectSoundSlider";
 import Alarming from "./Alarming";
 
-const Clock: React.FC = () => {
+const Clock: React.FC = (): JSX.Element => {
   const [time, setTime]: [
     string,
     React.Dispatch<React.SetStateAction<string>>
   ] = useState("");
-  useEffect(() => {
-    const timerID: NodeJS.Timeout = setInterval(() => tick(), 1000);
-    return () => clearInterval(timerID);
+  useEffect((): any => {
+    const timerID: NodeJS.Timeout = setInterval((): void => tick(), 1000);
+    return (): void => clearInterval(timerID);
   });
 
-  const [silenting, setSilenting] = useState(false);
-  const getInputTime = (e: any): void => {
+  const [silenting, setSilenting]: [boolean, any] = useState(false);
+  const getInputTime = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const inputTime: string = e.target.value;
     if (inputTime.match(/^([01]?[0-9]|2[0-3]):([0-5][0-9])$/)) {
       setTime(inputTime);
@@ -29,10 +29,10 @@ const Clock: React.FC = () => {
     }
   };
 
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentSlide, setCurrentSlide]: [number, any] = useState(0);
   const sounds: string[] = ["classic", "digital", "chicken", "silent"];
-  const sound: any = new Audio("classic.mp3");
-  useEffect(() => {
+  const sound: HTMLAudioElement = new Audio("classic.mp3");
+  useEffect((): void => {
     sound.src = sounds[currentSlide] + ".mp3";
   });
 
@@ -42,7 +42,7 @@ const Clock: React.FC = () => {
     sound.play();
   };
 
-  const [alarming, setAlarming] = useState(false);
+  const [alarming, setAlarming]: [any, any] = useState(false);
   const tick = (): void => {
     const date: Date = new Date();
     const hours: string = ("0" + date.getHours()).slice(-2);

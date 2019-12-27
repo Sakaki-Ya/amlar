@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { jsx, css, SerializedStyles } from "@emotion/core";
 import colors from "./Colors";
 
-const Footer: React.FC = () => (
+const Footer: React.FC = (): JSX.Element => (
   <footer css={footer}>
     <Link to="/privacy-policy" css={footer__link}>
       &#x1f4c4; Privacy Policy

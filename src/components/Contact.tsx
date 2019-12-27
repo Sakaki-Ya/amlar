@@ -3,7 +3,7 @@ import React from "react";
 import { jsx, css, SerializedStyles } from "@emotion/core";
 import Colors from "./Colors";
 
-const Contact: React.FC = () => (
+const Contact: React.FC = (): JSX.Element => (
   <React.Fragment>
     <div css={contact__titleWrap}>
       <svg width="286.001" viewBox="0 0 286.001 302" css={contact__icon}>

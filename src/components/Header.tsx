@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { jsx, css, SerializedStyles } from "@emotion/core";
 import Colors from "./Colors";
 
-const Header: React.FC = () => (
+const Header: React.FC = (): JSX.Element => (
   <header css={header}>
     <h1>
       <Link to="/" css={header__logo}>
@@ -24,7 +24,7 @@ const header: SerializedStyles = css`
   width: 100%;
 `;
 
-const header__logo = css`
+const header__logo: SerializedStyles = css`
   text-decoration: none;
   color: ${Colors.white};
 `;

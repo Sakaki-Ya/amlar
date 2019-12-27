@@ -3,7 +3,7 @@ import React from "react";
 import { jsx, css, SerializedStyles } from "@emotion/core";
 import Colors from "./Colors";
 
-const PrivacyPolicy: React.FC = () => (
+const PrivacyPolicy: React.FC = (): JSX.Element => (
   <div css={policy}>
     <h2 css={policy__h2}>Privacy Policy</h2>
     <svg width="333.334" viewBox="0 0 333.334 302" css={policy__icon}>

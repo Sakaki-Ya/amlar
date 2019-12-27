@@ -7,7 +7,7 @@ interface AlarmingProps {
   setAlarming: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Alarming = ({ sound, setAlarming }: AlarmingProps) => {
+const Alarming = ({ sound, setAlarming }: AlarmingProps): JSX.Element => {
   const stopAlarm = (): void => {
     console.log(sound);
     sound.pause();
@@ -40,12 +40,12 @@ const alarming: SerializedStyles = css`
   justify-content: center;
 `;
 
-const alarming__h2 = css`
+const alarming__h2: SerializedStyles = css`
   font-size: 1.25em;
   margin-bottom: 1em;
 `;
 
-const alarming__stop = css`
+const alarming__stop: SerializedStyles = css`
   text-decoration: none;
   margin: 0 auto 2em auto;
   padding: 0.5em 0.75em;
