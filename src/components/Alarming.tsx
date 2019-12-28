@@ -4,15 +4,22 @@ import Colors from "./Colors";
 
 interface AlarmingProps {
   sound: HTMLAudioElement;
-  setAlarming: React.Dispatch<React.SetStateAction<boolean>>;
+  // setAlarming: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Alarming = ({ sound, setAlarming }: AlarmingProps): JSX.Element => {
+const Alarming = ({
+  sound /* , setAlarming */
+}: AlarmingProps): JSX.Element => {
+  sound.loop = true;
+  sound.play();
+  console.log(sound);
+
   const stopAlarm = (): void => {
-    console.log(sound);
+    sound.loop = false;
     sound.pause();
     sound.currentTime = 0;
-    setAlarming(false);
+    // setAlarming(false);
+    console.log(sound);
   };
 
   return (

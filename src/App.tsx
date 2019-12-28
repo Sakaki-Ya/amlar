@@ -9,11 +9,16 @@ import Clock from "./components/Clock";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-// import "./style.sass";
+import "./stars.css";
+import "./stars2.css";
+import "./stars3.css";
 
 const App: React.FC = (): JSX.Element => (
   <React.Fragment>
     <Global styles={global} />
+    <div id="stars" />
+    <div id="stars2" />
+    <div id="stars3" />
     <BrowserRouter>
       <Header />
       <Switch>
@@ -30,9 +35,6 @@ const App: React.FC = (): JSX.Element => (
       </Switch>
       <Footer />
     </BrowserRouter>
-    {/* <div id="stars" />
-    <div id="stars2" />
-    <div id="stars3" /> */}
   </React.Fragment>
 );
 
