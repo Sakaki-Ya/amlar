@@ -5,7 +5,6 @@ import colors from "./Colors";
 import SelectSoundSlider from "./SelectSoundSlider";
 import Alarming from "./Alarming";
 
-let alarming = false;
 const Clock: React.FC = (): JSX.Element => {
   const [time, setTime]: [
     string,
@@ -17,21 +16,23 @@ const Clock: React.FC = (): JSX.Element => {
   });
 
   const [silenting, setSilenting]: [boolean, any] = useState(false);
+  const silent: HTMLAudioElement = new Audio("silent.mp3");
   const getInputTime = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const inputTime: string = e.target.value;
-    if (!inputTime.match(/^([01]?[0-9]|2[0-3]):([0-5][0-9])$/)) return;
-    setTime(inputTime);
-    if (silenting === false) {
-      setSilenting(true);
-      const silent: HTMLAudioElement = new Audio("silent.mp3");
-      silent.loop = true;
-      silent.play();
+    if (inputTime.match(/^([01]?[0-9]|2[0-3]):([0-5][0-9])$/)) {
+      setTime(inputTime);
+      if (silenting === false) {
+        setSilenting(true);
+        silent.loop = true;
+        silent.play();
+      }
     }
   };
 
-  const [currentSlide, setCurrentSlide]: [number, any] = useState(0);
-  const sounds: string[] = ["classic", "digital", "chicken", "silent"];
-  const sound: HTMLAudioElement = new Audio(sounds[currentSlide] + ".mp3");
+  const [sound, setSound]: [
+    HTMLAudioElement,
+    React.Dispatch<React.SetStateAction<HTMLAudioElement>>
+  ] = useState(new Audio("classic.mp3"));
   const soundTest = (): void => {
     sound.pause();
     sound.currentTime = 0;
@@ -39,15 +40,20 @@ const Clock: React.FC = (): JSX.Element => {
     sound.play();
   };
 
-  // const [alarming, setAlarming]: [any, any] = useState(false);
+  const [alarming, setAlarming]: [any, any] = useState(false);
   const tick = (): void => {
     const date: Date = new Date();
     const hours: string = ("0" + date.getHours()).slice(-2);
     const minutes: string = ("0" + date.getMinutes()).slice(-2);
     const currentTime: string = hours + ":" + minutes;
     if (currentTime === time && alarming === false) {
-      alarming = true;
-      // setAlarming(true);
+      sound.loop = true;
+      sound.play();
+      setAlarming(true);
+      silent.loop = false;
+      silent.pause();
+      silent.currentTime = 0;
+            setSilenting(false);
       setTime("");
     }
   };
@@ -55,7 +61,7 @@ const Clock: React.FC = (): JSX.Element => {
   return (
     <div css={clock}>
       <h2 css={clock__h2}>1. Select an alarm sound.</h2>
-      <SelectSoundSlider setCurrentSlide={setCurrentSlide} />
+      <SelectSoundSlider setSound={setSound} />
       <button onClick={soundTest} css={sounds__test}>
         <p>&#x25b6; Sound Test</p>
       </button>
@@ -274,7 +280,7 @@ const Clock: React.FC = (): JSX.Element => {
         </svg>
       </div>
       {alarming === true ? (
-        <Alarming sound={sound} /* setAlarming={setAlarming} */ />
+        <Alarming sound={sound} setAlarming={setAlarming} />
       ) : (
         <React.Fragment />
       )}

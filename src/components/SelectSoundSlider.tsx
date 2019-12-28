@@ -4,10 +4,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { jsx, css, SerializedStyles } from "@emotion/core";
 
-const SelectSoundSlider = ({ setCurrentSlide }: any): JSX.Element => {
+const SelectSoundSlider = ({ setSound }: any): JSX.Element => {
+  const sounds: string[] = ["classic", "digital", "chicken"];
   const settings = {
     afterChange: (currentIndexNum: number): void => {
-      setCurrentSlide(currentIndexNum);
+      setSound(new Audio(sounds[currentIndexNum] + ".mp3"));
     }
   };
 
