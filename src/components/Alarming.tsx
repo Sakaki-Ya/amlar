@@ -9,7 +9,6 @@ interface AlarmingProps {
 
 const Alarming = ({ sound, setAlarming }: AlarmingProps): JSX.Element => {
   console.log(sound);
-
   const stopAlarm = (): void => {
     sound.loop = false;
     sound.pause();
