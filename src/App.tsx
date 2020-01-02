@@ -16,25 +16,25 @@ import "./stars3.css";
 const App: React.FC = (): JSX.Element => (
   <React.Fragment>
     <Global styles={global} />
+    <BrowserRouter>
+        <Header />
+        <Switch>
+          <Route exact path="/">
+            <Clock />
+          </Route>
+          <Route exact path="/privacy-policy">
+            <PrivacyPolicy />
+          </Route>
+          <Route exact path="/contact">
+            <Contact />
+          </Route>
+          <Redirect to="/" />
+        </Switch>
+        <Footer />
+    </BrowserRouter>
     <div id="stars" />
     <div id="stars2" />
     <div id="stars3" />
-    <BrowserRouter>
-      <Header />
-      <Switch>
-        <Route exact path="/">
-          <Clock />
-        </Route>
-        <Route exact path="/privacy-policy">
-          <PrivacyPolicy />
-        </Route>
-        <Route exact path="/contact">
-          <Contact />
-        </Route>
-        <Redirect to="/" />
-      </Switch>
-      <Footer />
-    </BrowserRouter>
   </React.Fragment>
 );
 
@@ -47,7 +47,19 @@ const global: SerializedStyles = css`
       "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: radial-gradient(ellipse at center, #0f4c81 50%, #1f233a 100%);
+    /* background: radial-gradient(ellipse at center, #0f4c81 50%, #1f233a 100%); */
+    background: linear-gradient(180deg, #0f4c81, #00050c);
+    background-size: 400% 400%;
+    animation: bgAnime 60s ease forwards;
+    @keyframes bgAnime {
+      0% {
+        background-position: 50% 0%;
+      }
+      100% {
+        background-position: 50% 100%;
+      }
+    }
+
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
