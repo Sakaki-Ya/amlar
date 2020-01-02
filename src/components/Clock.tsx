@@ -5,24 +5,16 @@ import colors from "./Colors";
 import SelectSoundSlider from "./SelectSoundSlider";
 import Alarming from "./Alarming";
 
-const Clock: React.FC = (): JSX.Element => {
-  const [time, setTime]: [
-    string,
-    React.Dispatch<React.SetStateAction<string>>
-  ] = useState("");
-  useEffect((): any => {
-    const timerID: NodeJS.Timeout = setInterval((): void => tick(), 1000);
-    return (): void => clearInterval(timerID);
-  });
+let silenting: boolean = false;
+const silent: HTMLAudioElement = new Audio("silent.mp3");
 
-  const [silenting, setSilenting]: [boolean, any] = useState(false);
-  const silent: HTMLAudioElement = new Audio("silent.mp3");
+const Clock: React.FC = (): JSX.Element => {
   const getInputTime = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const inputTime: string = e.target.value;
     if (inputTime.match(/^([01]?[0-9]|2[0-3]):([0-5][0-9])$/)) {
       setTime(inputTime);
       if (silenting === false) {
-        setSilenting(true);
+        silenting = true;
         silent.loop = true;
         silent.play();
       }
@@ -41,22 +33,30 @@ const Clock: React.FC = (): JSX.Element => {
   };
 
   const [alarming, setAlarming]: [any, any] = useState(false);
-  const tick = (): void => {
-    const date: Date = new Date();
-    const hours: string = ("0" + date.getHours()).slice(-2);
-    const minutes: string = ("0" + date.getMinutes()).slice(-2);
-    const currentTime: string = hours + ":" + minutes;
-    if (currentTime === time && alarming === false) {
-      sound.loop = true;
-      sound.play();
-      setAlarming(true);
-      silent.loop = false;
-      silent.pause();
-      silent.currentTime = 0;
-            setSilenting(false);
-      setTime("");
-    }
-  };
+  const [time, setTime]: [
+    string,
+    React.Dispatch<React.SetStateAction<string>>
+  ] = useState("");
+  useEffect((): any => {
+    const tick = (): void => {
+      const date: Date = new Date();
+      const hours: string = ("0" + date.getHours()).slice(-2);
+      const minutes: string = ("0" + date.getMinutes()).slice(-2);
+      const currentTime: string = hours + ":" + minutes;
+      if (currentTime === time && alarming === false) {
+        sound.loop = true;
+        sound.play();
+        setAlarming(true);
+        silent.loop = false;
+        silent.pause();
+        silent.currentTime = 0;
+        silenting = false;
+        setTime("");
+      }
+    };
+    const timerID: NodeJS.Timeout = setInterval((): void => tick(), 1000);
+    return (): void => clearInterval(timerID);
+  }, [alarming, sound, time]);
 
   return (
     <div css={clock}>
