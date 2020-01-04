@@ -6,9 +6,9 @@
   animation: animStar 50s linear infinite;
 }
 
-#stars:after {
+#stars:before {
   content: "";
-  position: fixed;
+  /* position: fixed; */
   top: 2000px;
   width: 1px;
   height: 1px;

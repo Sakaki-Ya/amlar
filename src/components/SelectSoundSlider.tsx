@@ -324,10 +324,8 @@ const SelectSoundSlider = ({ setSound }: any): JSX.Element => {
 };
 
 const soundsSlider: SerializedStyles = css`
-  max-width: 120px;
-  @media screen and (min-width: 480px) {
-    max-width: 240px;
-  }
+  max-width: 240px;
+  width: 80%;
   display: flex;
   flex-direction: column;
   margin: 0 auto;

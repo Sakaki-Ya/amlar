@@ -22,6 +22,7 @@ const header: SerializedStyles = css`
   margin-bottom: 1em;
   padding: 1em;
   width: 100%;
+  margin: 0 auto;
 `;
 
 const header__logo: SerializedStyles = css`

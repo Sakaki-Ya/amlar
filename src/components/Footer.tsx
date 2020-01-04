@@ -6,12 +6,15 @@ import colors from "./Colors";
 
 const Footer: React.FC = (): JSX.Element => (
   <footer css={footer}>
+    <Link to="/how-to" css={footer__link}>
+      &#x1f4c4; How to
+    </Link>
     <Link to="/privacy-policy" css={footer__link}>
-      &#x1f4c4; Privacy Policy
+      &#x1f36a; Privacy Policy
     </Link>
-    <Link to="/contact" css={footer__link}>
+    {/* <Link to="/contact" css={footer__link}>
       &#x1f4e7; Contact
-    </Link>
+    </Link> */}
     <p css={footer__copyright}>&copy; 2019 Walke</p>
   </footer>
 );

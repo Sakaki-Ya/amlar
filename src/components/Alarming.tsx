@@ -1,87 +1,61 @@
 /** @jsx jsx */
-import React, { useState, Dispatch, SetStateAction } from "react";
+import React, { useState, useEffect } from "react";
 import { jsx, css, SerializedStyles } from "@emotion/core";
 import Colors from "./Colors";
 
-let startLatitude: number = 0,
-  startLongitude = 0;
-
-const getStart = (pos: any): void => {
-  startLatitude = pos.coords.latitude;
-  startLongitude = pos.coords.longitude;
-};
-const getStartError = (error: { code: number }): void => {
-  switch (error.code) {
-    case 1:
-      alert("Use of location information is not allowed.");
-      break;
-    case 2:
-      alert("Unable to determine device location.");
-      break;
-    case 3:
-      alert("Timed out.");
-      break;
-  }
-};
-
-if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(getStart, getStartError);
-} else {
-  alert("Your device cannot use this application.");
-}
 interface AlarmingProps {
   sound: HTMLAudioElement;
   setAlarming: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Alarming = ({ sound, setAlarming }: AlarmingProps): JSX.Element => {
-  navigator.geolocation.getCurrentPosition(getStart, getStartError);
-
-  const [latitude, setLatitude]: [
+  const [hold, setHold]: [boolean, any] = useState(false);
+  const [count, setCount]: [
     number,
-    Dispatch<SetStateAction<number>>
-  ] = useState(startLatitude);
-  const [longitude, setLongitude]: [
-    number,
-    Dispatch<SetStateAction<number>>
-  ] = useState(startLongitude);
-  const watchId: number = navigator.geolocation.watchPosition(
-    (pos: any) => {
-      setLatitude(pos.coords.latitude);
-      setLongitude(pos.coords.longitude);
-    },
-    () => alert("An unexpected error has occurred."),
-    {
-      enableHighAccuracy: true,
-      timeout: 1000,
-      maximumAge: Infinity
-    }
-  );
+    React.Dispatch<React.SetStateAction<number>>
+  ] = useState(0);
+  useEffect(() => {
+    if (hold === false) return;
+    const countUp = (): void => {
+      setCount(count + 1);
+      if (count === 1) {
+        sound.loop = false;
+        sound.pause();
+        sound.currentTime = 0;
+        setAlarming(false);
+      }
+    };
+    const timer: NodeJS.Timeout = setInterval((): void => countUp(), 1000);
+    return (): void => clearInterval(timer);
+  }, [count, hold, setAlarming, sound]);
 
-  const stopAlarm = (): void => {
-    sound.loop = false;
-    sound.pause();
-    sound.currentTime = 0;
-    setAlarming(false);
-    navigator.geolocation.clearWatch(watchId);
+  const holdDown = (): void => {
+    setHold(true);
+  };
+  const endHold = (): void => {
+    setHold(false);
+    setCount(0);
   };
 
   return (
     <div css={alarming}>
       <h2 css={alarming__h2}>Good Morning.</h2>
-      <p>スタート緯度 {startLatitude}</p>
-      <p>スタート経度 {startLongitude}</p>
-      <p>緯度 {latitude}</p>
-      <p>経度 {longitude}</p>
-      <button onClick={stopAlarm} css={alarming__stop}>
-        Stop Alarm
+      <button
+        onMouseDown={holdDown}
+        onMouseUp={endHold}
+        onContextMenu={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+          e.preventDefault();
+        }}
+        css={alarming__stop}
+      >
+        Stop
       </button>
     </div>
   );
 };
 
 const alarming: SerializedStyles = css`
-  background-color: ${Colors.white};
+  background: linear-gradient(180deg, #ffffff, #f0ece3);
   color: ${Colors.black};
   width: 100vw;
   height: 100vh;
@@ -96,30 +70,41 @@ const alarming: SerializedStyles = css`
 `;
 
 const alarming__h2: SerializedStyles = css`
+  position: absolute;
+  top: 0;
+  width: 100%;
   font-size: 1.25em;
-  margin-bottom: 1em;
+  font-weight: bold;
+  margin: 2em auto;
 `;
 
 const alarming__stop: SerializedStyles = css`
-  text-decoration: none;
-  margin: 0 auto 2em auto;
-  padding: 0.5em 0.75em;
-  background-color: ${Colors.orange};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4em;
+  height: 4em;
+  margin: auto;
+  padding: 1.25em;
+  background-color: ${Colors.blue};
   border: none;
-  border-radius: 3px;
+  border-radius: 50%;
   white-space: nowrap;
   color: ${Colors.white};
+  font-size: 1.25em;
   font-weight: bold;
   box-shadow: 0 2px 6px ${Colors.black};
+  user-select: none;
+  -webkit-touch-callout: none;
   transition: all 0.2s ease 0s;
   &:hover {
-    background-color: ${Colors.lightOrange};
-    box-shadow: 0 2px 6px ${Colors.white};
+    background-color: ${Colors.lightBlue};
+    box-shadow: 0 2px 6px ${Colors.black};
   }
   &:active {
-    transform: translateY(2px);
-    background-color: ${Colors.deepOrange};
-    color: ${Colors.white};
+    background-color: transparent;
+    border: 4px solid ${Colors.blue};
+    color: ${Colors.blue};
     box-shadow: none;
   }
 `;
