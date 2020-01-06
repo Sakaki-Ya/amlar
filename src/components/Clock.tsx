@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import React, { useState, useEffect } from "react";
 import { jsx, css, SerializedStyles } from "@emotion/core";
-import colors from "./Colors";
+import Colors from "./Colors";
 import SelectSoundSlider from "./SelectSoundSlider";
 import Alarming from "./Alarming";
 
@@ -9,6 +9,10 @@ let silenting: boolean = false;
 const silent: HTMLAudioElement = new Audio("silent.mp3");
 
 const Clock: React.FC = (): JSX.Element => {
+  const [time, setTime]: [
+    string,
+    React.Dispatch<React.SetStateAction<string>>
+  ] = useState("");
   const getInputTime = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const inputTime: string = e.target.value;
     if (inputTime.match(/^([01]?[0-9]|2[0-3]):([0-5][0-9])$/)) {
@@ -33,10 +37,6 @@ const Clock: React.FC = (): JSX.Element => {
   };
 
   const [alarming, setAlarming]: [any, any] = useState(false);
-  const [time, setTime]: [
-    string,
-    React.Dispatch<React.SetStateAction<string>>
-  ] = useState("");
   useEffect((): any => {
     const tick = (): void => {
       const date: Date = new Date();
@@ -54,25 +54,29 @@ const Clock: React.FC = (): JSX.Element => {
         setTime("");
       }
     };
-    const timerID: NodeJS.Timeout = setInterval((): void => tick(), 1000);
-    return (): void => clearInterval(timerID);
+    const timer: NodeJS.Timeout = setInterval((): void => tick(), 1000);
+    return (): void => clearInterval(timer);
   }, [alarming, sound, time]);
 
   return (
     <div css={clock}>
-      <h2 css={clock__h2}>1. Select an alarm sound.</h2>
-      <SelectSoundSlider setSound={setSound} />
-      <button onClick={soundTest} css={sounds__test}>
-        <p>&#x25b6; Sound Test</p>
-      </button>
-      <div css={clock__h2Wrap}>
-        <h2 css={clock__h2}>2. Set the time.</h2>
-        <input
-          type="time"
-          value={time}
-          css={clock__inputTime}
-          onChange={getInputTime}
-        />
+      <div css={clock__content}>
+        <h2 css={clock__h2}>1. Select an alarm sound.</h2>
+        <SelectSoundSlider setSound={setSound} />
+        <button onClick={soundTest} css={sounds__test}>
+          <p>&#x25b6; Sound Test</p>
+        </button>
+      </div>
+      <div css={clock__content}>
+        <div css={clock__h2Wrap}>
+          <h2 css={clock__h2}>2. Set the time.</h2>
+          <input
+            type="time"
+            value={time}
+            css={clock__inputTime}
+            onChange={getInputTime}
+          />
+        </div>
       </div>
       <div css={clock__h2Wrap}>
         <h2 css={clock__h2}>3. Let's sleep.</h2>
@@ -279,10 +283,8 @@ const Clock: React.FC = (): JSX.Element => {
           />
         </svg>
       </div>
-      {alarming === true ? (
+      {alarming === true && (
         <Alarming sound={sound} setAlarming={setAlarming} />
-      ) : (
-        <React.Fragment />
       )}
     </div>
   );
@@ -298,56 +300,58 @@ const clock: SerializedStyles = css`
   padding: 0 5%;
 `;
 
-const clock__h2: SerializedStyles = css`
-  font-size: 1.25em;
-  font-family: "Comic Sans MS", "Gill Sans", sans-serif;
+const clock__content: SerializedStyles = css`
+  margin: 0 auto 3em auto;
 `;
 
 const clock__h2Wrap: SerializedStyles = css`
   display: flex;
   align-items: center;
-  margin: 0 auto 2em auto;
+  margin: 0 auto;
+`;
+
+const clock__h2: SerializedStyles = css`
+  font-size: 1.25em;
+  font-weight: bold;
 `;
 
 const sounds__test: SerializedStyles = css`
-  margin: 0 auto 2em auto;
   padding: 0.5em 0.75em;
-  background-color: ${colors.orange};
+  background-color: ${Colors.orange};
   border: none;
   border-radius: 3px;
   white-space: nowrap;
-  color: ${colors.white};
+  color: ${Colors.white};
   font-weight: bold;
-  box-shadow: 0 2px 6px ${colors.black};
+  box-shadow: 0 2px 4px ${Colors.white};
   transition: all 0.2s ease 0s;
   &:hover {
-    background-color: ${colors.lightOrange};
-    box-shadow: 0 2px 6px ${colors.white};
+    background-color: ${Colors.lightOrange};
+    box-shadow: 0 2px 6px ${Colors.white};
   }
   &:active {
     transform: translateY(2px);
-    background-color: ${colors.deepOrange};
-    color: ${colors.white};
+    background-color: ${Colors.deepOrange};
+    color: ${Colors.white};
     box-shadow: none;
   }
 `;
 
 const clock__inputTime: SerializedStyles = css`
-  background-color: ${colors.white};
-  color: ${colors.black};
+  background-color: ${Colors.white};
+  color: ${Colors.black};
   border: none;
-  box-shadow: 0 2px 6px ${colors.black};
+  box-shadow: 0 2px 4px ${Colors.white};
   border-radius: 5px;
   margin-left: 1em;
   padding: 0 0.75em;
   height: 2em;
   font-family: "Arial Black", "Arial Rounded MT Bold", sans-serif;
-  font-size: 1.2em;
+  font-size: 1.1em;
   font-weight: bold;
   transition: all 0.2s ease 0s;
-  width: 100px;
   &:hover {
-    box-shadow: 0 2px 6px ${colors.white};
+    box-shadow: 0 2px 6px ${Colors.white};
   }
 `;
 
