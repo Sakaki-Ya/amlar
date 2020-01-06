@@ -17,28 +17,32 @@ import "./stars3.css";
 const App: React.FC = (): JSX.Element => (
   <React.Fragment>
     <Global styles={global} />
-    <div id="stars" />
-    <div id="stars2" />
-    <div id="stars3" />
-    <BrowserRouter>
-      <Header />
-      <Switch>
-        <Route exact path="/">
-          <Clock />
-        </Route>
-        <Route exact path="/how-to">
-          <HowTo />
-        </Route>
-        <Route exact path="/privacy-policy">
-          <PrivacyPolicy />
-        </Route>
-        {/* <Route exact path="/contact">
+    <div css={starsWrap}>
+      <div id="stars" />
+      <div id="stars2" />
+      <div id="stars3" />
+    </div>
+    <div css={main}>
+      <BrowserRouter>
+        <Header />
+        <Switch>
+          <Route exact path="/">
+            <Clock />
+          </Route>
+          <Route exact path="/how-to">
+            <HowTo />
+          </Route>
+          <Route exact path="/privacy-policy">
+            <PrivacyPolicy />
+          </Route>
+          {/* <Route exact path="/contact">
           <Contact />
         </Route> */}
-        <Redirect to="/" />
-      </Switch>
-      <Footer />
-    </BrowserRouter>
+          <Redirect to="/" />
+        </Switch>
+        <Footer />
+      </BrowserRouter>
+    </div>
   </React.Fragment>
 );
 
@@ -51,7 +55,7 @@ const global: SerializedStyles = css`
       "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: linear-gradient(180deg, #0f4c81, #00050c);
+    background: linear-gradient(180deg, ${Colors.blue}, ${Colors.darkBlue});
     background-size: 400% 400%;
     animation: bgAnime 60s ease infinite;
     @keyframes bgAnime {
@@ -65,12 +69,8 @@ const global: SerializedStyles = css`
         background-position: 50% 0%;
       }
     }
-    position: relative;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
+    margin: 0;
+    width: 100vw;
     height: 100vh;
     color: ${Colors.white};
     overflow: hidden;
@@ -80,6 +80,27 @@ const global: SerializedStyles = css`
   a {
     cursor: pointer;
   }
+`;
+
+const main = css`
+  /* box-sizing: border-box; */
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+`;
+
+const starsWrap = css`
+  position: relative;
+  top: 0;
+  left: 0;
 `;
 
 export default App;

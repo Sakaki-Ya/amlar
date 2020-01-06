@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import React, { useState, useEffect } from "react";
 import { jsx, css, SerializedStyles } from "@emotion/core";
-import colors from "./Colors";
+import Colors from "./Colors";
 import SelectSoundSlider from "./SelectSoundSlider";
 import Alarming from "./Alarming";
 
@@ -283,10 +283,8 @@ const Clock: React.FC = (): JSX.Element => {
           />
         </svg>
       </div>
-      {alarming === true ? (
+      {alarming === true && (
         <Alarming sound={sound} setAlarming={setAlarming} />
-      ) : (
-        <React.Fragment />
       )}
     </div>
   );
@@ -319,31 +317,31 @@ const clock__h2: SerializedStyles = css`
 
 const sounds__test: SerializedStyles = css`
   padding: 0.5em 0.75em;
-  background-color: ${colors.orange};
+  background-color: ${Colors.orange};
   border: none;
   border-radius: 3px;
   white-space: nowrap;
-  color: ${colors.white};
+  color: ${Colors.white};
   font-weight: bold;
-  box-shadow: 0 2px 4px ${colors.white};
+  box-shadow: 0 2px 4px ${Colors.white};
   transition: all 0.2s ease 0s;
   &:hover {
-    background-color: ${colors.lightOrange};
-    box-shadow: 0 2px 6px ${colors.white};
+    background-color: ${Colors.lightOrange};
+    box-shadow: 0 2px 6px ${Colors.white};
   }
   &:active {
     transform: translateY(2px);
-    background-color: ${colors.deepOrange};
-    color: ${colors.white};
+    background-color: ${Colors.deepOrange};
+    color: ${Colors.white};
     box-shadow: none;
   }
 `;
 
 const clock__inputTime: SerializedStyles = css`
-  background-color: ${colors.white};
-  color: ${colors.black};
+  background-color: ${Colors.white};
+  color: ${Colors.black};
   border: none;
-  box-shadow: 0 2px 4px ${colors.white};
+  box-shadow: 0 2px 4px ${Colors.white};
   border-radius: 5px;
   margin-left: 1em;
   padding: 0 0.75em;
@@ -353,7 +351,7 @@ const clock__inputTime: SerializedStyles = css`
   font-weight: bold;
   transition: all 0.2s ease 0s;
   &:hover {
-    box-shadow: 0 2px 6px ${colors.white};
+    box-shadow: 0 2px 6px ${Colors.white};
   }
 `;
 

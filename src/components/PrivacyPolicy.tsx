@@ -150,8 +150,7 @@ const PrivacyPolicy: React.FC = (): JSX.Element => (
 
 const policy: SerializedStyles = css`
   max-width: 480px;
-  text-align: center;
-  margin: 0 auto;
+  margin: auto;
   padding: 0 5%;
 `;
 
@@ -168,7 +167,6 @@ const policy__icon: SerializedStyles = css`
 `;
 
 const policy__text: SerializedStyles = css`
-  display: inline-block;
   text-align: left;
   line-height: 1.5em;
   margin-bottom: 0.5em;
