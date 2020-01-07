@@ -4,10 +4,20 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { jsx, css, SerializedStyles } from "@emotion/core";
 
-const SelectSoundSlider = ({ setSound }: any): JSX.Element => {
+interface SelectSoundSliderProps {
+  sound: HTMLAudioElement;
+  setSound: React.Dispatch<React.SetStateAction<HTMLAudioElement>>;
+}
+
+const SelectSoundSlider = ({
+  sound,
+  setSound
+}: SelectSoundSliderProps): JSX.Element => {
   const sounds: string[] = ["classic", "digital", "chicken"];
   const settings = {
     afterChange: (currentIndexNum: number): void => {
+      sound.pause();
+      sound.currentTime = 0;
       setSound(new Audio(sounds[currentIndexNum] + ".mp3"));
     }
   };
@@ -338,8 +348,11 @@ const soundsSlider: SerializedStyles = css`
 `;
 
 const sounds__icon: SerializedStyles = css`
+  box-sizing: border-box;
   width: 100%;
+  padding: 0 0.5em;
   margin-bottom: 0.5em;
+  filter: drop-shadow(0px 3px 1px rgba(255, 255, 255, 0.4));
 `;
 
 export default SelectSoundSlider;

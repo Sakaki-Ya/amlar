@@ -4,7 +4,7 @@ import { jsx, css, SerializedStyles } from "@emotion/core";
 import Colors from "./Colors";
 
 const Contact: React.FC = (): JSX.Element => (
-  <React.Fragment>
+  <div css={contact}>
     <div css={contact__titleWrap}>
       <svg width="286.001" viewBox="0 0 286.001 302" css={contact__icon}>
         <g fillRule="evenodd" clipRule="evenodd">
@@ -52,8 +52,48 @@ const Contact: React.FC = (): JSX.Element => (
       </svg>
       <h2 css={contact__h2}>Contact</h2>
     </div>
-  </React.Fragment>
+    <form
+      css={contact__form}
+      name="contact"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-filed"
+    >
+      <section>
+        <label>
+          <p>Name</p>
+          <input type="text" name="name" />
+        </label>
+      </section>
+      <section>
+        <label>
+          <p>Email</p>
+          <input type="email" name="email" />
+        </label>
+      </section>
+      <section>
+        <label>
+          <p>Message</p>
+          <textarea name="message" css={contact__message}></textarea>
+        </label>
+      </section>
+      <section>
+        <button type="submit" css={contact__send}>
+          Send
+        </button>
+      </section>
+    </form>
+  </div>
 );
+
+const contact: SerializedStyles = css`
+  max-width: 480px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: auto;
+  padding: 0 5%;
+  overflow-y: auto;
+`;
 
 const contact__titleWrap: SerializedStyles = css`
   display: flex;
@@ -65,12 +105,63 @@ const contact__titleWrap: SerializedStyles = css`
 const contact__icon: SerializedStyles = css`
   max-width: 30px;
   margin-right: 0.5em;
+  filter: drop-shadow(0px 2px 2px rgba(255, 255, 255, 0.4));
 `;
 
 const contact__h2: SerializedStyles = css`
   font-size: 1.25em;
   color: ${Colors.lightOrange};
   font-weight: bold;
+`;
+
+const contact__form: SerializedStyles = css`
+  section {
+    text-align: left;
+    margin-bottom: 1em;
+  }
+  input {
+    width: 100%;
+    border-radius: 5px;
+    background-color: ${Colors.white};
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+      "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+      "Helvetica Neue", sans-serif;
+  }
+  p {
+    margin-bottom: 0.5em;
+  }
+`;
+
+const contact__message: SerializedStyles = css`
+  width: 100%;
+  border-radius: 5px;
+  background-color: ${Colors.white};
+  height: 150px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+`;
+
+const contact__send: SerializedStyles = css`
+  padding: 0.5em 0.75em;
+  background-color: ${Colors.orange};
+  border: none;
+  border-radius: 3px;
+  white-space: nowrap;
+  color: ${Colors.white};
+  font-weight: bold;
+  box-shadow: 0 2px 4px ${Colors.white};
+  transition: all 0.2s ease 0s;
+  &:hover {
+    background-color: ${Colors.lightOrange};
+    box-shadow: 0 2px 6px ${Colors.white};
+  }
+  &:active {
+    transform: translateY(2px);
+    background-color: ${Colors.deepOrange};
+    color: ${Colors.white};
+    box-shadow: none;
+  }
 `;
 
 export default Contact;

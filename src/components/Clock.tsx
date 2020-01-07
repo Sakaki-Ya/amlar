@@ -37,7 +37,7 @@ const Clock: React.FC = (): JSX.Element => {
   };
 
   const [alarming, setAlarming]: [any, any] = useState(false);
-  useEffect((): any => {
+  useEffect(() => {
     const tick = (): void => {
       const date: Date = new Date();
       const hours: string = ("0" + date.getHours()).slice(-2);
@@ -45,7 +45,7 @@ const Clock: React.FC = (): JSX.Element => {
       const currentTime: string = hours + ":" + minutes;
       if (currentTime === time && alarming === false) {
         sound.loop = true;
-        sound.play();
+        // sound.play();
         setAlarming(true);
         silent.loop = false;
         silent.pause();
@@ -62,8 +62,8 @@ const Clock: React.FC = (): JSX.Element => {
     <div css={clock}>
       <div css={clock__content}>
         <h2 css={clock__h2}>1. Select an alarm sound.</h2>
-        <SelectSoundSlider setSound={setSound} />
-        <button onClick={soundTest} css={sounds__test}>
+        <SelectSoundSlider sound={sound} setSound={setSound} />
+        <button onClick={soundTest} css={clock__test}>
           <p>&#x25b6; Sound Test</p>
         </button>
       </div>
@@ -75,6 +75,8 @@ const Clock: React.FC = (): JSX.Element => {
             value={time}
             css={clock__inputTime}
             onChange={getInputTime}
+            required
+            pattern="[0-9]{2}:[0-9]{2}"
           />
         </div>
       </div>
@@ -315,7 +317,7 @@ const clock__h2: SerializedStyles = css`
   font-weight: bold;
 `;
 
-const sounds__test: SerializedStyles = css`
+const clock__test: SerializedStyles = css`
   padding: 0.5em 0.75em;
   background-color: ${Colors.orange};
   border: none;
@@ -347,9 +349,8 @@ const clock__inputTime: SerializedStyles = css`
   padding: 0 0.75em;
   height: 2em;
   font-family: "Arial Black", "Arial Rounded MT Bold", sans-serif;
-  font-size: 1.1em;
   font-weight: bold;
-  transition: all 0.2s ease 0s;
+  transition: 0.2s;
   &:hover {
     box-shadow: 0 2px 6px ${Colors.white};
   }
@@ -358,6 +359,7 @@ const clock__inputTime: SerializedStyles = css`
 const clock__sleepIcon: SerializedStyles = css`
   margin-left: 1em;
   width: 120px;
+  filter: drop-shadow(0px 3px 4px rgba(255,255,255,.4));
 `;
 
 export default Clock;

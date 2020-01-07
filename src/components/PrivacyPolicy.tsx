@@ -138,6 +138,7 @@ const PrivacyPolicy: React.FC = (): JSX.Element => (
         />
       </g>
     </svg>
+    <h3 css={policy__h3}>About access analysis.</h3>
     <p css={policy__text}>
       This site uses cookies to collect traffic data using the access analysis
       tool "Google Analytics".
@@ -150,6 +151,8 @@ const PrivacyPolicy: React.FC = (): JSX.Element => (
 
 const policy: SerializedStyles = css`
   max-width: 480px;
+  width: 100%;
+  box-sizing: border-box;
   margin: auto;
   padding: 0 5%;
 `;
@@ -161,9 +164,17 @@ const policy__h2: SerializedStyles = css`
   font-weight: bold;
 `;
 
+const policy__h3: SerializedStyles = css`
+  font-size: 1.15em;
+  margin-bottom: 1em;
+  font-weight: bold;
+  text-align: left;
+`;
+
 const policy__icon: SerializedStyles = css`
   max-width: 120px;
   margin-bottom: 1em;
+  filter: drop-shadow(0px 2px 2px rgba(255, 255, 255, 0.4));
 `;
 
 const policy__text: SerializedStyles = css`

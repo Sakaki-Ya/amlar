@@ -193,6 +193,8 @@ const HowTo: React.FC = (): JSX.Element => (
 
 const howto: SerializedStyles = css`
   max-width: 480px;
+  width: 100%;
+  box-sizing: border-box;
   margin: auto;
   padding: 0 5%;
 `;
@@ -207,6 +209,7 @@ const howto__h2: SerializedStyles = css`
 const howto__icon: SerializedStyles = css`
   max-width: 120px;
   margin-bottom: 1em;
+  filter: drop-shadow(0px 2px 2px rgba(255, 255, 255, 0.4));
 `;
 
 const howto__text: SerializedStyles = css`

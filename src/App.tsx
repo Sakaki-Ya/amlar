@@ -8,7 +8,7 @@ import Header from "./components/Header";
 import Clock from "./components/Clock";
 import HowTo from "./components/HowTo";
 import PrivacyPolicy from "./components/PrivacyPolicy";
-// import Contact from "./components/Contact";
+import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import "./stars.css";
 import "./stars2.css";
@@ -35,9 +35,9 @@ const App: React.FC = (): JSX.Element => (
           <Route exact path="/privacy-policy">
             <PrivacyPolicy />
           </Route>
-          {/* <Route exact path="/contact">
-          <Contact />
-        </Route> */}
+          <Route exact path="/contact">
+            <Contact />
+          </Route>
           <Redirect to="/" />
         </Switch>
         <Footer />
@@ -69,11 +69,13 @@ const global: SerializedStyles = css`
         background-position: 50% 0%;
       }
     }
+    box-sizing: border-box;
     margin: 0;
     width: 100vw;
     height: 100vh;
     color: ${Colors.white};
     overflow: hidden;
+    position: relative;
   }
   button,
   input,
@@ -83,8 +85,7 @@ const global: SerializedStyles = css`
 `;
 
 const main = css`
-  /* box-sizing: border-box; */
-  position: fixed;
+  position: absolute;
   width: 100%;
   height: 100%;
   top: 0;

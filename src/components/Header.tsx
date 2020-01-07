@@ -19,10 +19,9 @@ const header: SerializedStyles = css`
   position: absolute;
   top: 0;
   left: 0;
-  margin-bottom: 1em;
-  padding: 1em;
   width: 100%;
-  margin: 0 auto;
+  padding: 1em;
+  margin: 0 auto 1em auto;
 `;
 
 const header__logo: SerializedStyles = css`
