@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { jsx, css, SerializedStyles } from "@emotion/core";
 import Colors from "./Colors";
 
@@ -9,33 +9,27 @@ interface AlarmingProps {
 }
 
 const Alarming = ({ sound, setAlarming }: AlarmingProps): JSX.Element => {
-  const [hold, setHold]: [any, any] = useState(false);
-  const [count, setCount]: [
-    number,
-    React.Dispatch<React.SetStateAction<number>>
-  ] = useState(0);
-  useEffect(() => {
-    if (hold === false) return;
-    const countUp = (): void => {
-      setCount(count + 1);
-      if (count === 1) {
-        sound.loop = false;
-        sound.pause();
-        sound.currentTime = 0;
-        setAlarming(false);
-      }
-    };
-    const timer: NodeJS.Timeout = setInterval((): void => countUp(), 1000);
-    return (): void => clearInterval(timer);
-  }, [count, hold, setAlarming, sound]);
+  let count: number = 0;
+  const countUp = (): void => {
+    count++;
+    if (count === 1) {
+      sound.loop = false;
+      sound.pause();
+      sound.currentTime = 0;
+      setAlarming(false);
+    }
+  };
 
+  const [hold, setHold] = useState(false);
+  let timer: NodeJS.Timeout;
   const down = (): void => {
-    setCount(0);
     setHold(true);
+    timer = setInterval(countUp, 2000);
   };
   const up = (): void => {
     setHold(false);
-    setCount(0);
+    count = 0;
+    clearInterval(timer);
   };
   const touchDown = (): void => down();
   const touchUp = (e: React.TouchEvent<HTMLButtonElement>): void => {
@@ -45,22 +39,20 @@ const Alarming = ({ sound, setAlarming }: AlarmingProps): JSX.Element => {
   const mouseDown = (): void => down();
   const mouseUp = (): void => up();
 
-  const randomAreaWidth: number = window.screen.width,
-    randomAreaHight: number = window.screen.height - 200;
   let maxRandomLeft: number = 0,
     maxRandomTop: number = 0;
-  if (randomAreaWidth > randomAreaHight) {
-    maxRandomLeft = randomAreaWidth * 0.9;
-    maxRandomTop = randomAreaHight * 0.17;
+  if (window.screen.width > window.screen.height) {
+    maxRandomLeft = 85;
+    maxRandomTop = 16;
   } else {
-    maxRandomLeft = randomAreaWidth * 0.77;
-    maxRandomTop = randomAreaHight * 0.65;
+    maxRandomLeft = 80;
+    maxRandomTop = 55;
   }
-  // const randomLeft = Math.random() * (maxRandomLeft+1),
-  //   randomTop = Math.random() * (maxRandomTop+1);
+  const randomLeft: number = Math.random() * (maxRandomLeft + 1),
+    randomTop: number = Math.random() * (maxRandomTop + 1);
   const alarming__stop: SerializedStyles = css`
-    left: ${maxRandomLeft}px;
-    top: ${maxRandomTop}px;
+    left: ${randomLeft}%;
+    top: ${randomTop}%;
     position: absolute;
     display: flex;
     justify-content: center;
@@ -72,7 +64,7 @@ const Alarming = ({ sound, setAlarming }: AlarmingProps): JSX.Element => {
     background: ${Colors.orange};
     box-shadow: 0 2px 4px ${Colors.deepOrange};
     color: ${Colors.white};
-    font-size: 1.1em;
+    font-size: 1.1rem;
     font-weight: bold;
     user-select: none;
     -moz-user-select: none;
@@ -94,13 +86,13 @@ const Alarming = ({ sound, setAlarming }: AlarmingProps): JSX.Element => {
   `;
   const alarming__bar: SerializedStyles = css`
     background: linear-gradient(180deg, ${Colors.blue}, ${Colors.darkBlue});
-    width: ${randomAreaWidth}px;
-    height: ${randomAreaHight}px;
+    width: 100%;
+    height: 100%;
     animation: randomAreaAnime 2s;
     @keyframes randomAreaAnime {
       0% {
         opacity: 0;
-        transform: translate(0, ${randomAreaHight}px);
+        transform: translate(0, 100%);
       }
       100% {
         opacity: 1;
@@ -325,7 +317,7 @@ const Alarming = ({ sound, setAlarming }: AlarmingProps): JSX.Element => {
         </p>
       </header>
       <div css={alarming__randomArea}>
-        {hold === true && <div css={alarming__bar} />}
+        {hold && <div css={alarming__bar} />}
         <button
           onTouchStart={touchDown}
           onTouchEnd={touchUp}
@@ -346,7 +338,7 @@ const Alarming = ({ sound, setAlarming }: AlarmingProps): JSX.Element => {
 };
 
 const alarming: SerializedStyles = css`
-  background: linear-gradient(180deg, #ffffff, #f0ece3);
+  background: linear-gradient(180deg, #ffffff, ${Colors.white});
   color: ${Colors.black};
   width: 100vw;
   height: 100vh;
@@ -358,32 +350,29 @@ const alarming: SerializedStyles = css`
 `;
 
 const alarming__header: SerializedStyles = css`
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  box-sizing: border-box;
+  padding: 1rem 5%;
   font-weight: bold;
-  padding: 1em 5%;
-  height: 250px;
-  background-color: lightgrey;
 `;
 
 const alarming__text: SerializedStyles = css`
-  line-height: 1.5em;
-  margin-bottom: 0.5em;
+  line-height: 1.5rem;
   text-align: left;
+  margin-bottom: 0.5rem;
 `;
 
 const alarming__icon: SerializedStyles = css`
   max-width: 120px;
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
   filter: drop-shadow(0px 3px 2px rgba(0, 0, 0, 0.4));
 `;
 
 const alarming__h2: SerializedStyles = css`
-  font-size: 1.25em;
-  margin-bottom: 1em;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
 `;
 
 const alarming__randomArea: SerializedStyles = css`

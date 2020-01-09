@@ -22,24 +22,26 @@ const App: React.FC = (): JSX.Element => (
       <div id="stars2" />
       <div id="stars3" />
     </div>
-    <div css={main}>
+    <div css={wrap}>
       <BrowserRouter>
         <Header />
-        <Switch>
-          <Route exact path="/">
-            <Clock />
-          </Route>
-          <Route exact path="/how-to">
-            <HowTo />
-          </Route>
-          <Route exact path="/privacy-policy">
-            <PrivacyPolicy />
-          </Route>
-          <Route exact path="/contact">
-            <Contact />
-          </Route>
-          <Redirect to="/" />
-        </Switch>
+        <div css={main}>
+          <Switch>
+            <Route exact path="/">
+              <Clock />
+            </Route>
+            <Route exact path="/how-to">
+              <HowTo />
+            </Route>
+            <Route exact path="/privacy-policy">
+              <PrivacyPolicy />
+            </Route>
+            <Route exact path="/contact">
+              <Contact />
+            </Route>
+            <Redirect to="/" />
+          </Switch>
+        </div>
         <Footer />
       </BrowserRouter>
     </div>
@@ -48,11 +50,8 @@ const App: React.FC = (): JSX.Element => (
 
 const global: SerializedStyles = css`
   ${emotionReset};
-
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-      "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-      "Helvetica Neue", sans-serif;
+    font-family: 'Helvetica Neue','Helvetica','Arial',sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background: linear-gradient(180deg, ${Colors.blue}, ${Colors.darkBlue});
@@ -75,7 +74,6 @@ const global: SerializedStyles = css`
     height: 100vh;
     color: ${Colors.white};
     overflow: hidden;
-    position: relative;
   }
   button,
   input,
@@ -84,24 +82,28 @@ const global: SerializedStyles = css`
   }
 `;
 
-const main = css`
-  position: absolute;
+const wrap: SerializedStyles = css`
   width: 100%;
   height: 100%;
+  position: fixed;
   top: 0;
   left: 0;
   display: flex;
   flex-direction: column;
-  margin: auto;
-  justify-content: center;
-  align-items: center;
   text-align: center;
 `;
 
-const starsWrap = css`
+const main: SerializedStyles = css`
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+`;
+
+const starsWrap: SerializedStyles = css`
   position: relative;
-  top: 0;
-  left: 0;
 `;
 
 export default App;

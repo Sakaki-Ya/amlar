@@ -17,7 +17,7 @@ const Clock: React.FC = (): JSX.Element => {
     const inputTime: string = e.target.value;
     if (inputTime.match(/^([01]?[0-9]|2[0-3]):([0-5][0-9])$/)) {
       setTime(inputTime);
-      if (silenting === false) {
+      if (!silenting) {
         silenting = true;
         silent.loop = true;
         silent.play();
@@ -43,7 +43,7 @@ const Clock: React.FC = (): JSX.Element => {
       const hours: string = ("0" + date.getHours()).slice(-2);
       const minutes: string = ("0" + date.getMinutes()).slice(-2);
       const currentTime: string = hours + ":" + minutes;
-      if (currentTime === time && alarming === false) {
+      if (currentTime === time && !alarming) {
         sound.loop = true;
         // sound.play();
         setAlarming(true);
@@ -285,9 +285,7 @@ const Clock: React.FC = (): JSX.Element => {
           />
         </svg>
       </div>
-      {alarming === true && (
-        <Alarming sound={sound} setAlarming={setAlarming} />
-      )}
+      {alarming && <Alarming sound={sound} setAlarming={setAlarming} />}
     </div>
   );
 };
@@ -295,15 +293,12 @@ const Clock: React.FC = (): JSX.Element => {
 const clock: SerializedStyles = css`
   box-sizing: border-box;
   max-width: 760px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
+  margin: auto;
   padding: 0 5%;
 `;
 
 const clock__content: SerializedStyles = css`
-  margin: 0 auto 3em auto;
+  margin: 0 auto 3rem auto;
 `;
 
 const clock__h2Wrap: SerializedStyles = css`
@@ -313,12 +308,12 @@ const clock__h2Wrap: SerializedStyles = css`
 `;
 
 const clock__h2: SerializedStyles = css`
-  font-size: 1.25em;
+  font-size: 1.25rem;
   font-weight: bold;
 `;
 
 const clock__test: SerializedStyles = css`
-  padding: 0.5em 0.75em;
+  padding: 0.5rem 0.75rem;
   background-color: ${Colors.orange};
   border: none;
   border-radius: 3px;
@@ -345,9 +340,9 @@ const clock__inputTime: SerializedStyles = css`
   border: none;
   box-shadow: 0 2px 4px ${Colors.white};
   border-radius: 5px;
-  margin-left: 1em;
-  padding: 0 0.75em;
-  height: 2em;
+  margin-left: 1rem;
+  padding: 0 0.75rem;
+  height: 2rem;
   font-family: "Arial Black", "Arial Rounded MT Bold", sans-serif;
   font-weight: bold;
   transition: 0.2s;
@@ -357,9 +352,9 @@ const clock__inputTime: SerializedStyles = css`
 `;
 
 const clock__sleepIcon: SerializedStyles = css`
-  margin-left: 1em;
+  margin-left: 1rem;
   width: 120px;
-  filter: drop-shadow(0px 3px 4px rgba(255,255,255,.4));
+  filter: drop-shadow(0px 3px 4px rgba(255, 255, 255, 0.4));
 `;
 
 export default Clock;

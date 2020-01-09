@@ -99,17 +99,17 @@ const contact__titleWrap: SerializedStyles = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
 `;
 
 const contact__icon: SerializedStyles = css`
   max-width: 30px;
-  margin-right: 0.5em;
+  margin-right: 0.5rem;
   filter: drop-shadow(0px 2px 2px rgba(255, 255, 255, 0.4));
 `;
 
 const contact__h2: SerializedStyles = css`
-  font-size: 1.25em;
+  font-size: 1.25rem;
   color: ${Colors.lightOrange};
   font-weight: bold;
 `;
@@ -117,7 +117,7 @@ const contact__h2: SerializedStyles = css`
 const contact__form: SerializedStyles = css`
   section {
     text-align: left;
-    margin-bottom: 1em;
+    margin-bottom: 1rem;
   }
   input {
     width: 100%;
@@ -128,7 +128,7 @@ const contact__form: SerializedStyles = css`
       "Helvetica Neue", sans-serif;
   }
   p {
-    margin-bottom: 0.5em;
+    margin-bottom: 0.5rem;
   }
 `;
 
@@ -143,7 +143,7 @@ const contact__message: SerializedStyles = css`
 `;
 
 const contact__send: SerializedStyles = css`
-  padding: 0.5em 0.75em;
+  padding: 0.5rem 0.75rem;
   background-color: ${Colors.orange};
   border: none;
   border-radius: 3px;

@@ -200,22 +200,22 @@ const howto: SerializedStyles = css`
 `;
 
 const howto__h2: SerializedStyles = css`
-  font-size: 1.25em;
-  margin-bottom: 1em;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
   color: ${Colors.lightOrange};
   font-weight: bold;
 `;
 
 const howto__icon: SerializedStyles = css`
   max-width: 120px;
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
   filter: drop-shadow(0px 2px 2px rgba(255, 255, 255, 0.4));
 `;
 
 const howto__text: SerializedStyles = css`
   text-align: left;
-  line-height: 1.5em;
-  margin-bottom: 0.5em;
+  line-height: 1.5rem;
+  margin-bottom: 0.5rem;
 `;
 
 export default HowTo;

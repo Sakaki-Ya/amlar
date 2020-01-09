@@ -336,22 +336,20 @@ const SelectSoundSlider = ({
 const soundsSlider: SerializedStyles = css`
   max-width: 240px;
   width: 80%;
-  display: flex;
-  flex-direction: column;
   margin: 0 auto;
-  padding: 1em 1em 0 1em;
+  padding: 1rem 1rem 0 1rem;
 
   div p {
     overflow: visible;
-    padding-bottom: 1em;
+    padding-bottom: 1rem;
   }
 `;
 
 const sounds__icon: SerializedStyles = css`
   box-sizing: border-box;
   width: 100%;
-  padding: 0 0.5em;
-  margin-bottom: 0.5em;
+  padding: 0 0.5rem;
+  margin-bottom: 0.5rem;
   filter: drop-shadow(0px 3px 1px rgba(255, 255, 255, 0.4));
 `;
 

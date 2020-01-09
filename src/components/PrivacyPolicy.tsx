@@ -158,29 +158,29 @@ const policy: SerializedStyles = css`
 `;
 
 const policy__h2: SerializedStyles = css`
-  font-size: 1.25em;
-  margin-bottom: 1em;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
   color: ${Colors.lightOrange};
   font-weight: bold;
 `;
 
 const policy__h3: SerializedStyles = css`
-  font-size: 1.15em;
-  margin-bottom: 1em;
+  font-size: 1.15rem;
+  margin-bottom: 0.5rem;
   font-weight: bold;
   text-align: left;
 `;
 
 const policy__icon: SerializedStyles = css`
   max-width: 120px;
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
   filter: drop-shadow(0px 2px 2px rgba(255, 255, 255, 0.4));
 `;
 
 const policy__text: SerializedStyles = css`
   text-align: left;
-  line-height: 1.5em;
-  margin-bottom: 0.5em;
+  line-height: 1.5rem;
+  margin-bottom: 0.5rem;
 `;
 
 export default PrivacyPolicy;
