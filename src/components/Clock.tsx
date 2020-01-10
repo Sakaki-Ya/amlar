@@ -17,7 +17,7 @@ const Clock: React.FC = (): JSX.Element => {
     const inputTime: string = e.target.value;
     if (inputTime.match(/^([01]?[0-9]|2[0-3]):([0-5][0-9])$/)) {
       setTime(inputTime);
-      if (silenting === false) {
+      if (!silenting) {
         silenting = true;
         silent.loop = true;
         silent.play();
@@ -36,16 +36,38 @@ const Clock: React.FC = (): JSX.Element => {
     sound.play();
   };
 
-  const [alarming, setAlarming]: [any, any] = useState(false);
-  useEffect((): any => {
+  const randomPosition = (): number[] => {
+    let maxRandomLeft: number = 0;
+    let maxRandomTop: number = 0;
+    if (window.screen.width > window.screen.height) {
+      maxRandomLeft = 85;
+      maxRandomTop = 16;
+    } else {
+      maxRandomLeft = 80;
+      maxRandomTop = 55;
+    }
+    const randomLeft: number = Math.random() * (maxRandomLeft + 1);
+    const randomTop: number = Math.random() * (maxRandomTop + 1);
+    return [randomLeft, randomTop];
+  };
+
+  const [randomLeft, randomTop]: number[] = randomPosition();
+  const [position, setPosition]: [
+    number[],
+    React.Dispatch<React.SetStateAction<number[]>>
+  ] = useState([randomTop, randomLeft]);
+  const [alarming, setAlarming] = useState(false);
+  useEffect(() => {
     const tick = (): void => {
       const date: Date = new Date();
       const hours: string = ("0" + date.getHours()).slice(-2);
       const minutes: string = ("0" + date.getMinutes()).slice(-2);
       const currentTime: string = hours + ":" + minutes;
-      if (currentTime === time && alarming === false) {
+      if (currentTime === time && !alarming) {
         sound.loop = true;
         sound.play();
+        const [randomLeft, randomTop] = randomPosition();
+        setPosition([randomLeft, randomTop]);
         setAlarming(true);
         silent.loop = false;
         silent.pause();
@@ -59,11 +81,11 @@ const Clock: React.FC = (): JSX.Element => {
   }, [alarming, sound, time]);
 
   return (
-    <div css={clock}>
+    <React.Fragment>
       <div css={clock__content}>
         <h2 css={clock__h2}>1. Select an alarm sound.</h2>
-        <SelectSoundSlider setSound={setSound} />
-        <button onClick={soundTest} css={sounds__test}>
+        <SelectSoundSlider sound={sound} setSound={setSound} />
+        <button onClick={soundTest} css={clock__test}>
           <p>&#x25b6; Sound Test</p>
         </button>
       </div>
@@ -75,6 +97,8 @@ const Clock: React.FC = (): JSX.Element => {
             value={time}
             css={clock__inputTime}
             onChange={getInputTime}
+            required
+            pattern="[0-9]{2}:[0-9]{2}"
           />
         </div>
       </div>
@@ -283,40 +307,29 @@ const Clock: React.FC = (): JSX.Element => {
           />
         </svg>
       </div>
-      {alarming === true && (
-        <Alarming sound={sound} setAlarming={setAlarming} />
+      {alarming && (
+        <Alarming sound={sound} setAlarming={setAlarming} position={position} />
       )}
-    </div>
+    </React.Fragment>
   );
 };
 
-const clock: SerializedStyles = css`
-  box-sizing: border-box;
-  max-width: 760px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  padding: 0 5%;
-`;
-
 const clock__content: SerializedStyles = css`
-  margin: 0 auto 3em auto;
+  margin-bottom: 3rem;
 `;
 
 const clock__h2Wrap: SerializedStyles = css`
   display: flex;
   align-items: center;
-  margin: 0 auto;
+  justify-content:center;
 `;
 
 const clock__h2: SerializedStyles = css`
-  font-size: 1.25em;
-  font-weight: bold;
+  font-size: 1.25rem;
 `;
 
-const sounds__test: SerializedStyles = css`
-  padding: 0.5em 0.75em;
+const clock__test: SerializedStyles = css`
+  padding: 0.5rem 0.75rem;
   background-color: ${Colors.orange};
   border: none;
   border-radius: 3px;
@@ -343,21 +356,21 @@ const clock__inputTime: SerializedStyles = css`
   border: none;
   box-shadow: 0 2px 4px ${Colors.white};
   border-radius: 5px;
-  margin-left: 1em;
-  padding: 0 0.75em;
-  height: 2em;
+  margin-left: 1rem;
+  padding: 0 0.75rem;
+  height: 2rem;
   font-family: "Arial Black", "Arial Rounded MT Bold", sans-serif;
-  font-size: 1.1em;
   font-weight: bold;
-  transition: all 0.2s ease 0s;
+  transition: 0.2s;
   &:hover {
     box-shadow: 0 2px 6px ${Colors.white};
   }
 `;
 
 const clock__sleepIcon: SerializedStyles = css`
-  margin-left: 1em;
+  margin-left: 1rem;
   width: 120px;
+  filter: drop-shadow(0px 3px 4px rgba(255, 255, 255, 0.4));
 `;
 
 export default Clock;

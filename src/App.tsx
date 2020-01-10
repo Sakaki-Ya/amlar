@@ -4,11 +4,10 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import emotionReset from "emotion-reset";
 import { jsx, Global, css, SerializedStyles } from "@emotion/core";
 import Colors from "./components/Colors";
-import Header from "./components/Header";
 import Clock from "./components/Clock";
 import HowTo from "./components/HowTo";
 import PrivacyPolicy from "./components/PrivacyPolicy";
-// import Contact from "./components/Contact";
+import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import "./stars.css";
 import "./stars2.css";
@@ -22,24 +21,25 @@ const App: React.FC = (): JSX.Element => (
       <div id="stars2" />
       <div id="stars3" />
     </div>
-    <div css={main}>
+    <div css={app__wrap}>
       <BrowserRouter>
-        <Header />
-        <Switch>
-          <Route exact path="/">
-            <Clock />
-          </Route>
-          <Route exact path="/how-to">
-            <HowTo />
-          </Route>
-          <Route exact path="/privacy-policy">
-            <PrivacyPolicy />
-          </Route>
-          {/* <Route exact path="/contact">
-          <Contact />
-        </Route> */}
-          <Redirect to="/" />
-        </Switch>
+        <div css={wrap__main}>
+          <Switch>
+            <Route exact path="/">
+              <Clock />
+            </Route>
+            <Route exact path="/how-to">
+              <HowTo />
+            </Route>
+            <Route exact path="/privacy-policy">
+              <PrivacyPolicy />
+            </Route>
+            <Route exact path="/contact">
+              <Contact />
+            </Route>
+            <Redirect to="/" />
+          </Switch>
+        </div>
         <Footer />
       </BrowserRouter>
     </div>
@@ -48,11 +48,8 @@ const App: React.FC = (): JSX.Element => (
 
 const global: SerializedStyles = css`
   ${emotionReset};
-
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-      "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-      "Helvetica Neue", sans-serif;
+    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background: linear-gradient(180deg, ${Colors.blue}, ${Colors.darkBlue});
@@ -69,38 +66,39 @@ const global: SerializedStyles = css`
         background-position: 50% 0%;
       }
     }
-    margin: 0;
     width: 100vw;
     height: 100vh;
+    text-align: center;
     color: ${Colors.white};
     overflow: hidden;
   }
   button,
-  input,
   a {
     cursor: pointer;
   }
 `;
 
-const main = css`
-  /* box-sizing: border-box; */
+const app__wrap: SerializedStyles = css`
+  width: 100vw;
+  height: 100vh;
   position: fixed;
-  width: 100%;
-  height: 100%;
   top: 0;
   left: 0;
+  overflow: auto;
   display: flex;
   flex-direction: column;
-  margin: auto;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  box-sizing: border-box;
+  padding: 1rem 5%;
 `;
 
-const starsWrap = css`
-  position: relative;
-  top: 0;
-  left: 0;
+const wrap__main: SerializedStyles = css`
+  max-width: 760px;
+  width: 100%;
+  margin: auto;
+`;
+
+const starsWrap: SerializedStyles = css`
+  position: fixed;
 `;
 
 export default App;

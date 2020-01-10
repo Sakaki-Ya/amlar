@@ -5,7 +5,7 @@ import Colors from "./Colors";
 
 const Contact: React.FC = (): JSX.Element => (
   <React.Fragment>
-    <div css={contact__titleWrap}>
+    <div css={contact__titleSection}>
       <svg width="286.001" viewBox="0 0 286.001 302" css={contact__icon}>
         <g fillRule="evenodd" clipRule="evenodd">
           <path
@@ -52,25 +52,107 @@ const Contact: React.FC = (): JSX.Element => (
       </svg>
       <h2 css={contact__h2}>Contact</h2>
     </div>
+    <form
+      css={contact__form}
+      name="contact"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-filed"
+    >
+      <section css={contact__section}>
+        <label>
+          <p>Name</p>
+          <input type="text" name="name" css={contact__input} />
+        </label>
+      </section>
+      <section css={contact__section}>
+        <label>
+          <p>Email</p>
+          <input type="email" name="email" css={contact__input} />
+        </label>
+      </section>
+      <section css={contact__section}>
+        <label>
+          <p>Message</p>
+          <textarea name="message" css={contact__input} />
+        </label>
+      </section>
+      <section css={contact__sendSection}>
+        <button type="submit" css={contact__send}>
+          Send
+        </button>
+      </section>
+    </form>
   </React.Fragment>
 );
 
-const contact__titleWrap: SerializedStyles = css`
+const contact__titleSection: SerializedStyles = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
 `;
 
 const contact__icon: SerializedStyles = css`
   max-width: 30px;
-  margin-right: 0.5em;
+  margin-right: 0.5rem;
+  filter: drop-shadow(0px 2px 2px rgba(255, 255, 255, 0.4));
 `;
 
 const contact__h2: SerializedStyles = css`
-  font-size: 1.25em;
+  font-size: 1.25rem;
   color: ${Colors.lightOrange};
   font-weight: bold;
+`;
+
+const contact__form: SerializedStyles = css`
+  max-width: 480px;
+  width: 100%;
+  margin: auto;
+  p {
+    margin-bottom: 0.5rem;
+  }
+  textarea {
+    height: 150px;
+  }
+`;
+
+const contact__section: SerializedStyles = css`
+  margin-bottom: 1rem;
+  text-align: left;
+`;
+
+const contact__input: SerializedStyles = css`
+  width: 100%;
+  border-radius: 5px;
+  background-color: ${Colors.white};
+  font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+`;
+
+const contact__sendSection: SerializedStyles = css`
+  text-align: left;
+`;
+
+const contact__send: SerializedStyles = css`
+  padding: 0.5rem 0.75rem;
+  background-color: ${Colors.orange};
+  border: none;
+  border-radius: 3px;
+  white-space: nowrap;
+  color: ${Colors.white};
+  font-weight: bold;
+  box-shadow: 0 2px 4px ${Colors.white};
+  transition: all 0.2s ease 0s;
+  &:hover {
+    background-color: ${Colors.lightOrange};
+    box-shadow: 0 2px 6px ${Colors.white};
+  }
+  &:active {
+    transform: translateY(2px);
+    background-color: ${Colors.deepOrange};
+    color: ${Colors.white};
+    box-shadow: none;
+  }
 `;
 
 export default Contact;
