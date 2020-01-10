@@ -4,7 +4,7 @@ import { jsx, css, SerializedStyles } from "@emotion/core";
 import Colors from "./Colors";
 
 const HowTo: React.FC = (): JSX.Element => (
-  <div css={howto}>
+  <React.Fragment>
     <h2 css={howto__h2}>How to</h2>
     <svg width="286.001" viewBox="0 0 286.001 187.858" css={howto__icon}>
       <g fillRule="evenodd" clipRule="evenodd">
@@ -188,16 +188,8 @@ const HowTo: React.FC = (): JSX.Element => (
     </svg>
     <p css={howto__text}>aaaaaaa</p>
     <p css={howto__text}>aaaaaaa</p>
-  </div>
+  </React.Fragment>
 );
-
-const howto: SerializedStyles = css`
-  max-width: 480px;
-  width: 100%;
-  box-sizing: border-box;
-  margin: auto;
-  padding: 0 5%;
-`;
 
 const howto__h2: SerializedStyles = css`
   font-size: 1.25rem;

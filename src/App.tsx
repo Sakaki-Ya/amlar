@@ -4,7 +4,6 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import emotionReset from "emotion-reset";
 import { jsx, Global, css, SerializedStyles } from "@emotion/core";
 import Colors from "./components/Colors";
-import Header from "./components/Header";
 import Clock from "./components/Clock";
 import HowTo from "./components/HowTo";
 import PrivacyPolicy from "./components/PrivacyPolicy";
@@ -22,10 +21,9 @@ const App: React.FC = (): JSX.Element => (
       <div id="stars2" />
       <div id="stars3" />
     </div>
-    <div css={wrap}>
+    <div css={app__wrap}>
       <BrowserRouter>
-        <Header />
-        <div css={main}>
+        <div css={wrap__main}>
           <Switch>
             <Route exact path="/">
               <Clock />
@@ -51,7 +49,7 @@ const App: React.FC = (): JSX.Element => (
 const global: SerializedStyles = css`
   ${emotionReset};
   body {
-    font-family: 'Helvetica Neue','Helvetica','Arial',sans-serif;
+    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background: linear-gradient(180deg, ${Colors.blue}, ${Colors.darkBlue});
@@ -68,42 +66,39 @@ const global: SerializedStyles = css`
         background-position: 50% 0%;
       }
     }
-    box-sizing: border-box;
-    margin: 0;
     width: 100vw;
     height: 100vh;
+    text-align: center;
     color: ${Colors.white};
     overflow: hidden;
   }
   button,
-  input,
   a {
     cursor: pointer;
   }
 `;
 
-const wrap: SerializedStyles = css`
-  width: 100%;
-  height: 100%;
+const app__wrap: SerializedStyles = css`
+  width: 100vw;
+  height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
+  overflow: auto;
   display: flex;
   flex-direction: column;
-  text-align: center;
+  box-sizing: border-box;
+  padding: 1rem 5%;
 `;
 
-const main: SerializedStyles = css`
-  display: flex;
-  flex-direction: column;
-  margin: auto;
+const wrap__main: SerializedStyles = css`
+  max-width: 760px;
   width: 100%;
-  height: 100%;
-  overflow: auto;
+  margin: auto;
 `;
 
 const starsWrap: SerializedStyles = css`
-  position: relative;
+  position: fixed;
 `;
 
 export default App;

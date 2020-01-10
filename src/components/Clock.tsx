@@ -36,7 +36,27 @@ const Clock: React.FC = (): JSX.Element => {
     sound.play();
   };
 
-  const [alarming, setAlarming]: [any, any] = useState(false);
+  const randomPosition = (): number[] => {
+    let maxRandomLeft: number = 0;
+    let maxRandomTop: number = 0;
+    if (window.screen.width > window.screen.height) {
+      maxRandomLeft = 85;
+      maxRandomTop = 16;
+    } else {
+      maxRandomLeft = 80;
+      maxRandomTop = 55;
+    }
+    const randomLeft: number = Math.random() * (maxRandomLeft + 1);
+    const randomTop: number = Math.random() * (maxRandomTop + 1);
+    return [randomLeft, randomTop];
+  };
+
+  const [randomLeft, randomTop]: number[] = randomPosition();
+  const [position, setPosition]: [
+    number[],
+    React.Dispatch<React.SetStateAction<number[]>>
+  ] = useState([randomTop, randomLeft]);
+  const [alarming, setAlarming] = useState(false);
   useEffect(() => {
     const tick = (): void => {
       const date: Date = new Date();
@@ -46,6 +66,8 @@ const Clock: React.FC = (): JSX.Element => {
       if (currentTime === time && !alarming) {
         sound.loop = true;
         // sound.play();
+        const [randomLeft, randomTop] = randomPosition();
+        setPosition([randomLeft, randomTop]);
         setAlarming(true);
         silent.loop = false;
         silent.pause();
@@ -59,7 +81,7 @@ const Clock: React.FC = (): JSX.Element => {
   }, [alarming, sound, time]);
 
   return (
-    <div css={clock}>
+    <React.Fragment>
       <div css={clock__content}>
         <h2 css={clock__h2}>1. Select an alarm sound.</h2>
         <SelectSoundSlider sound={sound} setSound={setSound} />
@@ -285,31 +307,25 @@ const Clock: React.FC = (): JSX.Element => {
           />
         </svg>
       </div>
-      {alarming && <Alarming sound={sound} setAlarming={setAlarming} />}
-    </div>
+      {alarming && (
+        <Alarming sound={sound} setAlarming={setAlarming} position={position} />
+      )}
+    </React.Fragment>
   );
 };
 
-const clock: SerializedStyles = css`
-  box-sizing: border-box;
-  max-width: 760px;
-  margin: auto;
-  padding: 0 5%;
-`;
-
 const clock__content: SerializedStyles = css`
-  margin: 0 auto 3rem auto;
+  margin-bottom: 3rem;
 `;
 
 const clock__h2Wrap: SerializedStyles = css`
   display: flex;
   align-items: center;
-  margin: 0 auto;
+  justify-content:center;
 `;
 
 const clock__h2: SerializedStyles = css`
   font-size: 1.25rem;
-  font-weight: bold;
 `;
 
 const clock__test: SerializedStyles = css`

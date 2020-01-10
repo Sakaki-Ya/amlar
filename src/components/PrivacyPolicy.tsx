@@ -4,7 +4,7 @@ import { jsx, css, SerializedStyles } from "@emotion/core";
 import Colors from "./Colors";
 
 const PrivacyPolicy: React.FC = (): JSX.Element => (
-  <div css={policy}>
+  <React.Fragment>
     <h2 css={policy__h2}>Privacy Policy</h2>
     <svg width="333.334" viewBox="0 0 333.334 302" css={policy__icon}>
       <g fillRule="evenodd" clipRule="evenodd">
@@ -139,6 +139,7 @@ const PrivacyPolicy: React.FC = (): JSX.Element => (
       </g>
     </svg>
     <h3 css={policy__h3}>About access analysis.</h3>
+    <hr />
     <p css={policy__text}>
       This site uses cookies to collect traffic data using the access analysis
       tool "Google Analytics".
@@ -146,16 +147,8 @@ const PrivacyPolicy: React.FC = (): JSX.Element => (
     <p css={policy__text}>
       Traffic data is collected anonymously and is not personally identifiable.
     </p>
-  </div>
+  </React.Fragment>
 );
-
-const policy: SerializedStyles = css`
-  max-width: 480px;
-  width: 100%;
-  box-sizing: border-box;
-  margin: auto;
-  padding: 0 5%;
-`;
 
 const policy__h2: SerializedStyles = css`
   font-size: 1.25rem;

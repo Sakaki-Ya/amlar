@@ -336,7 +336,7 @@ const SelectSoundSlider = ({
 const soundsSlider: SerializedStyles = css`
   max-width: 240px;
   width: 80%;
-  margin: 0 auto;
+  margin: auto;
   padding: 1rem 1rem 0 1rem;
 
   div p {

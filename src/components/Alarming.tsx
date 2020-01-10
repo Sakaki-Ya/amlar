@@ -1,35 +1,40 @@
 /** @jsx jsx */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { jsx, css, SerializedStyles } from "@emotion/core";
 import Colors from "./Colors";
 
 interface AlarmingProps {
   sound: HTMLAudioElement;
   setAlarming: React.Dispatch<React.SetStateAction<boolean>>;
+  position: number[];
 }
 
-const Alarming = ({ sound, setAlarming }: AlarmingProps): JSX.Element => {
-  let count: number = 0;
-  const countUp = (): void => {
-    count++;
-    if (count === 1) {
-      sound.loop = false;
-      sound.pause();
-      sound.currentTime = 0;
-      setAlarming(false);
-    }
-  };
-
+const Alarming = ({
+  sound,
+  setAlarming,
+  position
+}: AlarmingProps): JSX.Element => {
   const [hold, setHold] = useState(false);
-  let timer: NodeJS.Timeout;
-  const down = (): void => {
-    setHold(true);
-    timer = setInterval(countUp, 2000);
-  };
+  let count: number = 0;
+  useEffect(() => {
+    if (!hold) return;
+    const countUp = (): void => {
+      count++;
+      if (count === 100) {
+        sound.pause();
+        sound.currentTime = 0;
+        sound.loop = false;
+        setAlarming(false);
+      }
+    };
+    const timer: NodeJS.Timeout = setInterval((): void => countUp(), 10);
+    return (): void => clearInterval(timer);
+  }, [count, hold, setAlarming, sound]);
+
+  const down = (): void => setHold(true);
   const up = (): void => {
     setHold(false);
     count = 0;
-    clearInterval(timer);
   };
   const touchDown = (): void => down();
   const touchUp = (e: React.TouchEvent<HTMLButtonElement>): void => {
@@ -39,17 +44,7 @@ const Alarming = ({ sound, setAlarming }: AlarmingProps): JSX.Element => {
   const mouseDown = (): void => down();
   const mouseUp = (): void => up();
 
-  let maxRandomLeft: number = 0,
-    maxRandomTop: number = 0;
-  if (window.screen.width > window.screen.height) {
-    maxRandomLeft = 85;
-    maxRandomTop = 16;
-  } else {
-    maxRandomLeft = 80;
-    maxRandomTop = 55;
-  }
-  const randomLeft: number = Math.random() * (maxRandomLeft + 1),
-    randomTop: number = Math.random() * (maxRandomTop + 1);
+  const [randomLeft, randomTop]: number[] = position;
   const alarming__stop: SerializedStyles = css`
     left: ${randomLeft}%;
     top: ${randomTop}%;
@@ -81,18 +76,21 @@ const Alarming = ({ sound, setAlarming }: AlarmingProps): JSX.Element => {
       background-color: ${Colors.white};
       color: ${Colors.orange};
       box-shadow: none;
-      transition: 3.5s;
+      transition: 2s;
     }
   `;
   const alarming__bar: SerializedStyles = css`
     background: linear-gradient(180deg, ${Colors.blue}, ${Colors.darkBlue});
-    width: 100%;
-    height: 100%;
-    animation: randomAreaAnime 2s;
-    @keyframes randomAreaAnime {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    animation: barMotion 2s;
+    @keyframes barMotion {
       0% {
         opacity: 0;
-        transform: translate(0, 100%);
+        transform: translate(0, 100vh);
       }
       100% {
         opacity: 1;
@@ -309,9 +307,11 @@ const Alarming = ({ sound, setAlarming }: AlarmingProps): JSX.Element => {
             />
           </g>
         </svg>
+        <br />
         <p css={alarming__text}>
           Press and hold the Stop button to stop the alarm.
         </p>
+        <br />
         <p css={alarming__text}>
           The buttons are placed in different positions each time.
         </p>
@@ -345,23 +345,13 @@ const alarming: SerializedStyles = css`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 2;
   overflow: hidden;
 `;
 
 const alarming__header: SerializedStyles = css`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   box-sizing: border-box;
   padding: 1rem 5%;
   font-weight: bold;
-`;
-
-const alarming__text: SerializedStyles = css`
-  line-height: 1.5rem;
-  text-align: left;
-  margin-bottom: 0.5rem;
 `;
 
 const alarming__icon: SerializedStyles = css`
@@ -373,6 +363,13 @@ const alarming__icon: SerializedStyles = css`
 const alarming__h2: SerializedStyles = css`
   font-size: 1.25rem;
   margin-bottom: 1rem;
+`;
+
+const alarming__text: SerializedStyles = css`
+  display: inline-block;
+  line-height: 1.5rem;
+  text-align: left;
+  margin-bottom: 0.5rem;
 `;
 
 const alarming__randomArea: SerializedStyles = css`
