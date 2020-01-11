@@ -5,21 +5,24 @@ import Colors from "./Colors";
 
 interface AlarmingProps {
   sound: HTMLAudioElement;
-  setAlarming: React.Dispatch<React.SetStateAction<boolean>>;
   position: number[];
+  setTime: React.Dispatch<React.SetStateAction<string>>
+  setAlarming: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Alarming = ({
   sound,
-  setAlarming,
-  position
+  position,
+  setTime,
+  setAlarming
 }: AlarmingProps): JSX.Element => {
   const [hold, setHold] = useState(false);
 
   const stopAlarm = (): void => {
     sound.pause();
     sound.currentTime = 0;
-    sound.loop = false;
+    sound.loop = false
+    setTime("");
     setAlarming(false);
   };
 
@@ -77,8 +80,8 @@ const Alarming = ({
     position: fixed;
     bottom: 0;
     left: 0;
-    animation: barMotion 2s;
-    @keyframes barMotion {
+    animation: barAnime 2s;
+    @keyframes barAnime {
       0% {
         opacity: 0;
         transform: translate(0, 100vh);
@@ -338,6 +341,17 @@ const alarming: SerializedStyles = css`
   left: 0;
   overflow: hidden;
   z-index: 1;
+  animation: alarmingAnime .5s;
+  @keyframes alarmingAnime {
+      0% {
+        opacity: 0;
+        transform: translate(0, 100vh);
+      }
+      100% {
+        opacity: 1;
+        transform: translate(0, 0);
+      }
+    }
 `;
 
 const alarming__header: SerializedStyles = css`

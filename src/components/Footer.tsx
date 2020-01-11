@@ -45,6 +45,16 @@ const footer: SerializedStyles = css`
   overflow-y: hidden;
 `;
 
+const footer__check: SerializedStyles = css`
+  display: none;
+  &:checked ~ * svg {
+    transform: rotate(180deg) translate(0, 0);
+  }
+  &:checked ~ div {
+    transform: translate(0, 0);
+  }
+`;
+
 const footer__checkArrow: SerializedStyles = css`
   cursor: pointer;
   transform: translate(0, 3rem);
@@ -56,22 +66,13 @@ const footer__checkArrow: SerializedStyles = css`
   }
 `;
 
-const footer__check: SerializedStyles = css`
-  display: none;
-  &:checked ~ * svg {
-    transform: rotate(180deg) translate(0, 0);
-  }
-  &:checked ~ div {
-    visibility: visible;
-  }
+const footer__content: SerializedStyles = css`
+  transform: translate(0, 3rem);
+  transition: 0.2s;
 `;
 
 const footer__list: SerializedStyles = css`
   margin-bottom: 0.5rem;
-`;
-
-const footer__content: SerializedStyles = css`
-  visibility: hidden;
 `;
 
 const footer__link: SerializedStyles = css`

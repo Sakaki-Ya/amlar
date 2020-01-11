@@ -73,7 +73,6 @@ const Clock: React.FC = (): JSX.Element => {
         silent.pause();
         silent.currentTime = 0;
         silenting = false;
-        setTime("");
       }
     };
     const timer: NodeJS.Timeout = setInterval((): void => tick(), 1000);
@@ -308,7 +307,7 @@ const Clock: React.FC = (): JSX.Element => {
         </svg>
       </div>
       {alarming && (
-        <Alarming sound={sound} setAlarming={setAlarming} position={position} />
+        <Alarming sound={sound} position={position} setTime={setTime} setAlarming={setAlarming} />
       )}
     </React.Fragment>
   );
