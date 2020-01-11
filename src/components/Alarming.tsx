@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { jsx, css, SerializedStyles } from "@emotion/core";
 import Colors from "./Colors";
 
@@ -15,26 +15,17 @@ const Alarming = ({
   position
 }: AlarmingProps): JSX.Element => {
   const [hold, setHold] = useState(false);
-  let count: number = 0;
-  useEffect(() => {
-    if (!hold) return;
-    const countUp = (): void => {
-      count++;
-      if (count === 100) {
-        sound.pause();
-        sound.currentTime = 0;
-        sound.loop = false;
-        setAlarming(false);
-      }
-    };
-    const timer: NodeJS.Timeout = setInterval((): void => countUp(), 10);
-    return (): void => clearInterval(timer);
-  }, [count, hold, setAlarming, sound]);
+
+  const stopAlarm = (): void => {
+    sound.pause();
+    sound.currentTime = 0;
+    sound.loop = false;
+    setAlarming(false);
+  };
 
   const down = (): void => setHold(true);
   const up = (): void => {
     setHold(false);
-    count = 0;
   };
   const touchDown = (): void => down();
   const touchUp = (e: React.TouchEvent<HTMLButtonElement>): void => {
@@ -316,7 +307,7 @@ const Alarming = ({
           The buttons are placed in different positions each time.
         </p>
       </header>
-      <div css={alarming__randomArea}>
+      <div css={alarming__randomArea} onAnimationEnd={stopAlarm}>
         {hold && <div css={alarming__bar} />}
         <button
           onTouchStart={touchDown}
@@ -346,6 +337,7 @@ const alarming: SerializedStyles = css`
   top: 0;
   left: 0;
   overflow: hidden;
+  z-index: 1;
 `;
 
 const alarming__header: SerializedStyles = css`

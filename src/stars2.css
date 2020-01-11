@@ -74,8 +74,6 @@
 
 #stars2:before {
   content: "";
-  position: fixed;
-  /* top: 2000px; */
   width: 2px;
   height: 2px;
   background: transparent;

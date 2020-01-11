@@ -65,7 +65,7 @@ const Clock: React.FC = (): JSX.Element => {
       const currentTime: string = hours + ":" + minutes;
       if (currentTime === time && !alarming) {
         sound.loop = true;
-        sound.play();
+        // sound.play();
         const [randomLeft, randomTop] = randomPosition();
         setPosition([randomLeft, randomTop]);
         setAlarming(true);

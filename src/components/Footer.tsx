@@ -1,51 +1,23 @@
 /** @jsx jsx */
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { jsx, css, SerializedStyles } from "@emotion/core";
 import colors from "./Colors";
 
 const Footer: React.FC = (): JSX.Element => {
-  const [visible, setVisible] = useState(false);
-  const showFooter = (): void => {
-    if (visible) {
-      setVisible(false);
-      return;
-    }
-    setVisible(true);
-  };
-
-  const footer__content: SerializedStyles = css`
-    visibility: ${visible ? "visible" : "hidden"};
-    margin-top: 1rem;
-    font-size: 0.75rem;
-  `;
-
-  const footer__visibleButtonWrap: SerializedStyles = css`
-    /* position: absolute;
-    bottom: 0;
-    left: 0; */
-  `;
-
-  const footer__visibleButton: SerializedStyles = css`
-    background: transparent;
-    border: none;
-    width: 1rem;
-    height: 1rem;
-    margin: 0 1rem;
-    border-bottom: 4px solid ${colors.white};
-    border-right: 4px solid ${colors.white};
-    opacity: .6;
-    transform: ${visible ? "rotate(45deg)" : "rotate(225deg)"};
-    &:hover{
-      opacity: 1;
-    }
-  `;
-
   return (
-      <footer css={footer}>
-      <div css={footer__visibleButtonWrap}>
-        <button onClick={showFooter} css={footer__visibleButton} />
-      </div>
+    <footer css={footer}>
+      <input id="footerCheck" type="checkbox" css={footer__check} />
+      <label htmlFor="footerCheck">
+        <svg
+          width="18"
+          css={footer__checkArrow}
+          id="checkArrow"
+          viewBox="0 0 512 512"
+        >
+          <path d="M255.992 92.089l-255.992 255.992 71.821 71.83 184.171-184.171 184.188 184.171 71.82-71.83z" />
+        </svg>
+      </label>
       <div css={footer__content}>
         <div css={footer__list}>
           <Link to="/how-to" css={footer__link}>
@@ -64,17 +36,42 @@ const Footer: React.FC = (): JSX.Element => {
             <h1>Random Alarm Clock</h1>
           </Link>
         </div>
-        </div>
-        </footer>
+      </div>
+    </footer>
   );
 };
 
 const footer: SerializedStyles = css`
-  position:relative;
+  overflow-y: hidden;
+`;
+
+const footer__checkArrow: SerializedStyles = css`
+  cursor: pointer;
+  transform: translate(0, 3rem);
+  margin-bottom: 0.5rem;
+  fill: ${colors.white};
+  opacity: 0.5;
+  &:hover {
+    opacity: 1;
+  }
+`;
+
+const footer__check: SerializedStyles = css`
+  display: none;
+  &:checked ~ * svg {
+    transform: rotate(180deg) translate(0, 0);
+  }
+  &:checked ~ div {
+    visibility: visible;
+  }
 `;
 
 const footer__list: SerializedStyles = css`
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.5rem;
+`;
+
+const footer__content: SerializedStyles = css`
+  visibility: hidden;
 `;
 
 const footer__link: SerializedStyles = css`
@@ -103,7 +100,6 @@ const footer__copy: SerializedStyles = css`
 
 const footer__title: SerializedStyles = css`
   color: ${colors.white};
-  font-size: 1rem;
 `;
 
 export default Footer;
