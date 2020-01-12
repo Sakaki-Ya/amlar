@@ -4,42 +4,40 @@ import { Link } from "react-router-dom";
 import { jsx, css, SerializedStyles } from "@emotion/core";
 import colors from "./Colors";
 
-const Footer: React.FC = (): JSX.Element => {
-  return (
-    <footer css={footer}>
-      <input id="footerCheck" type="checkbox" css={footer__check} />
-      <label htmlFor="footerCheck">
-        <svg
-          width="18"
-          css={footer__checkArrow}
-          id="checkArrow"
-          viewBox="0 0 512 512"
-        >
-          <path d="M255.992 92.089l-255.992 255.992 71.821 71.83 184.171-184.171 184.188 184.171 71.82-71.83z" />
-        </svg>
-      </label>
-      <div css={footer__content}>
-        <div css={footer__list}>
-          <Link to="/how-to" css={footer__link}>
-            How to
-          </Link>
-          <Link to="/privacy-policy" css={footer__link}>
-            Privacy Policy
-          </Link>
-          <Link to="/contact" css={footer__link}>
-            Contact
-          </Link>
-        </div>
-        <div css={footer__copyWrap}>
-          <p css={footer__copy}>&copy; 2020</p>
-          <Link to="/" css={footer__title}>
-            <h1>Random Alarm Clock</h1>
-          </Link>
-        </div>
+const Footer: React.FC = (): JSX.Element => (
+  <footer css={footer}>
+    <input id="footerCheck" type="checkbox" css={footer__check} />
+    <label htmlFor="footerCheck">
+      <svg
+        width="18"
+        css={footer__checkArrow}
+        id="checkArrow"
+        viewBox="0 0 512 512"
+      >
+        <path d="M255.992 92.089l-255.992 255.992 71.821 71.83 184.171-184.171 184.188 184.171 71.82-71.83z" />
+      </svg>
+    </label>
+    <div css={footer__content}>
+      <div css={footer__list}>
+        <Link to="/how-to" css={footer__link}>
+          How to
+        </Link>
+        <Link to="/privacy-policy" css={footer__link}>
+          Privacy Policy
+        </Link>
+        <Link to="/contact" css={footer__link}>
+          Contact
+        </Link>
       </div>
-    </footer>
-  );
-};
+      <div css={footer__copyWrap}>
+        <p css={footer__copy}>&copy; 2020</p>
+        <Link to="/" css={footer__title}>
+          <h1>Random Alarm Clock</h1>
+        </Link>
+      </div>
+    </div>
+  </footer>
+);
 
 const footer: SerializedStyles = css`
   overflow-y: hidden;

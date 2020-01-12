@@ -6,7 +6,7 @@ import Colors from "./Colors";
 interface AlarmingProps {
   sound: HTMLAudioElement;
   position: number[];
-  setTime: React.Dispatch<React.SetStateAction<string>>
+  setTime: React.Dispatch<React.SetStateAction<string>>;
   setAlarming: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -18,18 +18,8 @@ const Alarming = ({
 }: AlarmingProps): JSX.Element => {
   const [hold, setHold] = useState(false);
 
-  const stopAlarm = (): void => {
-    sound.pause();
-    sound.currentTime = 0;
-    sound.loop = false
-    setTime("");
-    setAlarming(false);
-  };
-
   const down = (): void => setHold(true);
-  const up = (): void => {
-    setHold(false);
-  };
+  const up = (): void => setHold(false);
   const touchDown = (): void => down();
   const touchUp = (e: React.TouchEvent<HTMLButtonElement>): void => {
     e.preventDefault();
@@ -73,25 +63,14 @@ const Alarming = ({
       transition: 2s;
     }
   `;
-  const alarming__bar: SerializedStyles = css`
-    background: linear-gradient(180deg, ${Colors.blue}, ${Colors.darkBlue});
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    animation: barAnime 2s;
-    @keyframes barAnime {
-      0% {
-        opacity: 0;
-        transform: translate(0, 100vh);
-      }
-      100% {
-        opacity: 1;
-        transform: translate(0, 0);
-      }
-    }
-  `;
+
+  const stopAlarm = (): void => {
+    sound.pause();
+    sound.currentTime = 0;
+    sound.loop = false;
+    setTime("");
+    setAlarming(false);
+  };
 
   return (
     <div css={alarming}>
@@ -341,17 +320,17 @@ const alarming: SerializedStyles = css`
   left: 0;
   overflow: hidden;
   z-index: 1;
-  animation: alarmingAnime .5s;
+  animation: alarmingAnime 0.5s;
   @keyframes alarmingAnime {
-      0% {
-        opacity: 0;
-        transform: translate(0, 100vh);
-      }
-      100% {
-        opacity: 1;
-        transform: translate(0, 0);
-      }
+    0% {
+      opacity: 0;
+      transform: translate(0, 100vh);
     }
+    100% {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+  }
 `;
 
 const alarming__header: SerializedStyles = css`
@@ -382,6 +361,26 @@ const alarming__randomArea: SerializedStyles = css`
   width: 100%;
   height: 100%;
   position: relative;
+`;
+
+const alarming__bar: SerializedStyles = css`
+  background: linear-gradient(180deg, ${Colors.blue}, ${Colors.darkBlue});
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  animation: barAnime 2s;
+  @keyframes barAnime {
+    0% {
+      opacity: 0;
+      transform: translate(0, 100vh);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+  }
 `;
 
 export default Alarming;

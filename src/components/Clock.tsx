@@ -37,8 +37,7 @@ const Clock: React.FC = (): JSX.Element => {
   };
 
   const randomPosition = (): number[] => {
-    let maxRandomLeft: number = 0;
-    let maxRandomTop: number = 0;
+    let [maxRandomLeft, maxRandomTop]: number[] = [0, 0];
     if (window.screen.width > window.screen.height) {
       maxRandomLeft = 85;
       maxRandomTop = 16;
@@ -46,16 +45,17 @@ const Clock: React.FC = (): JSX.Element => {
       maxRandomLeft = 80;
       maxRandomTop = 55;
     }
-    const randomLeft: number = Math.random() * (maxRandomLeft + 1);
-    const randomTop: number = Math.random() * (maxRandomTop + 1);
+    const [randomLeft, randomTop]: number[] = [
+      Math.random() * (maxRandomLeft + 1),
+      Math.random() * (maxRandomTop + 1)
+    ];
     return [randomLeft, randomTop];
   };
 
-  const [randomLeft, randomTop]: number[] = randomPosition();
   const [position, setPosition]: [
     number[],
     React.Dispatch<React.SetStateAction<number[]>>
-  ] = useState([randomTop, randomLeft]);
+  ] = useState([0, 0]);
   const [alarming, setAlarming] = useState(false);
   useEffect(() => {
     const tick = (): void => {
@@ -307,7 +307,12 @@ const Clock: React.FC = (): JSX.Element => {
         </svg>
       </div>
       {alarming && (
-        <Alarming sound={sound} position={position} setTime={setTime} setAlarming={setAlarming} />
+        <Alarming
+          sound={sound}
+          position={position}
+          setTime={setTime}
+          setAlarming={setAlarming}
+        />
       )}
     </React.Fragment>
   );
@@ -320,7 +325,7 @@ const clock__content: SerializedStyles = css`
 const clock__h2Wrap: SerializedStyles = css`
   display: flex;
   align-items: center;
-  justify-content:center;
+  justify-content: center;
 `;
 
 const clock__h2: SerializedStyles = css`
@@ -336,7 +341,7 @@ const clock__test: SerializedStyles = css`
   color: ${Colors.white};
   font-weight: bold;
   box-shadow: 0 2px 4px ${Colors.white};
-  transition: all 0.2s ease 0s;
+  transition: 0.2s;
   &:hover {
     background-color: ${Colors.lightOrange};
     box-shadow: 0 2px 6px ${Colors.white};
