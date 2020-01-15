@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { jsx, css, SerializedStyles } from "@emotion/core";
-import Colors from "./Colors";
+import colors from "./Colors";
 
 const Contact: React.FC = (): JSX.Element => {
   const [forms, setForms] = useState([false, false, false]);
@@ -153,7 +153,7 @@ const contact__icon: SerializedStyles = css`
 
 const contact__h2: SerializedStyles = css`
   font-size: 1.25rem;
-  color: ${Colors.lightOrange};
+  color: ${colors.lightOrange};
   font-weight: bold;
 `;
 
@@ -177,7 +177,7 @@ const contact__section: SerializedStyles = css`
 const contact__input: SerializedStyles = css`
   width: 100%;
   border-radius: 5px;
-  background-color: ${Colors.white};
+  background-color: ${colors.white};
   font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 `;
 
@@ -187,22 +187,22 @@ const contact__sendSection: SerializedStyles = css`
 
 const contact__send: SerializedStyles = css`
   padding: 0.5rem 0.75rem;
-  background-color: ${Colors.orange};
+  background-color: ${colors.orange};
   border: none;
   border-radius: 3px;
   white-space: nowrap;
-  color: ${Colors.white};
+  color: ${colors.white};
   font-weight: bold;
-  box-shadow: 0 2px 4px ${Colors.white};
+  box-shadow: 0 2px 4px ${colors.white};
   transition: 0.2s;
   &:hover {
-    background: ${Colors.lightOrange};
-    box-shadow: 0 2px 6px ${Colors.white};
+    background: ${colors.lightOrange};
+    box-shadow: 0 2px 6px ${colors.white};
   }
   &:active {
     transform: translateY(2px);
-    background: ${Colors.deepOrange};
-    color: ${Colors.white};
+    background: ${colors.deepOrange};
+    color: ${colors.white};
     box-shadow: none;
   }
   &:disabled {

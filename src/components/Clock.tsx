@@ -1,7 +1,8 @@
 /** @jsx jsx */
 import React, { useState, useEffect } from "react";
+import { useTransition, animated, TransitionFn,config } from "react-spring";
 import { jsx, css, SerializedStyles } from "@emotion/core";
-import Colors from "./Colors";
+import colors from "./Colors";
 import SelectSoundSlider from "./SelectSoundSlider";
 import Alarming from "./Alarming";
 
@@ -64,10 +65,11 @@ const Clock: React.FC = (): JSX.Element => {
       const minutes: string = ("0" + date.getMinutes()).slice(-2);
       const currentTime: string = hours + ":" + minutes;
       if (currentTime === time && !alarming) {
+        sound.pause();
+        sound.currentTime = 0;
         sound.loop = true;
-        // sound.play();
-        const [randomLeft, randomTop] = randomPosition();
-        setPosition([randomLeft, randomTop]);
+        sound.play();
+        setPosition(randomPosition());
         setAlarming(true);
         silent.loop = false;
         silent.pause();
@@ -78,6 +80,28 @@ const Clock: React.FC = (): JSX.Element => {
     const timer: NodeJS.Timeout = setInterval((): void => tick(), 1000);
     return (): void => clearInterval(timer);
   }, [alarming, sound, time]);
+
+  const transition: TransitionFn<boolean, {}> = useTransition(alarming, {
+    config:config.default,
+    from: {
+      display: "none",
+      opacity: 0,
+      transform: "translateY(100vh)"
+    },
+    enter: {
+      display: "block",
+      opacity: 1,
+      position: "fixed",
+      top: 0,
+      left: 0,
+      zIndex: 1,
+      transform: "translateY(0)"
+    },
+    leave: {
+      opacity: 0,
+      zIndex: -1
+    }
+  });
 
   return (
     <React.Fragment>
@@ -306,13 +330,18 @@ const Clock: React.FC = (): JSX.Element => {
           />
         </svg>
       </div>
-      {alarming && (
-        <Alarming
-          sound={sound}
-          position={position}
-          setTime={setTime}
-          setAlarming={setAlarming}
-        />
+      {transition(
+        (props, item): any =>
+          item && (
+            <animated.div style={props}>
+              <Alarming
+                sound={sound}
+                position={position}
+                setTime={setTime}
+                setAlarming={setAlarming}
+              />
+            </animated.div>
+          )
       )}
     </React.Fragment>
   );
@@ -334,31 +363,31 @@ const clock__h2: SerializedStyles = css`
 
 const clock__test: SerializedStyles = css`
   padding: 0.5rem 0.75rem;
-  background-color: ${Colors.orange};
+  background-color: ${colors.orange};
   border: none;
   border-radius: 3px;
   white-space: nowrap;
-  color: ${Colors.white};
+  color: ${colors.white};
   font-weight: bold;
-  box-shadow: 0 2px 4px ${Colors.white};
+  box-shadow: 0 2px 4px ${colors.white};
   transition: 0.2s;
   &:hover {
-    background-color: ${Colors.lightOrange};
-    box-shadow: 0 2px 6px ${Colors.white};
+    background-color: ${colors.lightOrange};
+    box-shadow: 0 2px 6px ${colors.white};
   }
   &:active {
     transform: translateY(2px);
-    background-color: ${Colors.deepOrange};
-    color: ${Colors.white};
+    background-color: ${colors.deepOrange};
+    color: ${colors.white};
     box-shadow: none;
   }
 `;
 
 const clock__inputTime: SerializedStyles = css`
-  background-color: ${Colors.white};
-  color: ${Colors.black};
+  background-color: ${colors.white};
+  color: ${colors.black};
   border: none;
-  box-shadow: 0 2px 4px ${Colors.white};
+  box-shadow: 0 2px 4px ${colors.white};
   border-radius: 5px;
   margin-left: 1rem;
   padding: 0 0.75rem;
@@ -367,7 +396,7 @@ const clock__inputTime: SerializedStyles = css`
   font-weight: bold;
   transition: 0.2s;
   &:hover {
-    box-shadow: 0 2px 6px ${Colors.white};
+    box-shadow: 0 2px 6px ${colors.white};
   }
 `;
 

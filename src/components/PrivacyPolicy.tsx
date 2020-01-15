@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import React from "react";
 import { jsx, css, SerializedStyles } from "@emotion/core";
-import Colors from "./Colors";
+import colors from "./Colors";
 
 const PrivacyPolicy: React.FC = (): JSX.Element => (
   <React.Fragment>
@@ -153,7 +153,7 @@ const PrivacyPolicy: React.FC = (): JSX.Element => (
 const policy__h2: SerializedStyles = css`
   font-size: 1.25rem;
   margin-bottom: 1rem;
-  color: ${Colors.lightOrange};
+  color: ${colors.lightOrange};
   font-weight: bold;
 `;
 

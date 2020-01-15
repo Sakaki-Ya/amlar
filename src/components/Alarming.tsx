@@ -1,7 +1,8 @@
 /** @jsx jsx */
 import React, { useState } from "react";
+import { useTransition, animated, TransitionFn,config } from "react-spring";
 import { jsx, css, SerializedStyles } from "@emotion/core";
-import Colors from "./Colors";
+import colors from "./Colors";
 
 interface AlarmingProps {
   sound: HTMLAudioElement;
@@ -16,18 +17,6 @@ const Alarming = ({
   setTime,
   setAlarming
 }: AlarmingProps): JSX.Element => {
-  const [hold, setHold] = useState(false);
-
-  const down = (): void => setHold(true);
-  const up = (): void => setHold(false);
-  const touchDown = (): void => down();
-  const touchUp = (e: React.TouchEvent<HTMLButtonElement>): void => {
-    e.preventDefault();
-    up();
-  };
-  const mouseDown = (): void => down();
-  const mouseUp = (): void => up();
-
   const [randomLeft, randomTop]: number[] = position;
   const alarming__stop: SerializedStyles = css`
     left: ${randomLeft}%;
@@ -40,9 +29,9 @@ const Alarming = ({
     border: none;
     width: 60px;
     height: 60px;
-    background: ${Colors.orange};
-    box-shadow: 0 2px 4px ${Colors.deepOrange};
-    color: ${Colors.white};
+    background: ${colors.orange};
+    box-shadow: 0 2px 4px ${colors.deepOrange};
+    color: ${colors.white};
     font-size: 1.1rem;
     font-weight: bold;
     user-select: none;
@@ -52,24 +41,42 @@ const Alarming = ({
     -ms-user-select: none;
     -webkit-touch-callout: none;
     &:hover {
-      background-color: ${Colors.lightOrange};
-      box-shadow: 0 2px 6px ${Colors.orange};
+      background-color: ${colors.lightOrange};
+      box-shadow: 0 2px 6px ${colors.orange};
       transition: 0.2s;
     }
     &:active {
-      background-color: ${Colors.white};
-      color: ${Colors.orange};
+      background-color: ${colors.white};
+      color: ${colors.orange};
       box-shadow: none;
       transition: 2s;
     }
   `;
 
-  const stopAlarm = (): void => {
+  const [hold, setHold] = useState(false);
+  const transition: TransitionFn<boolean, {}> = useTransition(hold, {
+    config: config.slow,
+    from: { transform: "translateY(100vh)" },
+    enter: {
+      position: "fixed",
+      bottom: 0,
+      left: 0,
+      transform: "translateY(0)"
+    },
+    leave: {
+      transform: "translateY(100vh)",
+      onRest: () => {
+        if (hold) stopAlarm();
+      }
+    }
+  });
+  const stopAlarm = () => {
     sound.pause();
     sound.currentTime = 0;
     sound.loop = false;
     setTime("");
     setAlarming(false);
+    setHold(false);
   };
 
   return (
@@ -289,16 +296,26 @@ const Alarming = ({
           The buttons are placed in different positions each time.
         </p>
       </header>
-      <div css={alarming__randomArea} onAnimationEnd={stopAlarm}>
-        {hold && <div css={alarming__bar} />}
+      {transition(
+        (props, item) =>
+          item && (
+            <animated.div style={props}>
+              <div css={alarming__bar} />
+            </animated.div>
+          )
+      )}
+      <div css={alarming__randomArea}>
         <button
-          onTouchStart={touchDown}
-          onTouchEnd={touchUp}
-          onMouseDown={mouseDown}
-          onMouseUp={mouseUp}
+          onTouchStart={() => setHold(true)}
+          onTouchEnd={(e: React.TouchEvent<HTMLButtonElement>): void => {
+            e.preventDefault();
+            setHold(false);
+          }}
+          onMouseDown={() => setHold(true)}
+          onMouseUp={() => setHold(false)}
           onContextMenu={(
             e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-          ) => {
+          ): void => {
             e.preventDefault();
           }}
           css={alarming__stop}
@@ -311,26 +328,11 @@ const Alarming = ({
 };
 
 const alarming: SerializedStyles = css`
-  background: linear-gradient(180deg, #ffffff, ${Colors.white});
-  color: ${Colors.black};
+  background: linear-gradient(180deg, #ffffff, ${colors.white});
+  color: ${colors.black};
   width: 100vw;
   height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
   overflow: hidden;
-  z-index: 1;
-  animation: alarmingAnime 0.5s;
-  @keyframes alarmingAnime {
-    0% {
-      opacity: 0;
-      transform: translate(0, 100vh);
-    }
-    100% {
-      opacity: 1;
-      transform: translate(0, 0);
-    }
-  }
 `;
 
 const alarming__header: SerializedStyles = css`
@@ -364,23 +366,9 @@ const alarming__randomArea: SerializedStyles = css`
 `;
 
 const alarming__bar: SerializedStyles = css`
-  background: linear-gradient(180deg, ${Colors.blue}, ${Colors.darkBlue});
+  background: linear-gradient(180deg, ${colors.blue}, ${colors.darkBlue});
   width: 100vw;
   height: 100vh;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  animation: barAnime 2s;
-  @keyframes barAnime {
-    0% {
-      opacity: 0;
-      transform: translate(0, 100vh);
-    }
-    100% {
-      opacity: 1;
-      transform: translate(0, 0);
-    }
-  }
 `;
 
 export default Alarming;

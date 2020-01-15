@@ -1,14 +1,10 @@
 /** @jsx jsx */
 import React from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import emotionReset from "emotion-reset";
 import { jsx, Global, css, SerializedStyles } from "@emotion/core";
-import Colors from "./components/Colors";
-import Clock from "./components/Clock";
-import HowTo from "./components/HowTo";
-import PrivacyPolicy from "./components/PrivacyPolicy";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
+import colors from "./components/Colors";
+import Main from "./components/Main";
 import "./stars.css";
 import "./stars2.css";
 import "./stars3.css";
@@ -23,24 +19,7 @@ const App: React.FC = (): JSX.Element => (
     </div>
     <div css={app__wrap}>
       <BrowserRouter>
-        <div css={wrap__main}>
-          <Switch>
-            <Route exact path="/">
-              <Clock />
-            </Route>
-            <Route exact path="/how-to">
-              <HowTo />
-            </Route>
-            <Route exact path="/privacy-policy">
-              <PrivacyPolicy />
-            </Route>
-            <Route exact path="/contact">
-              <Contact />
-            </Route>
-            <Redirect to="/" />
-          </Switch>
-        </div>
-        <Footer />
+        <Main />
       </BrowserRouter>
     </div>
   </React.Fragment>
@@ -52,7 +31,7 @@ const global: SerializedStyles = css`
     font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: linear-gradient(180deg, ${Colors.blue}, ${Colors.darkBlue});
+    background: linear-gradient(180deg, ${colors.blue}, ${colors.darkBlue});
     background-size: 400% 400%;
     animation: bgAnime 60s ease infinite;
     @keyframes bgAnime {
@@ -69,7 +48,7 @@ const global: SerializedStyles = css`
     width: 100vw;
     height: 100vh;
     text-align: center;
-    color: ${Colors.white};
+    color: ${colors.white};
     overflow: hidden;
   }
   button,
@@ -89,12 +68,6 @@ const app__wrap: SerializedStyles = css`
   flex-direction: column;
   box-sizing: border-box;
   padding: 1rem 5%;
-`;
-
-const wrap__main: SerializedStyles = css`
-  max-width: 760px;
-  width: 100%;
-  margin: auto;
 `;
 
 const starsWrap: SerializedStyles = css`
