@@ -1,22 +1,22 @@
 /** @jsx jsx */
 import React, { useState } from "react";
-import { useTransition, animated, TransitionFn,config } from "react-spring";
+import { useTransition, animated, TransitionFn, config } from "react-spring";
 import { jsx, css, SerializedStyles } from "@emotion/core";
 import colors from "./Colors";
 
-interface AlarmingProps {
+type AlarmingProps = {
   sound: HTMLAudioElement;
   position: number[];
   setTime: React.Dispatch<React.SetStateAction<string>>;
   setAlarming: React.Dispatch<React.SetStateAction<boolean>>;
-}
+};
 
-const Alarming = ({
+const Alarming: React.FC<AlarmingProps> = ({
   sound,
   position,
   setTime,
   setAlarming
-}: AlarmingProps): JSX.Element => {
+}): JSX.Element => {
   const [randomLeft, randomTop]: number[] = position;
   const alarming__stop: SerializedStyles = css`
     left: ${randomLeft}%;
@@ -51,32 +51,47 @@ const Alarming = ({
       box-shadow: none;
       transition: 2s;
     }
+    animation: stopButton 0.2s;
+    @keyframes stopButton {
+      0% {
+        transform: scale(1.2);
+      }
+      50% {
+        transform: scale(0.5);
+      }
+      75% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
   `;
 
+  const [rendered, setRendered] = useState(false);
   const [hold, setHold] = useState(false);
   const transition: TransitionFn<boolean, {}> = useTransition(hold, {
     config: config.slow,
-    from: { transform: "translateY(100vh)" },
+    from: { opacity: 0, transform: "translateY(100vh)" },
     enter: {
+      opacity: 1,
+      transform: "translateY(0)",
       position: "fixed",
-      bottom: 0,
-      left: 0,
-      transform: "translateY(0)"
+      top: 0,
+      left: 0
     },
-    leave: {
-      transform: "translateY(100vh)",
-      onRest: () => {
-        if (hold) stopAlarm();
-      }
+    leave: { opacity: 0, transform: "translateY(100vh)" },
+    onRest: (): void => {
+      if (hold) stopAlarm();
+      setRendered(true);
     }
   });
-  const stopAlarm = () => {
+  const stopAlarm = (): void => {
     sound.pause();
     sound.currentTime = 0;
     sound.loop = false;
     setTime("");
     setAlarming(false);
-    setHold(false);
   };
 
   return (
@@ -297,31 +312,33 @@ const Alarming = ({
         </p>
       </header>
       {transition(
-        (props, item) =>
+        (style, item) =>
           item && (
-            <animated.div style={props}>
+            <animated.div style={style}>
               <div css={alarming__bar} />
             </animated.div>
           )
       )}
       <div css={alarming__randomArea}>
-        <button
-          onTouchStart={() => setHold(true)}
-          onTouchEnd={(e: React.TouchEvent<HTMLButtonElement>): void => {
-            e.preventDefault();
-            setHold(false);
-          }}
-          onMouseDown={() => setHold(true)}
-          onMouseUp={() => setHold(false)}
-          onContextMenu={(
-            e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-          ): void => {
-            e.preventDefault();
-          }}
-          css={alarming__stop}
-        >
-          Stop
-        </button>
+        {rendered && (
+          <button
+            onTouchStart={() => setHold(true)}
+            onTouchEnd={(e: React.TouchEvent<HTMLButtonElement>): void => {
+              e.preventDefault();
+              setHold(false);
+            }}
+            onMouseDown={() => setHold(true)}
+            onMouseUp={() => setHold(false)}
+            onContextMenu={(
+              e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+            ): void => {
+              e.preventDefault();
+            }}
+            css={alarming__stop}
+          >
+            Stop
+          </button>
+        )}
       </div>
     </div>
   );

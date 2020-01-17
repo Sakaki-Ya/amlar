@@ -84,6 +84,7 @@ const Contact: React.FC = (): JSX.Element => {
         </svg>
         <h2 css={contact__h2}>Contact</h2>
       </div>
+      <p css={contact__text}>Please report any feature requests or bugs.</p>
       <form
         css={contact__form}
         name="contact"
@@ -157,6 +158,10 @@ const contact__h2: SerializedStyles = css`
   font-weight: bold;
 `;
 
+const contact__text: SerializedStyles = css`
+  margin-bottom: 1rem;
+`;
+
 const contact__form: SerializedStyles = css`
   max-width: 480px;
   width: 100%;
@@ -186,6 +191,7 @@ const contact__sendSection: SerializedStyles = css`
 `;
 
 const contact__send: SerializedStyles = css`
+  height: 100%;
   padding: 0.5rem 0.75rem;
   background-color: ${colors.orange};
   border: none;

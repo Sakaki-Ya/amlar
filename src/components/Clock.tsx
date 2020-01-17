@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import React, { useState, useEffect } from "react";
-import { useTransition, animated, TransitionFn,config } from "react-spring";
+import { useTransition, animated, TransitionFn, config } from "react-spring";
 import { jsx, css, SerializedStyles } from "@emotion/core";
 import colors from "./Colors";
 import SelectSoundSlider from "./SelectSoundSlider";
@@ -68,7 +68,7 @@ const Clock: React.FC = (): JSX.Element => {
         sound.pause();
         sound.currentTime = 0;
         sound.loop = true;
-        sound.play();
+        // sound.play();
         setPosition(randomPosition());
         setAlarming(true);
         silent.loop = false;
@@ -82,25 +82,17 @@ const Clock: React.FC = (): JSX.Element => {
   }, [alarming, sound, time]);
 
   const transition: TransitionFn<boolean, {}> = useTransition(alarming, {
-    config:config.default,
-    from: {
-      display: "none",
-      opacity: 0,
-      transform: "translateY(100vh)"
-    },
+    config: config.default,
+    from: { opacity: 0, transform: "translateY(100vh)" },
     enter: {
-      display: "block",
       opacity: 1,
+      transform: "translateY(0)",
       position: "fixed",
       top: 0,
       left: 0,
-      zIndex: 1,
-      transform: "translateY(0)"
+      zIndex: 1
     },
-    leave: {
-      opacity: 0,
-      zIndex: -1
-    }
+    leave: { opacity: 0, transform: "translateY(100vh)" }
   });
 
   return (
@@ -331,9 +323,9 @@ const Clock: React.FC = (): JSX.Element => {
         </svg>
       </div>
       {transition(
-        (props, item): any =>
+        (style, item) =>
           item && (
-            <animated.div style={props}>
+            <animated.div style={style}>
               <Alarming
                 sound={sound}
                 position={position}

@@ -13,18 +13,10 @@ const Main: React.FC = (): JSX.Element => {
     <React.Fragment>
       <div css={main}>
         <Switch>
-          <Route exact path="/">
-            <Clock />
-          </Route>
-          <Route exact path="/how-to">
-            <HowTo />
-          </Route>
-          <Route exact path="/privacy-policy">
-            <PrivacyPolicy />
-          </Route>
-          <Route exact path="/contact">
-            <Contact />
-          </Route>
+          <Route exact path="/" component={Clock} />
+          <Route exact path="/how-to" component={HowTo} />
+          <Route exact path="/privacy-policy" component={PrivacyPolicy} />
+          <Route exact path="/contact" component={Contact} />
           <Redirect to="/" />
         </Switch>
       </div>
@@ -36,7 +28,10 @@ const Main: React.FC = (): JSX.Element => {
 const main: SerializedStyles = css`
   max-width: 760px;
   width: 100%;
+  box-sizing: border-box;
   margin: auto;
+  padding: 1rem 0;
+  overflow: hidden;
 `;
 
 export default Main;

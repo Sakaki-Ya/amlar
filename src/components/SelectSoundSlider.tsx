@@ -4,15 +4,15 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { jsx, css, SerializedStyles } from "@emotion/core";
 
-interface SelectSoundSliderProps {
+type SelectSoundSliderProps = {
   sound: HTMLAudioElement;
   setSound: React.Dispatch<React.SetStateAction<HTMLAudioElement>>;
-}
+};
 
-const SelectSoundSlider = ({
+const SelectSoundSlider: React.FC<SelectSoundSliderProps> = ({
   sound,
   setSound
-}: SelectSoundSliderProps): JSX.Element => {
+}): JSX.Element => {
   const sounds: string[] = ["classic", "digital", "chicken"];
   const settings = {
     afterChange: (currentIndexNum: number): void => {
