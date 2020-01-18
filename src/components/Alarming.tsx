@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import React, { useState } from "react";
-import { useTransition, animated, TransitionFn, config } from "react-spring";
-import { jsx, css, SerializedStyles } from "@emotion/core";
+import { useTransition, animated, config, TransitionFn } from "react-spring";
+import { jsx, css } from "@emotion/core";
 import colors from "./Colors";
 
 type AlarmingProps = {
@@ -16,9 +16,9 @@ const Alarming: React.FC<AlarmingProps> = ({
   position,
   setTime,
   setAlarming
-}): JSX.Element => {
-  const [randomLeft, randomTop]: number[] = position;
-  const alarming__stop: SerializedStyles = css`
+}) => {
+  const [randomLeft, randomTop] = position;
+  const alarming__stop  = css`
     left: ${randomLeft}%;
     top: ${randomTop}%;
     position: absolute;
@@ -81,12 +81,12 @@ const Alarming: React.FC<AlarmingProps> = ({
       left: 0
     },
     leave: { opacity: 0, transform: "translateY(100vh)" },
-    onRest: (): void => {
+    onRest: ()  => {
       if (hold) stopAlarm();
       setRendered(true);
     }
   });
-  const stopAlarm = (): void => {
+  const stopAlarm = ()  => {
     sound.pause();
     sound.currentTime = 0;
     sound.loop = false;
@@ -323,15 +323,13 @@ const Alarming: React.FC<AlarmingProps> = ({
         {rendered && (
           <button
             onTouchStart={() => setHold(true)}
-            onTouchEnd={(e: React.TouchEvent<HTMLButtonElement>): void => {
+            onTouchEnd={e  => {
               e.preventDefault();
               setHold(false);
             }}
             onMouseDown={() => setHold(true)}
             onMouseUp={() => setHold(false)}
-            onContextMenu={(
-              e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-            ): void => {
+            onContextMenu={              e              => {
               e.preventDefault();
             }}
             css={alarming__stop}
@@ -344,7 +342,7 @@ const Alarming: React.FC<AlarmingProps> = ({
   );
 };
 
-const alarming: SerializedStyles = css`
+const alarming  = css`
   background: linear-gradient(180deg, #ffffff, ${colors.white});
   color: ${colors.black};
   width: 100vw;
@@ -352,37 +350,37 @@ const alarming: SerializedStyles = css`
   overflow: hidden;
 `;
 
-const alarming__header: SerializedStyles = css`
+const alarming__header  = css`
   box-sizing: border-box;
   padding: 1rem 5%;
   font-weight: bold;
 `;
 
-const alarming__icon: SerializedStyles = css`
+const alarming__icon  = css`
   max-width: 120px;
   margin-bottom: 1rem;
   filter: drop-shadow(0px 3px 2px rgba(0, 0, 0, 0.4));
 `;
 
-const alarming__h2: SerializedStyles = css`
+const alarming__h2  = css`
   font-size: 1.25rem;
   margin-bottom: 1rem;
 `;
 
-const alarming__text: SerializedStyles = css`
+const alarming__text  = css`
   display: inline-block;
   line-height: 1.5rem;
   text-align: left;
   margin-bottom: 0.5rem;
 `;
 
-const alarming__randomArea: SerializedStyles = css`
+const alarming__randomArea  = css`
   width: 100%;
   height: 100%;
   position: relative;
 `;
 
-const alarming__bar: SerializedStyles = css`
+const alarming__bar  = css`
   background: linear-gradient(180deg, ${colors.blue}, ${colors.darkBlue});
   width: 100vw;
   height: 100vh;

@@ -1,26 +1,23 @@
 /** @jsx jsx */
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { jsx, css, SerializedStyles } from "@emotion/core";
+import { jsx, css } from "@emotion/core";
 import colors from "./Colors";
 
-const Footer: React.FC = (): JSX.Element => {
-  const [view, setView]: [
-    number,
-    React.Dispatch<React.SetStateAction<number>>
-  ] = useState(0);
-  useEffect(():void => {
+const Footer: React.FC = () => {
+const [view, setView] = useState("top");
+  useEffect(() => {
     switch (view) {
-      case 0:
+      case "top":
         document.title = "Random Alarm Clock";
         break;
-      case 1:
-        document.title = "How to - Random Alarm Clock";
+      case "notes":
+        document.title = "Notes - Random Alarm Clock";
         break;
-      case 2:
+      case "policy":
         document.title = "Privacy Policy - Random Alarm Clock";
         break;
-      case 3:
+      case "contact":
         document.title = "Contact - Random Alarm Clock";
         break;
       default:
@@ -43,26 +40,26 @@ const Footer: React.FC = (): JSX.Element => {
       </label>
       <div css={footer__content}>
         <div css={footer__list}>
-          <Link to="/how-to" onClick={() => setView(1)}>
-            <button css={footer__link} disabled={view === 1 ? true : false}>
-              How to
+          <Link to="/notes" onClick={() => setView("notes")}>
+            <button css={footer__link} disabled={view === "notes" ? true : false}>
+              Notes
             </button>
           </Link>
-          <Link to="/privacy-policy" onClick={() => setView(2)}>
-            <button css={footer__link} disabled={view === 2 ? true : false}>
+          <Link to="/privacy-policy" onClick={() => setView("policy")}>
+            <button css={footer__link} disabled={view === "policy" ? true : false}>
               Privacy Policy
             </button>
           </Link>
-          <Link to="/contact" onClick={() => setView(3)}>
-            <button css={footer__link} disabled={view === 3 ? true : false}>
+          <Link to="/contact" onClick={() => setView("contact")}>
+            <button css={footer__link} disabled={view === "contact" ? true : false}>
               Contact
             </button>
           </Link>
         </div>
         <div css={footer__copyWrap}>
           <p css={footer__copy}>&copy; 2020</p>
-          <Link to="/" onClick={() => setView(0)}>
-            <button css={footer__title} disabled={view === 0 ? true : false}>
+          <Link to="/" onClick={() => setView("top")}>
+            <button css={footer__title} disabled={view === "top" ? true : false}>
               Random Alarm Clock
             </button>
           </Link>
@@ -72,21 +69,22 @@ const Footer: React.FC = (): JSX.Element => {
   );
 };
 
-const footer: SerializedStyles = css`
+const footer = css`
   overflow-y: hidden;
 `;
 
-const footer__check: SerializedStyles = css`
+const footer__check = css`
   display: none;
   &:checked ~ * svg {
     transform: rotate(180deg) translateY(0);
   }
   &:checked ~ div {
+    visibility: visible;
     transform: translateY(0);
   }
 `;
 
-const footer__checkArrow: SerializedStyles = css`
+const footer__checkArrow = css`
   cursor: pointer;
   transform: translateY(3rem);
   margin-bottom: 0.5rem;
@@ -98,16 +96,17 @@ const footer__checkArrow: SerializedStyles = css`
   }
 `;
 
-const footer__content: SerializedStyles = css`
+const footer__content = css`
+  visibility: hidden;
   transform: translateY(3rem);
   transition: 0.2s;
 `;
 
-const footer__list: SerializedStyles = css`
+const footer__list = css`
   margin-bottom: 0.5rem;
 `;
 
-const footer__link: SerializedStyles = css`
+const footer__link = css`
   border: none;
   background: transparent;
   margin: 0 0.5rem;
@@ -127,17 +126,17 @@ const footer__link: SerializedStyles = css`
   }
 `;
 
-const footer__copyWrap: SerializedStyles = css`
+const footer__copyWrap = css`
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
-const footer__copy: SerializedStyles = css`
+const footer__copy = css`
   margin-right: 0.25rem;
 `;
 
-const footer__title: SerializedStyles = css`
+const footer__title = css`
   border: none;
   background: transparent;
   text-decoration: underline;

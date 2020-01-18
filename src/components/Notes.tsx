@@ -1,11 +1,11 @@
 /** @jsx jsx */
 import React from "react";
-import { jsx, css, SerializedStyles } from "@emotion/core";
+import { jsx, css } from "@emotion/core";
 import colors from "./Colors";
 
-const HowTo: React.FC = (): JSX.Element => (
+const Notes: React.FC = () => (
   <React.Fragment>
-    <h2 css={howto__h2}>How to</h2>
+    <h2 css={howto__h2}>Notes</h2>
     <svg width="286.001" viewBox="0 0 286.001 187.858" css={howto__icon}>
       <g fillRule="evenodd" clipRule="evenodd">
         <path
@@ -186,28 +186,63 @@ const HowTo: React.FC = (): JSX.Element => (
         />
       </g>
     </svg>
-    <p css={howto__text}>aaaaaaa</p>
-    <p css={howto__text}>aaaaaaa</p>
+    <div css={howto__block}>
+      <h3 css={howto__h3}>Before use</h3>
+      <hr />
+      <p css={howto__text}>
+        The behavior may change depending on the device and browser you are
+        using.
+      </p>
+      <p css={howto__text}>
+        We recommend that you test the operation before using it.
+      </p>
+    </div>
+    <div css={howto__block}>
+      <h3 css={howto__h3}>Some test results</h3>
+      <hr />
+      <ul css={howto__list}>
+        <li>When the browser is closed, the alarm will not sound.</li>
+        <li>The alarm sounds even if you open another app or tab.</li>
+        <li>Some devices sound an alarm even in sleep mode, while others do not.</li>
+      </ul>
+    </div>
   </React.Fragment>
 );
 
-const howto__h2: SerializedStyles = css`
+const howto__h2 = css`
   font-size: 1.25rem;
   margin-bottom: 1rem;
   color: ${colors.lightOrange};
   font-weight: bold;
 `;
 
-const howto__icon: SerializedStyles = css`
+const howto__icon = css`
   max-width: 120px;
   margin-bottom: 1rem;
   filter: drop-shadow(0px 2px 2px rgba(255, 255, 255, 0.4));
 `;
 
-const howto__text: SerializedStyles = css`
+const howto__block = css`
+  margin-bottom: 1.5rem;
   text-align: left;
+`;
+
+const howto__h3 = css`
+  font-size: 1.15rem;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+`;
+
+const howto__text = css`
   line-height: 1.5rem;
   margin-bottom: 0.5rem;
 `;
 
-export default HowTo;
+const howto__list = css`
+  list-style-type: disc;
+  padding-left:1rem;
+  line-height: 1.5rem;
+  margin-bottom: 0.5rem;
+`;
+
+export default Notes;

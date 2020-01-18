@@ -1,12 +1,12 @@
 /** @jsx jsx */
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { jsx, css, SerializedStyles } from "@emotion/core";
+import { jsx, css } from "@emotion/core";
 import colors from "./Colors";
 
-const Contact: React.FC = (): JSX.Element => {
+const Contact: React.FC = () => {
   const [forms, setForms] = useState([false, false, false]);
-  const [name, mail, message]: boolean[] = [forms[0], forms[1], forms[2]];
+  const [name, mail, message] = [forms[0], forms[1], forms[2]];
   const checkName = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value === "") {
       setForms([false, mail, message]);
@@ -30,7 +30,7 @@ const Contact: React.FC = (): JSX.Element => {
   };
 
   const history = useHistory();
-  const send = (): void => {
+  const send = () => {
     alert("Sent successfully. Thank you.");
     history.push("/");
   };
@@ -139,30 +139,30 @@ const Contact: React.FC = (): JSX.Element => {
   );
 };
 
-const contact__titleSection: SerializedStyles = css`
+const contact__titleSection  = css`
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 1rem;
 `;
 
-const contact__icon: SerializedStyles = css`
+const contact__icon  = css`
   max-width: 30px;
   margin-right: 0.5rem;
   filter: drop-shadow(0px 2px 2px rgba(255, 255, 255, 0.4));
 `;
 
-const contact__h2: SerializedStyles = css`
+const contact__h2  = css`
   font-size: 1.25rem;
   color: ${colors.lightOrange};
   font-weight: bold;
 `;
 
-const contact__text: SerializedStyles = css`
+const contact__text  = css`
   margin-bottom: 1rem;
 `;
 
-const contact__form: SerializedStyles = css`
+const contact__form  = css`
   max-width: 480px;
   width: 100%;
   margin: auto;
@@ -174,23 +174,23 @@ const contact__form: SerializedStyles = css`
   }
 `;
 
-const contact__section: SerializedStyles = css`
+const contact__section  = css`
   margin-bottom: 1rem;
   text-align: left;
 `;
 
-const contact__input: SerializedStyles = css`
+const contact__input  = css`
   width: 100%;
   border-radius: 5px;
   background-color: ${colors.white};
   font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 `;
 
-const contact__sendSection: SerializedStyles = css`
+const contact__sendSection  = css`
   text-align: left;
 `;
 
-const contact__send: SerializedStyles = css`
+const contact__send  = css`
   height: 100%;
   padding: 0.5rem 0.75rem;
   background-color: ${colors.orange};

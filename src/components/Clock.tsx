@@ -1,21 +1,18 @@
 /** @jsx jsx */
 import React, { useState, useEffect } from "react";
 import { useTransition, animated, TransitionFn, config } from "react-spring";
-import { jsx, css, SerializedStyles } from "@emotion/core";
+import { jsx, css } from "@emotion/core";
 import colors from "./Colors";
 import SelectSoundSlider from "./SelectSoundSlider";
 import Alarming from "./Alarming";
 
-let silenting: boolean = false;
-const silent: HTMLAudioElement = new Audio("silent.mp3");
+let silenting = false;
+const silent = new Audio("silent.mp3");
 
-const Clock: React.FC = (): JSX.Element => {
-  const [time, setTime]: [
-    string,
-    React.Dispatch<React.SetStateAction<string>>
-  ] = useState("");
-  const getInputTime = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const inputTime: string = e.target.value;
+const Clock: React.FC = () => {
+  const [time, setTime] = useState("");
+  const getInputTime = (e: React.ChangeEvent<HTMLInputElement>)  => {
+    const inputTime = e.target.value;
     if (inputTime.match(/^([01]?[0-9]|2[0-3]):([0-5][0-9])$/)) {
       setTime(inputTime);
       if (!silenting) {
@@ -26,19 +23,16 @@ const Clock: React.FC = (): JSX.Element => {
     }
   };
 
-  const [sound, setSound]: [
-    HTMLAudioElement,
-    React.Dispatch<React.SetStateAction<HTMLAudioElement>>
-  ] = useState(new Audio("classic.mp3"));
-  const soundTest = (): void => {
+  const [sound, setSound] = useState(new Audio("classic.mp3"));
+  const soundTest = ()  => {
     sound.pause();
     sound.currentTime = 0;
     sound.loop = false;
     sound.play();
   };
 
-  const randomPosition = (): number[] => {
-    let [maxRandomLeft, maxRandomTop]: number[] = [0, 0];
+  const randomPosition = () => {
+    let [maxRandomLeft, maxRandomTop] = [0, 0];
     if (window.screen.width > window.screen.height) {
       maxRandomLeft = 85;
       maxRandomTop = 16;
@@ -46,24 +40,21 @@ const Clock: React.FC = (): JSX.Element => {
       maxRandomLeft = 80;
       maxRandomTop = 55;
     }
-    const [randomLeft, randomTop]: number[] = [
+    const [randomLeft, randomTop] = [
       Math.random() * (maxRandomLeft + 1),
       Math.random() * (maxRandomTop + 1)
     ];
     return [randomLeft, randomTop];
   };
 
-  const [position, setPosition]: [
-    number[],
-    React.Dispatch<React.SetStateAction<number[]>>
-  ] = useState([0, 0]);
+  const [position, setPosition] = useState([0, 0]);
   const [alarming, setAlarming] = useState(false);
   useEffect(() => {
-    const tick = (): void => {
-      const date: Date = new Date();
-      const hours: string = ("0" + date.getHours()).slice(-2);
-      const minutes: string = ("0" + date.getMinutes()).slice(-2);
-      const currentTime: string = hours + ":" + minutes;
+    const tick = ()  => {
+      const date = new Date();
+      const hours = ("0" + date.getHours()).slice(-2);
+      const minutes = ("0" + date.getMinutes()).slice(-2);
+      const currentTime = hours + ":" + minutes;
       if (currentTime === time && !alarming) {
         sound.pause();
         sound.currentTime = 0;
@@ -77,8 +68,8 @@ const Clock: React.FC = (): JSX.Element => {
         silenting = false;
       }
     };
-    const timer: NodeJS.Timeout = setInterval((): void => tick(), 1000);
-    return (): void => clearInterval(timer);
+    const timer = setInterval(()  => tick(), 1000);
+    return ()  => clearInterval(timer);
   }, [alarming, sound, time]);
 
   const transition: TransitionFn<boolean, {}> = useTransition(alarming, {
@@ -339,21 +330,21 @@ const Clock: React.FC = (): JSX.Element => {
   );
 };
 
-const clock__content: SerializedStyles = css`
+const clock__content  = css`
   margin-bottom: 3rem;
 `;
 
-const clock__h2Wrap: SerializedStyles = css`
+const clock__h2Wrap  = css`
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
-const clock__h2: SerializedStyles = css`
+const clock__h2  = css`
   font-size: 1.25rem;
 `;
 
-const clock__test: SerializedStyles = css`
+const clock__test  = css`
   padding: 0.5rem 0.75rem;
   background-color: ${colors.orange};
   border: none;
@@ -375,7 +366,7 @@ const clock__test: SerializedStyles = css`
   }
 `;
 
-const clock__inputTime: SerializedStyles = css`
+const clock__inputTime  = css`
   background-color: ${colors.white};
   color: ${colors.black};
   border: none;
@@ -392,7 +383,7 @@ const clock__inputTime: SerializedStyles = css`
   }
 `;
 
-const clock__sleepIcon: SerializedStyles = css`
+const clock__sleepIcon  = css`
   margin-left: 1rem;
   width: 120px;
   filter: drop-shadow(0px 3px 4px rgba(255, 255, 255, 0.4));

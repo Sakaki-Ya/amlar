@@ -1,20 +1,20 @@
 /** @jsx jsx */
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import { jsx, css, SerializedStyles } from "@emotion/core";
+import { jsx, css } from "@emotion/core";
 import Clock from "./Clock";
-import HowTo from "./HowTo";
+import Notes from "./Notes";
 import PrivacyPolicy from "./PrivacyPolicy";
 import Contact from "./Contact";
 import Footer from "./Footer";
 
-const Main: React.FC = (): JSX.Element => {
+const Main: React.FC = () => {
   return (
     <React.Fragment>
       <div css={main}>
         <Switch>
           <Route exact path="/" component={Clock} />
-          <Route exact path="/how-to" component={HowTo} />
+          <Route exact path="/notes" component={Notes} />
           <Route exact path="/privacy-policy" component={PrivacyPolicy} />
           <Route exact path="/contact" component={Contact} />
           <Redirect to="/" />
@@ -25,13 +25,12 @@ const Main: React.FC = (): JSX.Element => {
   );
 };
 
-const main: SerializedStyles = css`
+const main = css`
   max-width: 760px;
   width: 100%;
   box-sizing: border-box;
   margin: auto;
   padding: 1rem 0;
-  overflow: hidden;
 `;
 
 export default Main;
