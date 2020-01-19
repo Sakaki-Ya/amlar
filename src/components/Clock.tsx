@@ -1,20 +1,18 @@
 /** @jsx jsx */
 import React, { useState, useEffect } from "react";
-import { jsx, css, SerializedStyles } from "@emotion/core";
-import Colors from "./Colors";
+import { useTransition, animated, TransitionFn, config } from "react-spring";
+import { jsx, css } from "@emotion/core";
+import colors from "./Colors";
 import SelectSoundSlider from "./SelectSoundSlider";
 import Alarming from "./Alarming";
 
-let silenting: boolean = false;
-const silent: HTMLAudioElement = new Audio("silent.mp3");
+let silenting = false;
+const silent = new Audio("silent.mp3");
 
-const Clock: React.FC = (): JSX.Element => {
-  const [time, setTime]: [
-    string,
-    React.Dispatch<React.SetStateAction<string>>
-  ] = useState("");
-  const getInputTime = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const inputTime: string = e.target.value;
+const Clock: React.FC = () => {
+  const [time, setTime] = useState("");
+  const getInputTime = (e: React.ChangeEvent<HTMLInputElement>)  => {
+    const inputTime = e.target.value;
     if (inputTime.match(/^([01]?[0-9]|2[0-3]):([0-5][0-9])$/)) {
       setTime(inputTime);
       if (!silenting) {
@@ -25,20 +23,16 @@ const Clock: React.FC = (): JSX.Element => {
     }
   };
 
-  const [sound, setSound]: [
-    HTMLAudioElement,
-    React.Dispatch<React.SetStateAction<HTMLAudioElement>>
-  ] = useState(new Audio("classic.mp3"));
-  const soundTest = (): void => {
+  const [sound, setSound] = useState(new Audio("classic.mp3"));
+  const soundTest = ()  => {
     sound.pause();
     sound.currentTime = 0;
     sound.loop = false;
     sound.play();
   };
 
-  const randomPosition = (): number[] => {
-    let maxRandomLeft: number = 0;
-    let maxRandomTop: number = 0;
+  const randomPosition = () => {
+    let [maxRandomLeft, maxRandomTop] = [0, 0];
     if (window.screen.width > window.screen.height) {
       maxRandomLeft = 85;
       maxRandomTop = 16;
@@ -46,39 +40,51 @@ const Clock: React.FC = (): JSX.Element => {
       maxRandomLeft = 80;
       maxRandomTop = 55;
     }
-    const randomLeft: number = Math.random() * (maxRandomLeft + 1);
-    const randomTop: number = Math.random() * (maxRandomTop + 1);
+    const [randomLeft, randomTop] = [
+      Math.random() * (maxRandomLeft + 1),
+      Math.random() * (maxRandomTop + 1)
+    ];
     return [randomLeft, randomTop];
   };
 
-  const [randomLeft, randomTop]: number[] = randomPosition();
-  const [position, setPosition]: [
-    number[],
-    React.Dispatch<React.SetStateAction<number[]>>
-  ] = useState([randomTop, randomLeft]);
+  const [position, setPosition] = useState([0, 0]);
   const [alarming, setAlarming] = useState(false);
   useEffect(() => {
-    const tick = (): void => {
-      const date: Date = new Date();
-      const hours: string = ("0" + date.getHours()).slice(-2);
-      const minutes: string = ("0" + date.getMinutes()).slice(-2);
-      const currentTime: string = hours + ":" + minutes;
+    const tick = ()  => {
+      const date = new Date();
+      const hours = ("0" + date.getHours()).slice(-2);
+      const minutes = ("0" + date.getMinutes()).slice(-2);
+      const currentTime = hours + ":" + minutes;
       if (currentTime === time && !alarming) {
+        sound.pause();
+        sound.currentTime = 0;
         sound.loop = true;
-        sound.play();
-        const [randomLeft, randomTop] = randomPosition();
-        setPosition([randomLeft, randomTop]);
+        // sound.play();
+        setPosition(randomPosition());
         setAlarming(true);
         silent.loop = false;
         silent.pause();
         silent.currentTime = 0;
         silenting = false;
-        setTime("");
       }
     };
-    const timer: NodeJS.Timeout = setInterval((): void => tick(), 1000);
-    return (): void => clearInterval(timer);
+    const timer = setInterval(()  => tick(), 1000);
+    return ()  => clearInterval(timer);
   }, [alarming, sound, time]);
+
+  const transition: TransitionFn<boolean, {}> = useTransition(alarming, {
+    config: config.default,
+    from: { opacity: 0, transform: "translateY(100vh)" },
+    enter: {
+      opacity: 1,
+      transform: "translateY(0)",
+      position: "fixed",
+      top: 0,
+      left: 0,
+      zIndex: 1
+    },
+    leave: { opacity: 0, transform: "translateY(100vh)" }
+  });
 
   return (
     <React.Fragment>
@@ -86,7 +92,7 @@ const Clock: React.FC = (): JSX.Element => {
         <h2 css={clock__h2}>1. Select an alarm sound.</h2>
         <SelectSoundSlider sound={sound} setSound={setSound} />
         <button onClick={soundTest} css={clock__test}>
-          <p>&#x25b6; Sound Test</p>
+          <p>&#x25b6; Sound check</p>
         </button>
       </div>
       <div css={clock__content}>
@@ -307,54 +313,64 @@ const Clock: React.FC = (): JSX.Element => {
           />
         </svg>
       </div>
-      {alarming && (
-        <Alarming sound={sound} setAlarming={setAlarming} position={position} />
+      {transition(
+        (style, item) =>
+          item && (
+            <animated.div style={style}>
+              <Alarming
+                sound={sound}
+                position={position}
+                setTime={setTime}
+                setAlarming={setAlarming}
+              />
+            </animated.div>
+          )
       )}
     </React.Fragment>
   );
 };
 
-const clock__content: SerializedStyles = css`
+const clock__content = css`
   margin-bottom: 3rem;
 `;
 
-const clock__h2Wrap: SerializedStyles = css`
+const clock__h2Wrap  = css`
   display: flex;
   align-items: center;
-  justify-content:center;
+  justify-content: center;
 `;
 
-const clock__h2: SerializedStyles = css`
+const clock__h2  = css`
   font-size: 1.25rem;
 `;
 
-const clock__test: SerializedStyles = css`
+const clock__test  = css`
   padding: 0.5rem 0.75rem;
-  background-color: ${Colors.orange};
+  background-color: ${colors.orange};
   border: none;
   border-radius: 3px;
   white-space: nowrap;
-  color: ${Colors.white};
+  color: ${colors.white};
   font-weight: bold;
-  box-shadow: 0 2px 4px ${Colors.white};
-  transition: all 0.2s ease 0s;
+  box-shadow: 0 2px 4px ${colors.white};
+  transition: 0.2s;
   &:hover {
-    background-color: ${Colors.lightOrange};
-    box-shadow: 0 2px 6px ${Colors.white};
+    background-color: ${colors.lightOrange};
+    box-shadow: 0 2px 6px ${colors.white};
   }
   &:active {
     transform: translateY(2px);
-    background-color: ${Colors.deepOrange};
-    color: ${Colors.white};
+    background-color: ${colors.deepOrange};
+    color: ${colors.white};
     box-shadow: none;
   }
 `;
 
-const clock__inputTime: SerializedStyles = css`
-  background-color: ${Colors.white};
-  color: ${Colors.black};
+const clock__inputTime  = css`
+  background-color: ${colors.white};
+  color: ${colors.black};
   border: none;
-  box-shadow: 0 2px 4px ${Colors.white};
+  box-shadow: 0 2px 4px ${colors.white};
   border-radius: 5px;
   margin-left: 1rem;
   padding: 0 0.75rem;
@@ -363,11 +379,11 @@ const clock__inputTime: SerializedStyles = css`
   font-weight: bold;
   transition: 0.2s;
   &:hover {
-    box-shadow: 0 2px 6px ${Colors.white};
+    box-shadow: 0 2px 6px ${colors.white};
   }
 `;
 
-const clock__sleepIcon: SerializedStyles = css`
+const clock__sleepIcon  = css`
   margin-left: 1rem;
   width: 120px;
   filter: drop-shadow(0px 3px 4px rgba(255, 255, 255, 0.4));

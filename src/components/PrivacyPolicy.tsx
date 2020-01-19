@@ -1,9 +1,9 @@
 /** @jsx jsx */
 import React from "react";
-import { jsx, css, SerializedStyles } from "@emotion/core";
-import Colors from "./Colors";
+import { jsx, css } from "@emotion/core";
+import colors from "./Colors";
 
-const PrivacyPolicy: React.FC = (): JSX.Element => (
+const PrivacyPolicy: React.FC = () => (
   <React.Fragment>
     <h2 css={policy__h2}>Privacy Policy</h2>
     <svg width="333.334" viewBox="0 0 333.334 302" css={policy__icon}>
@@ -138,7 +138,7 @@ const PrivacyPolicy: React.FC = (): JSX.Element => (
         />
       </g>
     </svg>
-    <h3 css={policy__h3}>About access analysis.</h3>
+    <h3 css={policy__h3}>About access analysis</h3>
     <hr />
     <p css={policy__text}>
       This site uses cookies to collect traffic data using the access analysis
@@ -150,27 +150,27 @@ const PrivacyPolicy: React.FC = (): JSX.Element => (
   </React.Fragment>
 );
 
-const policy__h2: SerializedStyles = css`
+const policy__h2 = css`
   font-size: 1.25rem;
   margin-bottom: 1rem;
-  color: ${Colors.lightOrange};
+  color: ${colors.lightOrange};
   font-weight: bold;
 `;
 
-const policy__h3: SerializedStyles = css`
+const policy__h3 = css`
   font-size: 1.15rem;
   margin-bottom: 0.5rem;
   font-weight: bold;
   text-align: left;
 `;
 
-const policy__icon: SerializedStyles = css`
+const policy__icon = css`
   max-width: 120px;
   margin-bottom: 1rem;
   filter: drop-shadow(0px 2px 2px rgba(255, 255, 255, 0.4));
 `;
 
-const policy__text: SerializedStyles = css`
+const policy__text = css`
   text-align: left;
   line-height: 1.5rem;
   margin-bottom: 0.5rem;

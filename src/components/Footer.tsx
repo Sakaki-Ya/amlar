@@ -1,109 +1,164 @@
 /** @jsx jsx */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { jsx, css, SerializedStyles } from "@emotion/core";
+import { jsx, css } from "@emotion/core";
 import colors from "./Colors";
 
-const Footer: React.FC = (): JSX.Element => {
-  const [visible, setVisible] = useState(false);
-  const showFooter = (): void => {
-    if (visible) {
-      setVisible(false);
-      return;
+const Footer: React.FC = () => {
+  const [view, setView] = useState("top");
+  useEffect(() => {
+    switch (view) {
+      case "top":
+        document.title = "Random Alarm Clock";
+        break;
+      case "note":
+        document.title = "Note - Random Alarm Clock";
+        break;
+      case "policy":
+        document.title = "Privacy Policy - Random Alarm Clock";
+        break;
+      case "contact":
+        document.title = "Contact - Random Alarm Clock";
+        break;
+      default:
+        document.title = "Random Alarm Clock";
     }
-    setVisible(true);
-  };
-
-  const footer__content: SerializedStyles = css`
-    visibility: ${visible ? "visible" : "hidden"};
-    margin-top: 1rem;
-    font-size: 0.75rem;
-  `;
-
-  const footer__visibleButtonWrap: SerializedStyles = css`
-    /* position: absolute;
-    bottom: 0;
-    left: 0; */
-  `;
-
-  const footer__visibleButton: SerializedStyles = css`
-    background: transparent;
-    border: none;
-    width: 1rem;
-    height: 1rem;
-    margin: 0 1rem;
-    border-bottom: 4px solid ${colors.white};
-    border-right: 4px solid ${colors.white};
-    opacity: .6;
-    transform: ${visible ? "rotate(45deg)" : "rotate(225deg)"};
-    &:hover{
-      opacity: 1;
-    }
-  `;
+  }, [view]);
 
   return (
-      <footer css={footer}>
-      <div css={footer__visibleButtonWrap}>
-        <button onClick={showFooter} css={footer__visibleButton} />
-      </div>
+    <footer css={footer}>
+      <input id="footerCheck" type="checkbox" css={footer__check} />
+      <label htmlFor="footerCheck">
+        <svg
+          width="18"
+          css={footer__checkArrow}
+          id="checkArrow"
+          viewBox="0 0 512 512"
+        >
+          <path d="M255.992 92.089l-255.992 255.992 71.821 71.83 184.171-184.171 184.188 184.171 71.82-71.83z" />
+        </svg>
+      </label>
       <div css={footer__content}>
         <div css={footer__list}>
-          <Link to="/how-to" css={footer__link}>
-            How to
+          <Link to="/note" onClick={() => setView("note")}>
+            <button
+              css={footer__link}
+              disabled={view === "note" ? true : false}
+            >
+              Note
+            </button>
           </Link>
-          <Link to="/privacy-policy" css={footer__link}>
-            Privacy Policy
+          <Link to="/privacy-policy" onClick={() => setView("policy")}>
+            <button
+              css={footer__link}
+              disabled={view === "policy" ? true : false}
+            >
+              Privacy Policy
+            </button>
           </Link>
-          <Link to="/contact" css={footer__link}>
-            Contact
+          <Link to="/contact" onClick={() => setView("contact")}>
+            <button
+              css={footer__link}
+              disabled={view === "contact" ? true : false}
+            >
+              Contact
+            </button>
           </Link>
         </div>
         <div css={footer__copyWrap}>
           <p css={footer__copy}>&copy; 2020</p>
-          <Link to="/" css={footer__title}>
-            <h1>Random Alarm Clock</h1>
+          <Link to="/" onClick={() => setView("top")}>
+            <button
+              css={footer__title}
+              disabled={view === "top" ? true : false}
+            >
+              Randomizer Button Alarm Clock
+            </button>
           </Link>
         </div>
-        </div>
-        </footer>
+      </div>
+    </footer>
   );
 };
 
-const footer: SerializedStyles = css`
-  position:relative;
+const footer = css`
+  overflow-y: hidden;
+  margin-bottom: 1rem;
 `;
 
-const footer__list: SerializedStyles = css`
-  margin-bottom: 0.35rem;
+const footer__check = css`
+  display: none;
+  &:checked ~ * svg {
+    transform: rotate(180deg) translateY(0);
+  }
+  &:checked ~ div {
+    visibility: visible;
+    transform: translateY(0);
+  }
 `;
 
-const footer__link: SerializedStyles = css`
+const footer__checkArrow = css`
+  cursor: pointer;
+  transform: translateY(3rem);
+  margin-bottom: 0.5rem;
+  fill: ${colors.white};
+  transition: 0.2s;
+  opacity: 0.5;
+  &:hover {
+    opacity: 1;
+  }
+`;
+
+const footer__content = css`
+  visibility: hidden;
+  transform: translateY(3rem);
+  transition: 0.2s;
+`;
+
+const footer__list = css`
+  margin-bottom: 0.5rem;
+`;
+
+const footer__link = css`
+  border: none;
+  background: transparent;
   margin: 0 0.5rem;
   color: ${colors.lightOrange};
   text-decoration: none;
   font-weight: bold;
-  transition: all 0.2s ease 0s;
+  transition: 0.2s;
   &:hover {
     color: ${colors.moreLightOrange};
   }
   &:active {
     color: ${colors.orange};
   }
+  &:disabled {
+    color: ${colors.deepOrange};
+    cursor: default;
+  }
 `;
 
-const footer__copyWrap: SerializedStyles = css`
+const footer__copyWrap = css`
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
 `;
 
-const footer__copy: SerializedStyles = css`
+const footer__copy = css`
   margin-right: 0.25rem;
 `;
 
-const footer__title: SerializedStyles = css`
+const footer__title = css`
+  border: none;
+  background: transparent;
+  text-decoration: underline;
   color: ${colors.white};
-  font-size: 1rem;
+  transition: 0.2s;
+  &:disabled {
+    cursor: default;
+    text-decoration: none;
+  }
 `;
 
 export default Footer;

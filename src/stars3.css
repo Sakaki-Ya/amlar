@@ -42,7 +42,7 @@
 #stars3:before {
   content: "";
   position: fixed;
-  /* top: 2000px; */
+  top: 2000px;
   width: 3px;
   height: 3px;
   background: transparent;

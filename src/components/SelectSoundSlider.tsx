@@ -2,20 +2,20 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { jsx, css, SerializedStyles } from "@emotion/core";
+import { jsx, css } from "@emotion/core";
 
-interface SelectSoundSliderProps {
+type SelectSoundSliderProps = {
   sound: HTMLAudioElement;
   setSound: React.Dispatch<React.SetStateAction<HTMLAudioElement>>;
-}
+};
 
-const SelectSoundSlider = ({
+const SelectSoundSlider: React.FC<SelectSoundSliderProps> = ({
   sound,
   setSound
-}: SelectSoundSliderProps): JSX.Element => {
-  const sounds: string[] = ["classic", "digital", "chicken"];
+}) => {
+  const sounds = ["classic", "digital", "chicken"];
   const settings = {
-    afterChange: (currentIndexNum: number): void => {
+    afterChange: (currentIndexNum: number) => {
       sound.pause();
       sound.currentTime = 0;
       setSound(new Audio(sounds[currentIndexNum] + ".mp3"));
@@ -169,7 +169,7 @@ const SelectSoundSlider = ({
             />
           </g>
         </svg>
-        <p>Classic sound Clock</p>
+        <p>Classic alarm clock</p>
       </div>
       <div>
         <svg width="480" viewBox="0 0 480 320" css={sounds__icon}>
@@ -264,7 +264,7 @@ const SelectSoundSlider = ({
             />
           </g>
         </svg>
-        <p>Digital sound Clock</p>
+        <p>Digital alarm clock</p>
       </div>
       <div>
         <svg width="480" viewBox="0 0 480 320" css={sounds__icon}>
@@ -327,25 +327,23 @@ const SelectSoundSlider = ({
             />
           </g>
         </svg>
-        <p>Chicken Shout</p>
+        <p>Cockerel</p>
       </div>
     </Slider>
   );
 };
 
-const soundsSlider: SerializedStyles = css`
+const soundsSlider  = css`
   max-width: 240px;
-  width: 80%;
   margin: auto;
   padding: 1rem 1rem 0 1rem;
-
   div p {
     overflow: visible;
     padding-bottom: 1rem;
   }
 `;
 
-const sounds__icon: SerializedStyles = css`
+const sounds__icon  = css`
   box-sizing: border-box;
   width: 100%;
   padding: 0 0.5rem;
