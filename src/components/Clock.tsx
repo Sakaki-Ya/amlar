@@ -92,7 +92,7 @@ const Clock: React.FC = () => {
         <h2 css={clock__h2}>1. Select an alarm sound.</h2>
         <SelectSoundSlider sound={sound} setSound={setSound} />
         <button onClick={soundTest} css={clock__test}>
-          <p>&#x25b6; Sound Test</p>
+          <p>&#x25b6; Sound check</p>
         </button>
       </div>
       <div css={clock__content}>
@@ -330,7 +330,7 @@ const Clock: React.FC = () => {
   );
 };
 
-const clock__content  = css`
+const clock__content = css`
   margin-bottom: 3rem;
 `;
 

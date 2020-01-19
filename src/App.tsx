@@ -32,7 +32,8 @@ const global: SerializedStyles = css`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background: linear-gradient(180deg, ${colors.blue}, ${colors.darkBlue});
-    background-size: 400% 400%;
+    background-attachment: fixed;
+    background-size: 100vw 200vh;
     animation: bgAnime 60s ease infinite;
     @keyframes bgAnime {
       0% {
@@ -45,11 +46,10 @@ const global: SerializedStyles = css`
         background-position: 50% 0%;
       }
     }
-    width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
+    overflow-x: hidden;
     text-align: center;
     color: ${colors.white};
-    overflow: hidden;
   }
   button,
   a {
@@ -58,16 +58,13 @@ const global: SerializedStyles = css`
 `;
 
 const app__wrap: SerializedStyles = css`
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
-  overflow: auto;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
-  padding: 1rem 5%;
+  min-height: 100vh;
 `;
 
 const starsWrap: SerializedStyles = css`

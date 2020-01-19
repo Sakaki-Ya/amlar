@@ -84,7 +84,7 @@ const Contact: React.FC = () => {
         </svg>
         <h2 css={contact__h2}>Contact</h2>
       </div>
-      <p css={contact__text}>Please report any feature requests or bugs.</p>
+      <p css={contact__text}>Please report any feature requests or glitch.</p>
       <form
         css={contact__form}
         name="contact"
@@ -181,8 +181,10 @@ const contact__section  = css`
 
 const contact__input  = css`
   width: 100%;
-  border-radius: 5px;
+  height: 1.2rem;
+  border: none;
   background-color: ${colors.white};
+  background: linear-gradient(45deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.5) 100%);
   font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 `;
 

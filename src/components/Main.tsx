@@ -3,7 +3,7 @@ import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { jsx, css } from "@emotion/core";
 import Clock from "./Clock";
-import Notes from "./Notes";
+import Note from "./Note";
 import PrivacyPolicy from "./PrivacyPolicy";
 import Contact from "./Contact";
 import Footer from "./Footer";
@@ -14,7 +14,7 @@ const Main: React.FC = () => {
       <div css={main}>
         <Switch>
           <Route exact path="/" component={Clock} />
-          <Route exact path="/notes" component={Notes} />
+          <Route exact path="/note" component={Note} />
           <Route exact path="/privacy-policy" component={PrivacyPolicy} />
           <Route exact path="/contact" component={Contact} />
           <Redirect to="/" />
@@ -30,7 +30,7 @@ const main = css`
   width: 100%;
   box-sizing: border-box;
   margin: auto;
-  padding: 1rem 0;
+  padding: 1rem 5%;
 `;
 
 export default Main;

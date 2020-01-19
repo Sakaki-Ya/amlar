@@ -327,7 +327,7 @@ const SelectSoundSlider: React.FC<SelectSoundSliderProps> = ({
             />
           </g>
         </svg>
-        <p>Chicken shout</p>
+        <p>Cockerel</p>
       </div>
     </Slider>
   );
@@ -335,10 +335,8 @@ const SelectSoundSlider: React.FC<SelectSoundSliderProps> = ({
 
 const soundsSlider  = css`
   max-width: 240px;
-  width: 80%;
   margin: auto;
   padding: 1rem 1rem 0 1rem;
-
   div p {
     overflow: visible;
     padding-bottom: 1rem;

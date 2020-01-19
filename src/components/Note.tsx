@@ -3,10 +3,10 @@ import React from "react";
 import { jsx, css } from "@emotion/core";
 import colors from "./Colors";
 
-const Notes: React.FC = () => (
+const Note: React.FC = () => (
   <React.Fragment>
-    <h2 css={howto__h2}>Notes</h2>
-    <svg width="286.001" viewBox="0 0 286.001 187.858" css={howto__icon}>
+    <h2 css={note__h2}>Note</h2>
+    <svg width="286.001" viewBox="0 0 286.001 187.858" css={note__icon}>
       <g fillRule="evenodd" clipRule="evenodd">
         <path
           fill="#ACB6BE"
@@ -186,63 +186,57 @@ const Notes: React.FC = () => (
         />
       </g>
     </svg>
-    <div css={howto__block}>
-      <h3 css={howto__h3}>Before use</h3>
+    <div css={note__block}>
+      <h3 css={note__h3}>Before using</h3>
       <hr />
-      <p css={howto__text}>
+      <p css={note__text}>
         The behavior may change depending on the device and browser you are
         using.
       </p>
-      <p css={howto__text}>
+      <p css={note__text}>
         We recommend that you test the operation before using it.
       </p>
     </div>
-    <div css={howto__block}>
-      <h3 css={howto__h3}>Some test results</h3>
+    <div css={note__block}>
+      <h3 css={note__h3}>Question & Answer</h3>
       <hr />
-      <ul css={howto__list}>
-        <li>When the browser is closed, the alarm will not sound.</li>
-        <li>The alarm sounds even if you open another app or tab.</li>
-        <li>Some devices sound an alarm even in sleep mode, while others do not.</li>
-      </ul>
+      <p css={note__text}>Q:Will the alarm work if you close the browser?</p>
+      <p css={note__text}>A:It will not work when the browser is closed.</p>
+      <p css={note__text}>Q:Will the alarm work when you open another application?</p>
+      <p css={note__text}>A:It depends on the device and browser.</p>
+      <p css={note__text}>Q:Will the alarm work when you put the device into sleep mode?</p>
+      <p css={note__text}>A:There are some devices alarm even in sleep mode, while others do not.</p>
     </div>
   </React.Fragment>
 );
 
-const howto__h2 = css`
+const note__h2 = css`
   font-size: 1.25rem;
   margin-bottom: 1rem;
   color: ${colors.lightOrange};
   font-weight: bold;
 `;
 
-const howto__icon = css`
+const note__icon = css`
   max-width: 120px;
   margin-bottom: 1rem;
   filter: drop-shadow(0px 2px 2px rgba(255, 255, 255, 0.4));
 `;
 
-const howto__block = css`
+const note__block = css`
   margin-bottom: 1.5rem;
   text-align: left;
 `;
 
-const howto__h3 = css`
+const note__h3 = css`
   font-size: 1.15rem;
   margin-bottom: 0.5rem;
   font-weight: bold;
 `;
 
-const howto__text = css`
+const note__text = css`
   line-height: 1.5rem;
   margin-bottom: 0.5rem;
 `;
 
-const howto__list = css`
-  list-style-type: disc;
-  padding-left:1rem;
-  line-height: 1.5rem;
-  margin-bottom: 0.5rem;
-`;
-
-export default Notes;
+export default Note;

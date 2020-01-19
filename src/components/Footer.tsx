@@ -5,14 +5,14 @@ import { jsx, css } from "@emotion/core";
 import colors from "./Colors";
 
 const Footer: React.FC = () => {
-const [view, setView] = useState("top");
+  const [view, setView] = useState("top");
   useEffect(() => {
     switch (view) {
       case "top":
         document.title = "Random Alarm Clock";
         break;
-      case "notes":
-        document.title = "Notes - Random Alarm Clock";
+      case "note":
+        document.title = "Note - Random Alarm Clock";
         break;
       case "policy":
         document.title = "Privacy Policy - Random Alarm Clock";
@@ -40,18 +40,27 @@ const [view, setView] = useState("top");
       </label>
       <div css={footer__content}>
         <div css={footer__list}>
-          <Link to="/notes" onClick={() => setView("notes")}>
-            <button css={footer__link} disabled={view === "notes" ? true : false}>
-              Notes
+          <Link to="/note" onClick={() => setView("note")}>
+            <button
+              css={footer__link}
+              disabled={view === "note" ? true : false}
+            >
+              Note
             </button>
           </Link>
           <Link to="/privacy-policy" onClick={() => setView("policy")}>
-            <button css={footer__link} disabled={view === "policy" ? true : false}>
+            <button
+              css={footer__link}
+              disabled={view === "policy" ? true : false}
+            >
               Privacy Policy
             </button>
           </Link>
           <Link to="/contact" onClick={() => setView("contact")}>
-            <button css={footer__link} disabled={view === "contact" ? true : false}>
+            <button
+              css={footer__link}
+              disabled={view === "contact" ? true : false}
+            >
               Contact
             </button>
           </Link>
@@ -59,8 +68,11 @@ const [view, setView] = useState("top");
         <div css={footer__copyWrap}>
           <p css={footer__copy}>&copy; 2020</p>
           <Link to="/" onClick={() => setView("top")}>
-            <button css={footer__title} disabled={view === "top" ? true : false}>
-              Random Alarm Clock
+            <button
+              css={footer__title}
+              disabled={view === "top" ? true : false}
+            >
+              Randomizer Button Alarm Clock
             </button>
           </Link>
         </div>
@@ -71,6 +83,7 @@ const [view, setView] = useState("top");
 
 const footer = css`
   overflow-y: hidden;
+  margin-bottom: 1rem;
 `;
 
 const footer__check = css`
@@ -140,7 +153,6 @@ const footer__title = css`
   border: none;
   background: transparent;
   text-decoration: underline;
-  font-size: 1rem;
   color: ${colors.white};
   transition: 0.2s;
   &:disabled {
