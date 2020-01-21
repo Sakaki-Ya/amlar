@@ -200,12 +200,28 @@ const Note: React.FC = () => (
     <div css={note__block}>
       <h3 css={note__h3}>Question & Answer</h3>
       <hr />
-      <p css={note__text}>Q:Will the alarm work if you close the browser?</p>
-      <p css={note__text}>A:It will not work when the browser is closed.</p>
-      <p css={note__text}>Q:Will the alarm work when you open another application?</p>
-      <p css={note__text}>A:It depends on the device and browser.</p>
-      <p css={note__text}>Q:Will the alarm work when you put the device into sleep mode?</p>
-      <p css={note__text}>A:There are some devices alarm even in sleep mode, while others do not.</p>
+      <div css={note__qaBlock}>
+        <p css={note__question}>
+          Q:Will the alarm work if you close the browser?
+        </p>
+        <p css={note__text}>A:It will not work when the browser is closed.</p>
+      </div>
+      <div css={note__qaBlock}>
+        <p css={note__question}>
+          Q:Will the alarm work when you open another application?
+        </p>
+        <p css={note__text}>A:The alarm works, depending on the device and browser.
+</p>
+      </div>
+      <div css={note__qaBlock}>
+        <p css={note__question}>
+          Q:Will the alarm work when you put the device into sleep mode?
+        </p>
+        <p css={note__text}>
+          A:There are some devices alarm even in sleep mode, while others do
+          not.
+        </p>
+      </div>
     </div>
   </React.Fragment>
 );
@@ -234,9 +250,18 @@ const note__h3 = css`
   font-weight: bold;
 `;
 
+const note__qaBlock = css`
+  margin-bottom: 1.5rem;
+`;
+
 const note__text = css`
   line-height: 1.5rem;
   margin-bottom: 0.5rem;
+`;
+
+const note__question = css`
+  ${note__text};
+  color: ${colors.lightOrange};
 `;
 
 export default Note;

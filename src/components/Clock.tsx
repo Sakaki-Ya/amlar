@@ -24,7 +24,7 @@ const Clock: React.FC = () => {
   };
 
   const [sound, setSound] = useState(new Audio("classic.mp3"));
-  const soundTest = ()  => {
+  const soundTest = () => {
     sound.pause();
     sound.currentTime = 0;
     sound.loop = false;
@@ -59,7 +59,7 @@ const Clock: React.FC = () => {
         sound.pause();
         sound.currentTime = 0;
         sound.loop = true;
-        // sound.play();
+        sound.play();
         setPosition(randomPosition());
         setAlarming(true);
         silent.loop = false;

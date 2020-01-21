@@ -9,19 +9,19 @@ const Footer: React.FC = () => {
   useEffect(() => {
     switch (view) {
       case "top":
-        document.title = "Random Alarm Clock";
+        document.title = "Amlar";
         break;
       case "note":
-        document.title = "Note - Random Alarm Clock";
+        document.title = "Note - Amlar";
         break;
       case "policy":
-        document.title = "Privacy Policy - Random Alarm Clock";
+        document.title = "Privacy Policy - Amlar";
         break;
       case "contact":
-        document.title = "Contact - Random Alarm Clock";
+        document.title = "Contact - Amlar";
         break;
       default:
-        document.title = "Random Alarm Clock";
+        document.title = "Amlar";
     }
   }, [view]);
 
@@ -72,7 +72,7 @@ const Footer: React.FC = () => {
               css={footer__title}
               disabled={view === "top" ? true : false}
             >
-              Randomizer Button Alarm Clock
+              Amlar
             </button>
           </Link>
         </div>
@@ -147,6 +147,7 @@ const footer__copyWrap = css`
 
 const footer__copy = css`
   margin-right: 0.25rem;
+  font-size: .9rem;
 `;
 
 const footer__title = css`

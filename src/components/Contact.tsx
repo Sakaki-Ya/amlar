@@ -184,7 +184,7 @@ const contact__input  = css`
   height: 1.2rem;
   border: none;
   background-color: ${colors.white};
-  background: linear-gradient(45deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.5) 100%);
+  background: linear-gradient(45deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.6) 100%);
   font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 `;
 
