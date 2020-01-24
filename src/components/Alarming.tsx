@@ -7,18 +7,20 @@ import colors from "./Colors";
 type AlarmingProps = {
   sound: HTMLAudioElement;
   position: number[];
-  setTime: React.Dispatch<React.SetStateAction<string>>;
+  setInputTime: React.Dispatch<React.SetStateAction<string>>;
   setAlarming: React.Dispatch<React.SetStateAction<boolean>>;
+  setAfterSet: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const Alarming: React.FC<AlarmingProps> = ({
   sound,
   position,
-  setTime,
-  setAlarming
+  setInputTime,
+  setAlarming,
+  setAfterSet
 }) => {
   const [randomLeft, randomTop] = position;
-  const alarming__stop  = css`
+  const alarming__stop = css`
     left: ${randomLeft}%;
     top: ${randomTop}%;
     position: absolute;
@@ -30,7 +32,7 @@ const Alarming: React.FC<AlarmingProps> = ({
     width: 60px;
     height: 60px;
     background: ${colors.orange};
-    box-shadow: 0 2px 4px ${colors.deepOrange};
+    box-shadow: 0 2px 4px ${colors.darkOrange};
     color: ${colors.white};
     font-size: 1.1rem;
     font-weight: bold;
@@ -81,16 +83,17 @@ const Alarming: React.FC<AlarmingProps> = ({
       left: 0
     },
     leave: { opacity: 0, transform: "translateY(100vh)" },
-    onRest: ()  => {
+    onRest: () => {
       if (hold) stopAlarm();
       setRendered(true);
     }
   });
-  const stopAlarm = ()  => {
+  const stopAlarm = () => {
     sound.pause();
     sound.currentTime = 0;
     sound.loop = false;
-    setTime("");
+    setInputTime("");
+    setAfterSet(false);
     setAlarming(false);
   };
 
@@ -323,13 +326,13 @@ const Alarming: React.FC<AlarmingProps> = ({
         {rendered && (
           <button
             onTouchStart={() => setHold(true)}
-            onTouchEnd={e  => {
+            onTouchEnd={e => {
               e.preventDefault();
               setHold(false);
             }}
             onMouseDown={() => setHold(true)}
             onMouseUp={() => setHold(false)}
-            onContextMenu={              e              => {
+            onContextMenu={e => {
               e.preventDefault();
             }}
             css={alarming__stop}
@@ -342,7 +345,7 @@ const Alarming: React.FC<AlarmingProps> = ({
   );
 };
 
-const alarming  = css`
+const alarming = css`
   background: linear-gradient(180deg, #ffffff, ${colors.white});
   color: ${colors.black};
   width: 100vw;
@@ -350,37 +353,37 @@ const alarming  = css`
   overflow: hidden;
 `;
 
-const alarming__header  = css`
+const alarming__header = css`
   box-sizing: border-box;
   padding: 1rem 5%;
   font-weight: bold;
 `;
 
-const alarming__icon  = css`
+const alarming__icon = css`
   max-width: 120px;
   margin-bottom: 1rem;
   filter: drop-shadow(0px 3px 2px rgba(0, 0, 0, 0.4));
 `;
 
-const alarming__h2  = css`
+const alarming__h2 = css`
   font-size: 1.25rem;
   margin-bottom: 1rem;
 `;
 
-const alarming__text  = css`
+const alarming__text = css`
   display: inline-block;
   line-height: 1.5rem;
   text-align: left;
   margin-bottom: 0.5rem;
 `;
 
-const alarming__randomArea  = css`
+const alarming__randomArea = css`
   width: 100%;
   height: 100%;
   position: relative;
 `;
 
-const alarming__bar  = css`
+const alarming__bar = css`
   background: linear-gradient(180deg, ${colors.blue}, ${colors.darkBlue});
   width: 100vw;
   height: 100vh;

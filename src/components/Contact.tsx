@@ -139,30 +139,31 @@ const Contact: React.FC = () => {
   );
 };
 
-const contact__titleSection  = css`
+const contact__titleSection = css`
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 1rem;
 `;
 
-const contact__icon  = css`
+const contact__icon = css`
   max-width: 30px;
   margin-right: 0.5rem;
   filter: drop-shadow(0px 2px 2px rgba(255, 255, 255, 0.4));
 `;
 
-const contact__h2  = css`
+const contact__h2 = css`
   font-size: 1.25rem;
-  color: ${colors.lightOrange};
+  color: ${colors.moreLightOrange};
   font-weight: bold;
 `;
 
-const contact__text  = css`
+const contact__text = css`
+  line-height: 1.5;
   margin-bottom: 1rem;
 `;
 
-const contact__form  = css`
+const contact__form = css`
   max-width: 480px;
   width: 100%;
   margin: auto;
@@ -174,25 +175,30 @@ const contact__form  = css`
   }
 `;
 
-const contact__section  = css`
+const contact__section = css`
   margin-bottom: 1rem;
   text-align: left;
 `;
 
-const contact__input  = css`
+const contact__input = css`
   width: 100%;
   height: 1.2rem;
   border: none;
+  border-radius: 3px;
   background-color: ${colors.white};
-  background: linear-gradient(45deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.6) 100%);
+  background: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.6) 100%
+  );
   font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 `;
 
-const contact__sendSection  = css`
+const contact__sendSection = css`
   text-align: left;
 `;
 
-const contact__send  = css`
+const contact__send = css`
   height: 100%;
   padding: 0.5rem 0.75rem;
   background-color: ${colors.orange};
@@ -209,13 +215,13 @@ const contact__send  = css`
   }
   &:active {
     transform: translateY(2px);
-    background: ${colors.deepOrange};
+    background: ${colors.darkOrange};
     color: ${colors.white};
     box-shadow: none;
   }
   &:disabled {
     cursor: default;
-    background: grey;
+    opacity: .5;
   }
 `;
 
