@@ -123,18 +123,18 @@ const footer__link = css`
   border: none;
   background: transparent;
   margin: 0 0.5rem;
-  color: ${colors.lightOrange};
+  color: ${colors.moreLightOrange};
   text-decoration: none;
   font-weight: bold;
   transition: 0.2s;
   &:hover {
-    color: ${colors.moreLightOrange};
+    color: ${colors.mostLightOrange};
   }
   &:active {
     color: ${colors.orange};
   }
   &:disabled {
-    color: ${colors.deepOrange};
+    opacity:.5;
     cursor: default;
   }
 `;
@@ -147,7 +147,7 @@ const footer__copyWrap = css`
 
 const footer__copy = css`
   margin-right: 0.25rem;
-  font-size: .9rem;
+  font-size: 0.9rem;
 `;
 
 const footer__title = css`

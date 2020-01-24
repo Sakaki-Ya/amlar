@@ -210,8 +210,9 @@ const Note: React.FC = () => (
         <p css={note__question}>
           Q:Will the alarm work when you open another application?
         </p>
-        <p css={note__text}>A:The alarm works, depending on the device and browser.
-</p>
+        <p css={note__text}>
+          A:The alarm works, depending on the device and browser.
+        </p>
       </div>
       <div css={note__qaBlock}>
         <p css={note__question}>
@@ -229,7 +230,7 @@ const Note: React.FC = () => (
 const note__h2 = css`
   font-size: 1.25rem;
   margin-bottom: 1rem;
-  color: ${colors.lightOrange};
+  color: ${colors.moreLightOrange};
   font-weight: bold;
 `;
 
@@ -255,13 +256,13 @@ const note__qaBlock = css`
 `;
 
 const note__text = css`
-  line-height: 1.5rem;
+  line-height: 1.5;
   margin-bottom: 0.5rem;
 `;
 
 const note__question = css`
   ${note__text};
-  color: ${colors.lightOrange};
+  color: ${colors.moreLightOrange};
 `;
 
 export default Note;

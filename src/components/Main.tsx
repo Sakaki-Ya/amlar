@@ -25,7 +25,7 @@ const Main: React.FC = () => {
           (props, item) =>
             item && (
               <animated.div style={props}>
-                <Switch>
+                <Switch location={item}>
                   <Route exact path="/" component={Clock} />
                   <Route exact path="/note" component={Note} />
                   <Route
