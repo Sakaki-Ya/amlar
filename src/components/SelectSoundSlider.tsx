@@ -1,8 +1,10 @@
 /** @jsx jsx */
+import React,{ memo } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { jsx, css } from "@emotion/core";
+import colors from "./Colors";
 
 type SelectSoundSliderProps = {
   sound: HTMLAudioElement;
@@ -10,7 +12,7 @@ type SelectSoundSliderProps = {
   afterSet: boolean;
 };
 
-const SelectSoundSlider: React.FC<SelectSoundSliderProps> = ({
+const SelectSoundSlider: React.FC<SelectSoundSliderProps> = memo(({
   sound,
   setSound,
   afterSet
@@ -33,7 +35,14 @@ const SelectSoundSlider: React.FC<SelectSoundSliderProps> = ({
     arrows: afterSet ? false : true
   };
 
-  const soundsSlider = css`
+  const soundPreview = () => {
+    sound.pause();
+    sound.currentTime = 0;
+    sound.loop = false;
+    sound.play();
+  };
+
+  const selectSound__slider = css`
   max-width: 240px;
   margin: auto;
   padding: 0 1rem;
@@ -46,9 +55,11 @@ const SelectSoundSlider: React.FC<SelectSoundSliderProps> = ({
 `;
 
   return (
-    <Slider {...settings} css={soundsSlider}>
+    <React.Fragment>
+      <h2 css={selectSound__h2}>1. Select an alarm sound.</h2>
+    <Slider {...settings} css={selectSound__slider}>
       <div>
-        <svg width="480" viewBox="0 0 480 320" css={sounds__icon}>
+        <svg width="480" viewBox="0 0 480 320" css={selectSound__icon}>
           <g fillRule="evenodd" clipRule="evenodd">
             <path
               fill="#E2001D"
@@ -195,7 +206,7 @@ const SelectSoundSlider: React.FC<SelectSoundSliderProps> = ({
         <p>Classic alarm clock</p>
       </div>
       <div>
-        <svg width="480" viewBox="0 0 480 320" css={sounds__icon}>
+        <svg width="480" viewBox="0 0 480 320" css={selectSound__icon}>
           <g fillRule="evenodd" clipRule="evenodd">
             <path
               fill="#7E858C"
@@ -290,7 +301,7 @@ const SelectSoundSlider: React.FC<SelectSoundSliderProps> = ({
         <p>Digital alarm clock</p>
       </div>
       <div>
-        <svg width="480" viewBox="0 0 480 320" css={sounds__icon}>
+        <svg width="480" viewBox="0 0 480 320" css={selectSound__icon}>
           <g fillRule="evenodd" clipRule="evenodd">
             <path
               fill="#C0B2A5"
@@ -353,7 +364,7 @@ const SelectSoundSlider: React.FC<SelectSoundSliderProps> = ({
         <p>Cockerel</p>
       </div>
       <div>
-        <svg width="480" viewBox="0 0 480 320" css={sounds__icon}>
+        <svg width="480" viewBox="0 0 480 320" css={selectSound__icon}>
           <g fillRule="evenodd" clipRule="evenodd">
             <path
               fill="#B3B0AC"
@@ -544,7 +555,7 @@ const SelectSoundSlider: React.FC<SelectSoundSliderProps> = ({
         <p>Cuckoo</p>
       </div>
       <div>
-        <svg width="480" viewBox="0 0 480 320" css={sounds__icon}>
+        <svg width="480" viewBox="0 0 480 320" css={selectSound__icon}>
           <path
             fillRule="evenodd"
             clipRule="evenodd"
@@ -1308,7 +1319,7 @@ const SelectSoundSlider: React.FC<SelectSoundSliderProps> = ({
         <p>Bell</p>
       </div>
       <div>
-        <svg width="480" viewBox="0 0 480 320" css={sounds__icon}>
+        <svg width="480" viewBox="0 0 480 320" css={selectSound__icon}>
           <g fillRule="evenodd" clipRule="evenodd">
             <path
               fill="#3D8FCE"
@@ -1805,16 +1816,50 @@ const SelectSoundSlider: React.FC<SelectSoundSliderProps> = ({
         </svg>
         <p>Laughter</p>
       </div>
-    </Slider>
+      </Slider>
+      <button
+        onClick={soundPreview}
+        css={selectSound__preview}
+        disabled={afterSet ? true : false}
+      >
+        &#x25b6; Preview
+        </button>
+    </React.Fragment>
   );
-};
+});
 
-const sounds__icon = css`
+const selectSound__h2 = css`
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+`;
+
+const selectSound__icon = css`
   box-sizing: border-box;
   width: 100%;
   padding: 0 0.5rem;
   margin-bottom: 0.5rem;
   filter: drop-shadow(0px 3px 1px rgba(255, 255, 255, 0.4));
+`;
+
+const selectSound__preview = css`
+  background: transparent;
+  border: none;
+  color: ${colors.moreLightOrange};
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-decoration: underline;
+  transition: 0.2s;
+  &:hover {
+    color: ${colors.mostLightOrange};
+  }
+  &:active {
+    color: ${colors.orange};
+    transform: translateY(2px);
+  }
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
 `;
 
 export default SelectSoundSlider;
