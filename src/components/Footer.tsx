@@ -84,6 +84,7 @@ const Footer: React.FC = () => {
 const footer = css`
   overflow-y: hidden;
   margin-bottom: 1rem;
+  font-size: 1rem;
 `;
 
 const footer__check = css`
@@ -134,7 +135,7 @@ const footer__link = css`
     color: ${colors.orange};
   }
   &:disabled {
-    opacity:.5;
+    opacity: 0.5;
     cursor: default;
   }
 `;

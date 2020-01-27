@@ -154,7 +154,7 @@ const contact__icon = css`
 
 const contact__h2 = css`
   font-size: 1.25rem;
-  color: ${colors.moreLightOrange};
+  color: ${colors.mostLightOrange};
   font-weight: bold;
 `;
 
@@ -191,6 +191,7 @@ const contact__input = css`
     rgba(255, 255, 255, 0.9) 0%,
     rgba(255, 255, 255, 0.6) 100%
   );
+  box-shadow: 0 2px 4px ${colors.white};
   font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 `;
 

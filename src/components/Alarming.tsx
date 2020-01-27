@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import React, { useState } from "react";
+import React, { useState,memo } from "react";
 import { useTransition, animated, config, TransitionFn } from "react-spring";
 import { jsx, css } from "@emotion/core";
 import colors from "./Colors";
@@ -12,13 +12,14 @@ type AlarmingProps = {
   setAfterSet: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const Alarming: React.FC<AlarmingProps> = ({
+const Alarming: React.FC<AlarmingProps> = memo(({
   sound,
   position,
   setInputTime,
   setAlarming,
   setAfterSet
 }) => {
+  console.log("rendered Alarming");
   const [randomLeft, randomTop] = position;
   const alarming__stop = css`
     left: ${randomLeft}%;
@@ -343,7 +344,7 @@ const Alarming: React.FC<AlarmingProps> = ({
       </div>
     </div>
   );
-};
+});
 
 const alarming = css`
   background: linear-gradient(180deg, #ffffff, ${colors.white});
