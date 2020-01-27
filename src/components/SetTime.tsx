@@ -76,11 +76,11 @@ const SetTime: React.FC<InputTimeProps> = memo(
         <div css={setTime__formButtonBlock}>
           <input
             type="time"
-            name="inputTime"
             value={inputTime}
             css={setTime__inputForm}
             onChange={getInputTime}
             disabled={afterSet ? true : false}
+            aria-label="input time"
           />
           <button
             onClick={afterSet ? cancelAlarm : setAlarm}
