@@ -154,7 +154,7 @@ const contact__icon = css`
 
 const contact__h2 = css`
   font-size: 1.25rem;
-  color: ${colors.moreLightOrange};
+  color: ${colors.mostLightOrange};
   font-weight: bold;
 `;
 

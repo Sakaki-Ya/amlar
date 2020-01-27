@@ -153,7 +153,7 @@ const PrivacyPolicy: React.FC = () => (
 const policy__h2 = css`
   font-size: 1.25rem;
   margin-bottom: 1rem;
-  color: ${colors.moreLightOrange};
+  color: ${colors.mostLightOrange};
   font-weight: bold;
 `;
 

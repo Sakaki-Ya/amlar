@@ -8,7 +8,8 @@ import Alarming from "./Alarming";
 
 const silent = new Audio("silent.mp3");
 
-const Clock: React.FC = () => { 
+const Clock: React.FC = () => {
+  console.log("rendered Clock");
   const randomPosition = () => {
     let [maxRandomLeft, maxRandomTop] = [0, 0];
     if (window.screen.width > window.screen.height) {

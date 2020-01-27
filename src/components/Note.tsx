@@ -230,7 +230,7 @@ const Note: React.FC = () => (
 const note__h2 = css`
   font-size: 1.25rem;
   margin-bottom: 1rem;
-  color: ${colors.moreLightOrange};
+  color: ${colors.mostLightOrange};
   font-weight: bold;
 `;
 
@@ -262,7 +262,7 @@ const note__text = css`
 
 const note__question = css`
   ${note__text};
-  color: ${colors.moreLightOrange};
+  color: ${colors.mostLightOrange};
 `;
 
 export default Note;

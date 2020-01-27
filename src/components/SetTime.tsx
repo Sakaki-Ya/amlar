@@ -21,6 +21,7 @@ const SetTime: React.FC<InputTimeProps> = memo(
     setAlarmTime,
     silent
   }) => {
+    console.log("rendered SetTime");
     const getInputTime = (e: React.ChangeEvent<HTMLInputElement>) => {
       if (e.target.value.match(/^([01]?[0-9]|2[0-3]):([0-5][0-9])$/))
         setInputTime(e.target.value);
@@ -48,7 +49,7 @@ const SetTime: React.FC<InputTimeProps> = memo(
     const setTime__setButton = css`
       margin: 0 0.5rem;
       padding: 0.5rem 0.75rem;
-      background-color: ${afterSet ? colors.blue : colors.orange};
+      background-color: ${afterSet ? colors.lightBlue : colors.darkOrange};
       border: none;
       border-radius: 3px;
       white-space: nowrap;
@@ -58,12 +59,12 @@ const SetTime: React.FC<InputTimeProps> = memo(
       box-shadow: 0 2px 4px ${colors.white};
       transition: 0.2s;
       &:hover {
-        background-color: ${afterSet ? colors.lightBlue : colors.lightOrange};
+        background-color: ${afterSet ? colors.moreLightBlue : colors.lightOrange};
         box-shadow: 0 2px 6px ${colors.white};
       }
       &:active {
         transform: translateY(2px);
-        background-color: ${afterSet ? "#00274f" : colors.darkOrange};
+        background-color: ${afterSet ? "#00274f" : colors.moreDarkOrange};
         color: ${colors.white};
         box-shadow: none;
       }
@@ -75,6 +76,7 @@ const SetTime: React.FC<InputTimeProps> = memo(
         <div css={setTime__formButtonBlock}>
           <input
             type="time"
+            name="inputTime"
             value={inputTime}
             css={setTime__inputForm}
             onChange={getInputTime}
