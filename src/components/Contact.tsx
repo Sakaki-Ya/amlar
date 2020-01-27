@@ -92,6 +92,7 @@ const Contact: React.FC = () => {
         data-netlify="true"
         netlify-honeypot="bot-filed"
       >
+        <input type="hidden" name="contact" value="contact" />
         <section css={contact__section}>
           <label>
             <p>Name</p>
@@ -202,11 +203,12 @@ const contact__sendSection = css`
 const contact__send = css`
   height: 100%;
   padding: 0.5rem 0.75rem;
-  background-color: ${colors.orange};
+  background-color: ${colors.darkOrange};
   border: none;
   border-radius: 3px;
   white-space: nowrap;
   color: ${colors.white};
+  font-size: 1.1rem;
   font-weight: bold;
   box-shadow: 0 2px 4px ${colors.white};
   transition: 0.2s;
@@ -216,7 +218,7 @@ const contact__send = css`
   }
   &:active {
     transform: translateY(2px);
-    background: ${colors.darkOrange};
+    background: ${colors.moreDarkOrange};
     color: ${colors.white};
     box-shadow: none;
   }
