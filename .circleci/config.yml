@@ -22,10 +22,10 @@ jobs:
       - run:
           name: package install
           command: npm install
-      # rulesのテストに使用するエミュレーターのセットアップ
-      - run:
-          name: emulators install
-          command: ./node_modules/.bin/firebase setup:emulators:firestore
+      # # rulesのテストに使用するエミュレーターのセットアップ
+      # - run:
+      #     name: emulators install
+      #     command: ./node_modules/.bin/firebase setup:emulators:firestore
       # functionsのパッケージのインストール
       - run:
           name: functions package install
@@ -40,10 +40,10 @@ jobs:
       - run:
           name: firebase-tools install
           command: cd functions/ && npm install -D firebase-tools
-      # functions内のテストの実行
-      - run:
-          name: run test
-          command: cd functions/ && npm run test
+      # # functions内のテストの実行
+      # - run:
+      #     name: run test
+      #     command: cd functions/ && npm run test
       #　デプロイの実行
       - run:
           name: deploy to Firebase Hosting
