@@ -5,22 +5,16 @@ import { jsx, css } from "@emotion/core";
 import colors from "./Colors";
 
 type AlarmingProps = {
-  sound: HTMLAudioElement;
-  position: number[];
-  setInputTime: React.Dispatch<React.SetStateAction<string>>;
+  randomPosition: number[];
   setAlarming: React.Dispatch<React.SetStateAction<boolean>>;
-  setAfterSet: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const Alarming: React.FC<AlarmingProps> = memo(({
-  sound,
-  position,
-  setInputTime,
-  setAlarming,
-  setAfterSet
+  randomPosition,
+  setAlarming
 }) => {
   console.log("rendered Alarming");
-  const [randomLeft, randomTop] = position;
+  const [randomLeft, randomTop] = randomPosition;
   const alarming__stop = css`
     left: ${randomLeft}%;
     top: ${randomTop}%;
@@ -85,18 +79,10 @@ const Alarming: React.FC<AlarmingProps> = memo(({
     },
     leave: { opacity: 0, transform: "translateY(100vh)" },
     onRest: () => {
-      if (hold) stopAlarm();
+      if (hold) setAlarming(false);;
       setRendered(true);
     }
   });
-  const stopAlarm = () => {
-    sound.pause();
-    sound.currentTime = 0;
-    sound.loop = false;
-    setInputTime("");
-    setAfterSet(false);
-    setAlarming(false);
-  };
 
   return (
     <div css={alarming}>
