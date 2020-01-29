@@ -1,6 +1,5 @@
 /** @jsx jsx */
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 import { jsx, css } from "@emotion/core";
 import colors from "./Colors";
 
@@ -27,12 +26,6 @@ const Contact: React.FC = () => {
       return;
     }
     setForms([name, mail, true]);
-  };
-
-  const history = useHistory();
-  const send = () => {
-    alert("Sent successfully. Thank you.");
-    history.push("/");
   };
 
   return (
@@ -85,48 +78,30 @@ const Contact: React.FC = () => {
         <h2 css={contact__h2}>Contact</h2>
       </div>
       <p css={contact__text}>Please report any feature requests or glitch.</p>
-      <form name="contact" method="post">
+      <form name="contact" method="post" action="/" css={contact__form}>
         <input type="hidden" name="form-name" value="contact" />
-        <p>
-          <label>Your Name: <input type="text" name="name" /></label>
-        </p>
-        <p>
-          <label>Your Email: <input type="email" name="email" /></label>
-        </p>
-        <p>
-          <label>Message: <textarea name="message"></textarea></label>
-        </p>
-        <p>
-          <button type="submit">Send</button>
-        </p>
-      </form>
-      {/* <form name="contact" method="post" css={contact__form}>
-        <input type="hidden" name="contact" value="contact" />
-        <section css={contact__section}>
-          <label><p>Name</p><input type="text" name="name" css={contact__input}
-            onChange={checkName} /></label>
-        </section>
-        <section css={contact__section}>
+        <div css={contact__section}>
+          <label>
+            <p>Name</p>
+            <input type="text" name="name" css={contact__input} onChange={checkName} />
+          </label>
+        </div>
+        <div css={contact__section}>
           <label>
             <p>Email</p>
-            <input
-              type="email"
-              name="email"
-              css={contact__input}
-              onChange={checkMail}
-            />
+            <input type="email" name="email" css={contact__input} onChange={checkMail} />
           </label>
-        </section>
-        <section css={contact__section}>
+        </div>
+        <div css={contact__section}>
           <label>
-            <p>Message</p>
-            <textarea
-              name="message"
-              css={contact__input}
-              onChange={checkMessage}
-            />
+            <p>Message</p><textarea name="message" css={contact__input} onChange={checkMessage} />
           </label>
-        </section>
+        </div>
+        <div css={contact__sendSection}>
+          <button type="submit" css={contact__send} disabled={forms.some(boolean => !boolean)}>Send</button>
+        </div>
+      </form>
+      {/* 
         <section css={contact__sendSection}>
           <button
             type="submit"
