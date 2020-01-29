@@ -1,27 +1,74 @@
-version: 2
-jobs:
-  build:
-    branches:
-      only:
-        - master
+version: 2.1
+
+executors:
+  default:
     docker:
-      - image: circleci/openjdk:11-jdk-sid-node
+      - image: circleci/node:10.15.3
+
+commands:
+  npm_install:
     steps:
-      - checkout
+      - restore_cache:
+          name: Restore Dependencies
+          keys:
+            - v1-dependencies-{{ checksum "yarn.lock" }}
+            - v1-dependencies
       - run:
-          name: package install
-          command: npm install
-      - run:
-          name: functions package install
-          command: cd functions/ && npm install
+          name: Install Dependencies
+          command: yarn install
       - save_cache:
+          name: Save Dependencies
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
-            - functions/node_modules
-          key: v1-dependencies-{{ checksum "functions/package.json" }}
+  firebase_install:
+    steps:
       - run:
-          name: firebase-tools install
-          command: cd functions/ && npm install -D firebase-tools
+          name: Install Firebase CLI
+          command: yarn add -D firebase-tools
+
+jobs:
+  build:
+    executor:
+      name: default
+    steps:
+      - checkout
+      - npm_install
+
+  test:
+    executor:
+      name: default
+    steps:
+      - checkout
+      - npm_install
       - run:
-          name: deploy to Firebase Hosting
-          command: ./node_modules/.bin/firebase --project default deploy --token=$FIREBASE_TOKEN
+          name: Test Project
+          command: yarn test
+  deploy:
+    executor:
+      name: default
+    steps:
+      - checkout
+      - firebase_install
+      - npm_install
+      - run:
+          name: Build Project
+          command: yarn build
+      - run:
+          name: Deploy to Firebase Hosting
+          command: node_modules/.bin/firebase deploy --only hosting --project "$FIREBASE_PROJECT_ID" --token "$FIREBASE_TOKEN"
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
