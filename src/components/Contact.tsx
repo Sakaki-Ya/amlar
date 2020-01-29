@@ -78,7 +78,7 @@ const Contact: React.FC = () => {
         <h2 css={contact__h2}>Contact</h2>
       </div>
       <p css={contact__text}>Please report any feature requests or glitch.</p>
-      <form name="contact" method="post" action="/" css={contact__form}>
+      <form name="contact" method="post" css={contact__form}>
         <input type="hidden" name="form-name" value="contact" />
         <div css={contact__section}>
           <label>
