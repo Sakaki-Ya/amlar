@@ -85,24 +85,11 @@ const Contact: React.FC = () => {
         <h2 css={contact__h2}>Contact</h2>
       </div>
       <p css={contact__text}>Please report any feature requests or glitch.</p>
-      <form
-        css={contact__form}
-        name="contact"
-        method="POST"
-        data-netlify="true"
-        netlify-honeypot="bot-filed"
-      >
+      <form name="contact" method="post" css={contact__form}>
         <input type="hidden" name="contact" value="contact" />
         <section css={contact__section}>
-          <label>
-            <p>Name</p>
-            <input
-              type="text"
-              name="name"
-              css={contact__input}
-              onChange={checkName}
-            />
-          </label>
+          <label><p>Name</p><input type="text" name="name" css={contact__input}
+            onChange={checkName} /></label>
         </section>
         <section css={contact__section}>
           <label>

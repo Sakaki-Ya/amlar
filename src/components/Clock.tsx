@@ -7,17 +7,18 @@ import SetTime from "./SetTime";
 import Alarming from "./Alarming";
 
 const silent = new Audio("silent.mp3");
+let randomPosition = [0, 0];
 
 const Clock: React.FC = () => {
   console.log("rendered Clock");
-  const randomPosition = () => {
+  const genRandomPosition = () => {
     let [maxRandomLeft, maxRandomTop] = [0, 0];
     if (window.screen.width > window.screen.height) {
       maxRandomLeft = 85;
       maxRandomTop = 16;
     } else {
       maxRandomLeft = 80;
-      maxRandomTop = 55;
+      maxRandomTop = 50;
     }
     const [randomLeft, randomTop] = [
       Math.random() * (maxRandomLeft + 1),
@@ -30,7 +31,6 @@ const Clock: React.FC = () => {
   const [alarmTime, setAlarmTime] = useState("");
   const [afterSet, setAfterSet] = useState(false);
   const [sound, setSound] = useState(new Audio("classic.mp3"));
-  const [position, setPosition] = useState([0, 0]);
   const [alarming, setAlarming] = useState(false);
   useEffect(() => {
     const tick = () => {
@@ -42,10 +42,9 @@ const Clock: React.FC = () => {
         sound.pause();
         sound.currentTime = 0;
         sound.loop = true;
-        sound.play();
-        setPosition(randomPosition());
+        // sound.play();
+        randomPosition = genRandomPosition();
         setAlarming(true);
-        setAlarmTime("");
         silent.loop = false;
         silent.pause();
         silent.currentTime = 0;
@@ -54,6 +53,17 @@ const Clock: React.FC = () => {
     const timer = setInterval(() => tick(), 1000);
     return () => clearInterval(timer);
   }, [alarming, sound, alarmTime]);
+  useEffect(() => {
+    if (!alarming) {
+      sound.pause();
+      sound.currentTime = 0;
+      sound.loop = false;
+      setInputTime("");
+      setAlarmTime("");
+      setAfterSet(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [alarming])
 
   const transition: TransitionFn<boolean, {}> = useTransition(alarming, {
     config: config.default,
@@ -94,11 +104,8 @@ const Clock: React.FC = () => {
           item && (
             <animated.div style={props}>
               <Alarming
-                sound={sound}
-                position={position}
-                setInputTime={setInputTime}
+                randomPosition={randomPosition}
                 setAlarming={setAlarming}
-                setAfterSet={setAfterSet}
               />
             </animated.div>
           )
