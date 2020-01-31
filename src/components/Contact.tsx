@@ -1,31 +1,56 @@
 /** @jsx jsx */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import * as firebase from 'firebase/app';
+import 'firebase/firestore';
 import { jsx, css } from "@emotion/core";
 import colors from "./Colors";
 
+let db: firebase.firestore.CollectionReference<firebase.firestore.DocumentData>;
+
 const Contact: React.FC = () => {
-  const [forms, setForms] = useState([false, false, false]);
-  const [name, mail, message] = [forms[0], forms[1], forms[2]];
+  const [value, setValue] = useState(["", "", ""]);
+  const [name, mail, message] = [value[0], value[1], value[2]];
+  const [check, setCheck] = useState([false, false, false]);
+  const [inName, inMail, inMessage] = [check[0], check[1], check[2]];
   const checkName = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value === "") {
-      setForms([false, mail, message]);
+      setCheck([false, inMail, inMessage]);
       return;
     }
-    setForms([true, mail, message]);
+    setCheck([true, inMail, inMessage]);
+    setValue([e.target.value, mail, message]);
   };
   const checkMail = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value === "" || !e.target.value.match(/.+@.+\..+/)) {
-      setForms([name, false, message]);
+      setCheck([inName, false, inMessage]);
       return;
     }
-    setForms([name, true, message]);
+    setCheck([inName, true, inMessage]);
+    setValue([name, e.target.value, message]);
   };
   const checkMessage = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (e.target.value === "") {
-      setForms([name, mail, false]);
+      setCheck([inName, inMail, false]);
       return;
     }
-    setForms([name, mail, true]);
+    setCheck([inName, inMail, true]);
+    setValue([name, mail, e.target.value]);
+  };
+
+  useEffect(() => {
+    db = firebase.firestore().collection("contacts");
+    console.log(db);
+  }, [])
+  const contactSend = () => {
+    db.doc().set({
+      name: name,
+      mail: mail,
+      message: message
+    }).then(() => {
+      alert("success");
+    }).catch((error) => {
+      console.log(error);
+    })
   };
 
   return (
@@ -78,41 +103,29 @@ const Contact: React.FC = () => {
         <h2 css={contact__h2}>Contact</h2>
       </div>
       <p css={contact__text}>Please report any feature requests or glitch.</p>
-      <form name="contact" method="post" css={contact__form}>
-        <input type="hidden" name="form-name" value="contact" />
+      <form onSubmit={contactSend} css={contact__form}>
         <div css={contact__section}>
           <label>
             <p>Name</p>
-            <input type="text" name="name" css={contact__input} onChange={checkName} />
+            <input type="text" name="name" onChange={checkName} css={contact__input} />
           </label>
         </div>
         <div css={contact__section}>
           <label>
-            <p>Email</p>
-            <input type="email" name="email" css={contact__input} onChange={checkMail} />
+            <p>E-mail</p>
+            <input type="email" name="email" onChange={checkMail} css={contact__input} />
           </label>
         </div>
         <div css={contact__section}>
           <label>
-            <p>Message</p><textarea name="message" css={contact__input} onChange={checkMessage} />
+            <p>Message</p>
+            <textarea name="message" onChange={checkMessage} css={contact__input} />
           </label>
         </div>
         <div css={contact__sendSection}>
-          <button type="submit" css={contact__send} disabled={forms.some(boolean => !boolean)}>Send</button>
+          <input type="submit" value="Send" css={contact__send} disabled={check.some(boolean => !boolean)} />
         </div>
       </form>
-      {/* 
-        <section css={contact__sendSection}>
-          <button
-            type="submit"
-            css={contact__send}
-            onClick={send}
-            disabled={forms.some(boolean => !boolean)}
-          >
-            Send
-          </button>
-        </section>
-      </form> */}
     </React.Fragment>
   );
 };
@@ -189,6 +202,7 @@ const contact__send = css`
   font-weight: bold;
   box-shadow: 0 2px 4px ${colors.white};
   transition: 0.2s;
+  cursor: pointer;
   &:hover {
     background: ${colors.lightOrange};
     box-shadow: 0 2px 6px ${colors.white};

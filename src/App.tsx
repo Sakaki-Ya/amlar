@@ -1,7 +1,9 @@
 /** @jsx jsx */
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import emotionReset from "emotion-reset";
+import * as firebase from 'firebase/app';
+import { config } from "./components/FireBaseConfig";
 import { jsx, Global, css, SerializedStyles } from "@emotion/core";
 import colors from "./components/Colors";
 import Main from "./components/Main";
@@ -9,21 +11,29 @@ import "./stars.css";
 import "./stars2.css";
 import "./stars3.css";
 
-const App: React.FC = (): JSX.Element => (
-  <React.Fragment>
-    <Global styles={global} />
-    <div css={starsWrap}>
-      <div id="stars" />
-      <div id="stars2" />
-      <div id="stars3" />
-    </div>
-    <div css={app__wrap}>
-      <BrowserRouter>
-        <Main />
-      </BrowserRouter>
-    </div>
-  </React.Fragment>
-);
+
+const App: React.FC = () => {
+  useEffect(() => {
+    firebase.initializeApp(config);
+    console.log(config);
+  }, []);
+
+  return (
+    <React.Fragment>
+      <Global styles={global} />
+      <div css={starsWrap}>
+        <div id="stars" />
+        <div id="stars2" />
+        <div id="stars3" />
+      </div>
+      <div css={app__wrap}>
+        <BrowserRouter>
+          <Main />
+        </BrowserRouter>
+      </div>
+    </React.Fragment>
+  );
+}
 
 const global: SerializedStyles = css`
   ${emotionReset};
