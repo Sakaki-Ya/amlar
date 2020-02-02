@@ -1,11 +1,7 @@
 /** @jsx jsx */
-import React, { useState, useEffect } from "react";
-import * as firebase from 'firebase/app';
-import 'firebase/firestore';
+import React, { useState } from "react";
 import { jsx, css } from "@emotion/core";
 import colors from "./Colors";
-
-let db: firebase.firestore.CollectionReference<firebase.firestore.DocumentData>;
 
 const Contact: React.FC = () => {
   const [value, setValue] = useState(["", "", ""]);
@@ -37,20 +33,7 @@ const Contact: React.FC = () => {
     setValue([name, mail, e.target.value]);
   };
 
-  useEffect(() => {
-    db = firebase.firestore().collection("contacts");
-    console.log(db);
-  }, [])
-  const contactSend = () => {
-    db.doc().set({
-      name: name,
-      mail: mail,
-      message: message
-    }).then(() => {
-      alert("success");
-    }).catch((error) => {
-      console.log(error);
-    })
+  const send = () => {
   };
 
   return (
@@ -103,7 +86,7 @@ const Contact: React.FC = () => {
         <h2 css={contact__h2}>Contact</h2>
       </div>
       <p css={contact__text}>Please report any feature requests or glitch.</p>
-      <form onSubmit={contactSend} css={contact__form}>
+      <form onSubmit={send} css={contact__form}>
         <div css={contact__section}>
           <label>
             <p>Name</p>

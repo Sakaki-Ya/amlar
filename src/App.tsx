@@ -1,9 +1,7 @@
 /** @jsx jsx */
-import React, { useEffect } from "react";
+import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import emotionReset from "emotion-reset";
-import * as firebase from 'firebase/app';
-import { config } from "./components/FireBaseConfig";
 import { jsx, Global, css, SerializedStyles } from "@emotion/core";
 import colors from "./components/Colors";
 import Main from "./components/Main";
@@ -11,13 +9,7 @@ import "./stars.css";
 import "./stars2.css";
 import "./stars3.css";
 
-
 const App: React.FC = () => {
-  useEffect(() => {
-    firebase.initializeApp(config);
-    console.log(config);
-  }, []);
-
   return (
     <React.Fragment>
       <Global styles={global} />

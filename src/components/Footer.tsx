@@ -5,9 +5,9 @@ import { jsx, css } from "@emotion/core";
 import colors from "./Colors";
 
 const Footer: React.FC = () => {
-  const [view, setView] = useState("top");
+  const [page, setPage] = useState("top");
   useEffect(() => {
-    switch (view) {
+    switch (page) {
       case "top":
         document.title = "Amlar";
         break;
@@ -17,22 +17,19 @@ const Footer: React.FC = () => {
       case "policy":
         document.title = "Privacy Policy - Amlar";
         break;
-      case "contact":
-        document.title = "Contact - Amlar";
-        break;
       default:
         document.title = "Amlar";
     }
-  }, [view]);
+  }, [page]);
 
   return (
     <footer css={footer}>
       <input id="footerCheck" type="checkbox" css={footer__check} />
       <label htmlFor="footerCheck">
         <svg
+          id="checkArrow"
           width="18"
           css={footer__checkArrow}
-          id="checkArrow"
           viewBox="0 0 512 512"
         >
           <path d="M255.992 92.089l-255.992 255.992 71.821 71.83 184.171-184.171 184.188 184.171 71.82-71.83z" />
@@ -40,37 +37,33 @@ const Footer: React.FC = () => {
       </label>
       <div css={footer__content}>
         <div css={footer__list}>
-          <Link to="/note" onClick={() => setView("note")}>
+          <Link to="/note" onClick={() => setPage("note")}>
             <button
               css={footer__link}
-              disabled={view === "note" ? true : false}
+              disabled={page === "note" ? true : false}
             >
               Note
             </button>
           </Link>
-          <Link to="/privacy-policy" onClick={() => setView("policy")}>
+          <Link to="/privacy-policy" onClick={() => setPage("policy")}>
             <button
               css={footer__link}
-              disabled={view === "policy" ? true : false}
+              disabled={page === "policy" ? true : false}
             >
               Privacy Policy
             </button>
           </Link>
-          <Link to="/contact" onClick={() => setView("contact")}>
-            <button
-              css={footer__link}
-              disabled={view === "contact" ? true : false}
-            >
-              Contact
-            </button>
-          </Link>
+          <a href="https://forms.gle/PEFMkALLPSvXumaR7" css={footer__contact} target="_blank" rel="noopener noreferrer">
+            <span>Contact</span>
+            <svg css={footer__tabIcon} viewBox="0 0 512 512" width="16"><g><path d="M96 0v416h416v-416h-416zm376 376h-336v-336h336v336zM40 472v-376h-40v416h416v-40h-40zM232.812 312.829l117.859-117.86v84.797h40v-153.078h-153.077v40h84.796l-117.859 117.859z" /></g></svg>
+          </a>
         </div>
         <div css={footer__copyWrap}>
           <p css={footer__copy}>&copy; 2020</p>
-          <Link to="/" onClick={() => setView("top")}>
+          <Link to="/" onClick={() => setPage("top")}>
             <button
               css={footer__title}
-              disabled={view === "top" ? true : false}
+              disabled={page === "top" ? true : false}
             >
               Amlar
             </button>
@@ -84,12 +77,11 @@ const Footer: React.FC = () => {
 const footer = css`
   overflow-y: hidden;
   margin-bottom: 1rem;
-  font-size: 1rem;
 `;
 
 const footer__check = css`
   display: none;
-  &:checked ~ * svg {
+  &:checked ~ * #checkArrow {
     transform: rotate(180deg) translateY(0);
   }
   &:checked ~ div {
@@ -118,6 +110,9 @@ const footer__content = css`
 
 const footer__list = css`
   margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const footer__link = css`
@@ -125,9 +120,8 @@ const footer__link = css`
   background: transparent;
   margin: 0 0.5rem;
   color: ${colors.moreLightOrange};
-  text-decoration: none;
+  font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   font-weight: bold;
-  transition: 0.2s;
   &:hover {
     color: ${colors.mostLightOrange};
   }
@@ -138,6 +132,30 @@ const footer__link = css`
     opacity: 0.5;
     cursor: default;
   }
+`;
+
+const footer__contact = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  text-decoration: none;
+  font-weight: bold;
+  color: ${colors.moreLightOrange};
+  fill: ${colors.moreLightOrange};
+  transition: .2s;
+  &:hover {
+    color: ${colors.mostLightOrange};
+    fill: ${colors.mostLightOrange};
+  }
+  &:active {
+    color: ${colors.orange};
+    fill: ${colors.orange};
+  }
+`;
+
+const footer__tabIcon = css`
+  margin-left: .35rem;
 `;
 
 const footer__copyWrap = css`
@@ -155,6 +173,7 @@ const footer__title = css`
   border: none;
   background: transparent;
   text-decoration: underline;
+  font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   color: ${colors.white};
   transition: 0.2s;
   &:disabled {
