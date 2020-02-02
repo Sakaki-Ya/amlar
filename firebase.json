@@ -18,5 +18,17 @@
       "npm --prefix \"$RESOURCE_DIR\" run lint",
       "npm --prefix \"$RESOURCE_DIR\" run build"
     ]
-  }
+  },
+  "redirects": [
+    {
+      "source": "https://amlar-64749.web.app",
+      "destination": "https://amlar.onl",
+      "type": 301
+    },
+    {
+      "source": "https://amlar-64749.firebaseapp.com/",
+      "destination": "https://amlar.onl",
+      "type": 302
+    }
+  ]
 }
