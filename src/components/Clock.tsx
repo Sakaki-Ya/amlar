@@ -42,7 +42,7 @@ const Clock: React.FC = () => {
         sound.pause();
         sound.currentTime = 0;
         sound.loop = true;
-        // sound.play();
+        sound.play();
         randomPosition = genRandomPosition();
         setAlarming(true);
         silent.loop = false;
