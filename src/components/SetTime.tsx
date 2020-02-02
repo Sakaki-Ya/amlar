@@ -54,6 +54,7 @@ const SetTime: React.FC<InputTimeProps> = memo(
       border-radius: 3px;
       white-space: nowrap;
       color: ${colors.white};
+      font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
       font-size: 1.25rem;
       font-weight: bold;
       box-shadow: 0 2px 4px ${colors.white};

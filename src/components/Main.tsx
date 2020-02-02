@@ -6,7 +6,6 @@ import { jsx, css } from "@emotion/core";
 import Clock from "./Clock";
 import Note from "./Note";
 import PrivacyPolicy from "./PrivacyPolicy";
-import Contact from "./Contact";
 import Footer from "./Footer";
 
 const Main: React.FC = () => {
@@ -33,7 +32,6 @@ const Main: React.FC = () => {
                     path="/privacy-policy"
                     component={PrivacyPolicy}
                   />
-                  <Route exact path="/contact" component={Contact} />
                   <Redirect to="/" />
                 </Switch>
               </animated.div>

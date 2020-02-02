@@ -261,6 +261,7 @@ const selectSound__preview = css`
   border: none;
   color: ${colors.moreLightOrange};
   font-size: 1.25rem;
+      font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   font-weight: bold;
   text-decoration: underline;
   transition: 0.2s;
