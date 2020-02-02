@@ -5,11 +5,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { jsx, css } from "@emotion/core";
 import colors from "./Colors";
-import digital from "../img/digital.svg";
-import cockerel from "../img/cockerel.svg";
-import cuckoo from "../img/cuckoo.svg";
-import bell from "../img/bell.svg";
-import laughter from "../img/laughter.svg";
 
 type SelectSoundSliderProps = {
   sound: HTMLAudioElement;
@@ -59,6 +54,14 @@ const SelectSoundSlider: React.FC<SelectSoundSliderProps> = memo(({
   opacity: ${afterSet ? 0.5 : 1};
   transition: .2s;
 `;
+
+  const soundIcons = ["Digital alarm clock", "Cockerel", "Cuckoo", "Bell", "Laughter"];
+  const renderSoundIcons = soundIcons.map((soundIcons) =>
+    <div>
+      <img src={soundIcons + ".svg"} alt={soundIcons} css={selectSound__icon} />
+      <p>{soundIcons}</p>
+    </div>
+  );
 
   return (
     <React.Fragment>
@@ -211,26 +214,7 @@ const SelectSoundSlider: React.FC<SelectSoundSliderProps> = memo(({
           </svg>
           <p>Classic alarm clock</p>
         </div>
-        <div>
-          <img src={digital} alt="Digital alarm clock" css={selectSound__icon} />
-          <p>Digital alarm clock</p>
-        </div>
-        <div>
-          <img src={cockerel} alt="Cockerel" css={selectSound__icon} />
-          <p>Cockerel</p>
-        </div>
-        <div>
-          <img src={cuckoo} alt="Cuckoo" css={selectSound__icon} />
-          <p>Cuckoo</p>
-        </div>
-        <div>
-          <img src={bell} alt="Bell" css={selectSound__icon} />
-          <p>Bell</p>
-        </div>
-        <div>
-          <img src={laughter} alt="Laughter" css={selectSound__icon} />
-          <p>Laughter</p>
-        </div>
+        {renderSoundIcons}
       </Slider>
       <button
         onClick={soundPreview}
@@ -261,7 +245,7 @@ const selectSound__preview = css`
   border: none;
   color: ${colors.moreLightOrange};
   font-size: 1.25rem;
-      font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   font-weight: bold;
   text-decoration: underline;
   transition: 0.2s;
