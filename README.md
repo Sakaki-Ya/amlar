@@ -1,44 +1,49 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Amlar（アムラー）とは
 
-## Available Scripts
+オンライン目覚まし時計です。  
+[Amlar](https://amlar.onl/)
 
-In the project directory, you can run:
+## Amlarの特徴
+1. アラームを止めるボタン（以下ストップボタン）の位置が毎回ランダム
+2. ストップボタンを長押しすることでアラームが止まる  
 
-### `yarn start`
+上記の2点です。  
+寝ぼけながら無意識でアラームを止められる可能性をできるだけ抑えられるように、また、目を開けて画面を確認してもらえるように上記の特徴を付与しました。
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+それぞれの特徴はそれぞれの難点を補っています。
+1. の難点  
+ストップボタンの位置を確認せずとも、無作為に画面上をタップ（クリック）することでアラームを止められる。  
+**→ 特徴2により、画面上を無作為にタップ（クリック）してもアラームを止められない。**
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+2. の難点  
+例えばストップボタンの位置が画面の中央固定の場合、画面を確認せずとも画面の中央あたりをタップ（クリック）し続けることでアラームを止められる。  
+**→ 特徴1により、ストップボタンの位置を確認する必要が発生する。**
 
-### `yarn test`
+目覚まし時計は国籍問わず世界中で使用されていることから、外国人にも使ってもらいたいと考えアプリの言語を英語にしています。
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+また、ストップボタンの位置がランダムに配置されることから、「Alarm」の文字列をランダムに並び替えた文字列を複数生成し、アメリカ人の知人に語感の良いものを選んでもらい、名称を「Amlar」としました。
 
-### `yarn build`
+## Amlarの使い方
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 1. アラーム音を選択します。  
+![1](https://user-images.githubusercontent.com/48976713/73621733-7e787780-467a-11ea-9659-987c24831255.jpg)  
+イラストを左右にフリック（ドラッグ）するか、イラストの両端にある矢印を押すことでアラーム音を選択できます。  
+イラストの下にある「<u>Preview</u>」を押すことでアラーム音を試聴できます。  
+試聴できるアラーム音は短いフレーズですが、アラーム発動時はループ再生します。
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### 2. アラームを発動する時間を設定します。  
+![2](https://user-images.githubusercontent.com/48976713/73621734-7f110e00-467a-11ea-9164-400c79f65e44.jpg)  
+左の白いフォームに時間を入力し、右のオレンジ色の「Set」ボタンを押すことで、アラームを発動させる時間を設定したことになります。
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 3. アラームが発動するまで待ちます。  
+![3](https://user-images.githubusercontent.com/48976713/73621735-7fa9a480-467a-11ea-8048-535936e2231f.jpg)  
+アラームを鳴らす時間を設定した後は、アラーム音の選択とアラームを鳴らす時間の入力ができなくなります。  
+青色の「Cancel」ボタンを押すことでアラーム音の選択が可能になり、アラームを発動する時間はリセットされ時間の入力が可能になります。
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 4. アラームを止めます。  
+![4](https://user-images.githubusercontent.com/48976713/73622726-9998b680-467d-11ea-82bf-4b216a35cdd0.jpg)    
+画面上のどこかに位置するストップボタンを長押しすることでアラームを止められます。  
+ストップボタンを長押ししている間は画面の下から青いオブジェクトが出現し、ストップボタンの長押しを止めると青いオブジェクトは下へ消えます。  
+![5](https://user-images.githubusercontent.com/48976713/73622727-9998b680-467d-11ea-97f4-979adaa8cbf0.jpg)  
+青いオブジェクトが画面全体を覆うと、アラームが止まり、元の画面に戻ります。  
+![6](https://user-images.githubusercontent.com/48976713/73622724-99002000-467d-11ea-8eb8-6bdf35000252.jpg)
