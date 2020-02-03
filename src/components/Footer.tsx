@@ -120,6 +120,7 @@ const footer__link = css`
   background: transparent;
   margin: 0 0.5rem;
   color: ${colors.moreLightOrange};
+    font-size: 1rem;
   font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   font-weight: bold;
   &:hover {
@@ -138,7 +139,6 @@ const footer__contact = css`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.9rem;
   text-decoration: none;
   font-weight: bold;
   color: ${colors.moreLightOrange};
@@ -166,13 +166,13 @@ const footer__copyWrap = css`
 
 const footer__copy = css`
   margin-right: 0.25rem;
-  font-size: 0.9rem;
 `;
 
 const footer__title = css`
   border: none;
   background: transparent;
   text-decoration: underline;
+    font-size: 1rem;
   font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   color: ${colors.white};
   transition: 0.2s;

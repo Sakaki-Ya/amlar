@@ -22,6 +22,18 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
   <title>Amlar</title>
+  <script>
+    window.addEventListener('load', function () {
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register("/sw.js")
+          .then(function (registration) {
+            console.log("serviceWorker registed.");
+          }).catch(function (error) {
+            console.warn("serviceWorker error.", error);
+          });
+      }
+    });
+  </script>
 </head>
 
 <body>
