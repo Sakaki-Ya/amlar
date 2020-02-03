@@ -21,7 +21,6 @@ const SetTime: React.FC<InputTimeProps> = memo(
     setAlarmTime,
     silent
   }) => {
-    console.log("rendered SetTime");
     const getInputTime = (e: React.ChangeEvent<HTMLInputElement>) => {
       if (e.target.value.match(/^([01]?[0-9]|2[0-3]):([0-5][0-9])$/))
         setInputTime(e.target.value);

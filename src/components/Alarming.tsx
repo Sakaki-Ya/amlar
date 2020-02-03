@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import React, { useState,memo } from "react";
+import React, { useState, memo } from "react";
 import { useTransition, animated, config, TransitionFn } from "react-spring";
 import { jsx, css } from "@emotion/core";
 import colors from "./Colors";
@@ -13,7 +13,6 @@ const Alarming: React.FC<AlarmingProps> = memo(({
   randomPosition,
   setAlarming
 }) => {
-  console.log("rendered Alarming");
   const [randomLeft, randomTop] = randomPosition;
   const alarming__stop = css`
     left: ${randomLeft}%;

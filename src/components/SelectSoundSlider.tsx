@@ -17,7 +17,6 @@ const SelectSoundSlider: React.FC<SelectSoundSliderProps> = memo(({
   setSound,
   afterSet
 }) => {
-  console.log("rendered SelectSoundSlider");
   const sounds = [
     "classic",
     "digital",
@@ -57,7 +56,7 @@ const SelectSoundSlider: React.FC<SelectSoundSliderProps> = memo(({
 
   const soundIcons = ["Digital alarm clock", "Cockerel", "Cuckoo", "Bell", "Laughter"];
   const renderSoundIcons = soundIcons.map((soundIcons) =>
-    <div>
+    <div key={soundIcons}>
       <img src={soundIcons + ".svg"} alt={soundIcons} css={selectSound__icon} />
       <p>{soundIcons}</p>
     </div>
