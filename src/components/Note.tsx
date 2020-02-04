@@ -186,7 +186,7 @@ const Note: React.FC = () => (
         />
       </g>
     </svg>
-    <p css={note__text}>Amlar is the online alarm clock.</p>
+    <p css={note__text}>Amlar is a slightly unique online alarm clock.</p>
     <div css={note__block}>
       <h3 css={note__h3}>Before using</h3>
       <hr />
