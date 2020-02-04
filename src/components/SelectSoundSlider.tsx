@@ -43,7 +43,7 @@ const SelectSoundSlider: React.FC<SelectSoundSliderProps> = memo(({
   };
 
   const selectSound__slider = css`
-  max-width: 240px;
+    max-width: 240px;
   margin: auto;
   padding: 0 1rem;
   div p {
