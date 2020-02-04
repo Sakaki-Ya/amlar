@@ -5,8 +5,15 @@
   <meta charset="utf-8" />
   <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Web site created using create-react-app" />
+  <meta name="description" content="Amlar is a slightly unique online alarm clock." />
+  <link rel="canonical" href="https://amlar.onl" />
   <link rel="apple-touch-icon" href="logo192.png" />
+
+  <meta name="twitter:card" content="ummary_large_image" />
+  <meta property="og:url" content="https://amlar.onl" />
+  <meta property="og:title" content="Amlar" />
+  <meta property="og:description" content="Amlar is a slightly unique online alarm clock." />
+  <meta property="og:image" content="https://amlar.onl/ogp.jpg" />
   <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -22,18 +29,6 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
   <title>Amlar</title>
-  <script>
-    window.addEventListener('load', function () {
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register("/sw.js")
-          .then(function (registration) {
-            console.log("serviceWorker registed.");
-          }).catch(function (error) {
-            console.warn("serviceWorker error.", error);
-          });
-      }
-    });
-  </script>
 </head>
 
 <body>
