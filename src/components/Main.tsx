@@ -7,6 +7,7 @@ import Clock from "./Clock";
 import Note from "./Note";
 import PrivacyPolicy from "./PrivacyPolicy";
 import Footer from "./Footer";
+import Contact from "./Contact";
 
 const Main: React.FC = () => {
   const location = useLocation();
@@ -32,6 +33,7 @@ const Main: React.FC = () => {
                     path="/privacy-policy"
                     component={PrivacyPolicy}
                   />
+                  <Route exact path="/contact" component={Contact} />
                   <Redirect to="/" />
                 </Switch>
               </animated.div>

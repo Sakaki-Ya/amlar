@@ -8,6 +8,7 @@
   <meta name="description" content="Amlar is a slightly unique online alarm clock." />
   <link rel="canonical" href="https://amlar.onl" />
   <link rel="apple-touch-icon" href="logo192.png" />
+  <meta name="theme-color" content="#0f4c81" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta property="og:url" content="https://amlar.onl" />
@@ -32,6 +33,11 @@
 </head>
 
 <body>
+  <form name="contact" netlify method="post" enctype="multipart/form-data" hidden>
+    <input type="text" name="name" />
+    <input type="email" name="mail" />
+    <textarea name="message"></textarea>
+  </form>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
   <!--

@@ -1,39 +1,41 @@
 /** @jsx jsx */
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { jsx, css } from "@emotion/core";
 import colors from "./Colors";
 
 const Contact: React.FC = () => {
-  const [value, setValue] = useState(["", "", ""]);
-  const [name, mail, message] = [value[0], value[1], value[2]];
-  const [check, setCheck] = useState([false, false, false]);
-  const [inName, inMail, inMessage] = [check[0], check[1], check[2]];
-  const checkName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value === "") {
-      setCheck([false, inMail, inMessage]);
-      return;
-    }
-    setCheck([true, inMail, inMessage]);
-    setValue([e.target.value, mail, message]);
-  };
-  const checkMail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value === "" || !e.target.value.match(/.+@.+\..+/)) {
-      setCheck([inName, false, inMessage]);
-      return;
-    }
-    setCheck([inName, true, inMessage]);
-    setValue([name, e.target.value, message]);
-  };
-  const checkMessage = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    if (e.target.value === "") {
-      setCheck([inName, inMail, false]);
-      return;
-    }
-    setCheck([inName, inMail, true]);
-    setValue([name, mail, e.target.value]);
+  document.title = "Contact - Amlar";
+
+  const [input, setInput] = useState(["", "", ""]);
+  const [user, mail, message] = [input[0], input[1], input[2]];
+  const checkForm = (e: { target: { name: any; value: string; }; }) => {
+    const { name, value } = e.target;
+    if (name === "name") return setInput([value, mail, message]);
+    if (name === "mail" && value.match(/.+@.+\..+/)) return setInput([user, value, message]);
+    if (name === "message") return setInput([user, mail, value]);
   };
 
-  const send = () => {
+  const encode = (data: any) => {
+    const formData = new FormData();
+    Object.keys(data).forEach((k) => {
+      formData.append(k, data[k])
+    });
+    return formData
+  };
+
+  const history = useHistory();
+  const submit = (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
+    const name = user;
+    const data = { "form-name": "contact", name, mail, message };
+    fetch("/", {
+      method: "POST",
+      body: encode(data)
+    }).then(() => {
+      alert("success!");
+      history.push("/");
+    }).catch(error => console.log(error));
   };
 
   return (
@@ -86,27 +88,21 @@ const Contact: React.FC = () => {
         <h2 css={contact__h2}>Contact</h2>
       </div>
       <p css={contact__text}>Please report any feature requests or glitch.</p>
-      <form onSubmit={send} css={contact__form}>
+      <form onSubmit={submit} css={contact__form}>
         <div css={contact__section}>
-          <label>
-            <p>Name</p>
-            <input type="text" name="name" onChange={checkName} css={contact__input} />
-          </label>
+          <p>Name</p>
+          <input type="text" name="name" onChange={checkForm} css={contact__input} />
         </div>
         <div css={contact__section}>
-          <label>
-            <p>E-mail</p>
-            <input type="email" name="email" onChange={checkMail} css={contact__input} />
-          </label>
+          <p>E-mail</p>
+          <input type="mail" name="mail" onChange={checkForm} css={contact__input} />
         </div>
         <div css={contact__section}>
-          <label>
-            <p>Message</p>
-            <textarea name="message" onChange={checkMessage} css={contact__input} />
-          </label>
+          <p>Message</p>
+          <textarea name="message" onChange={checkForm} css={contact__input} />
         </div>
-        <div css={contact__sendSection}>
-          <input type="submit" value="Send" css={contact__send} disabled={check.some(boolean => !boolean)} />
+        <div css={contact__submitSection}>
+          <button type="submit" disabled={input.some(check => !check)} css={contact__submit}>Send</button>
         </div>
       </form>
     </React.Fragment>
@@ -169,11 +165,11 @@ const contact__input = css`
   font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 `;
 
-const contact__sendSection = css`
+const contact__submitSection = css`
   text-align: left;
 `;
 
-const contact__send = css`
+const contact__submit = css`
   height: 100%;
   padding: 0.5rem 0.75rem;
   background-color: ${colors.darkOrange};
