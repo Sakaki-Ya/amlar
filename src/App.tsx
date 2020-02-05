@@ -30,6 +30,13 @@ const App: React.FC = () => {
 const global: SerializedStyles = css`
   ${emotionReset};
   body {
+    @font-face{
+      font-family: "slick";
+      font-weight: normal; 
+      font-style: normal;
+      font-display: swap;
+      src: url("https://d33wubrfki0l68.cloudfront.net/af91c12f0f406a4f801aeb3b398768fe41d8f864/5c9aa/static/media/slick.b7c9e1e4.woff") format("woff2");
+    }
     font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
