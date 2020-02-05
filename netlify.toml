@@ -1,0 +1,14 @@
+[[redirects]]
+  from = "https://peaceful-volhard-503580.netlify.com"
+  to = "https://amlar.onl"
+  status = 301
+
+[[redirects]]
+  from = "http://amlar.onl"
+  to = "https://amlar.onl"
+  status = 301
+
+[[redirects]]
+  from = "https://amlar.onl/index.html"
+  to = "https://amlar.onl"
+  status = 301
