@@ -10,6 +10,7 @@ const silent = new Audio("silent.mp3");
 let randomPosition = [0, 0];
 
 const Clock: React.FC = () => {
+  document.title = "Amlar";
   const genRandomPosition = () => {
     let [maxRandomLeft, maxRandomTop] = [0, 0];
     if (window.screen.width > window.screen.height) {

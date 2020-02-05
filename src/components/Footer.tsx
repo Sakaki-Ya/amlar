@@ -1,26 +1,10 @@
 /** @jsx jsx */
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { jsx, css } from "@emotion/core";
 import colors from "./Colors";
 
 const Footer: React.FC = () => {
-  const [page, setPage] = useState("top");
-  useEffect(() => {
-    switch (page) {
-      case "top":
-        document.title = "Amlar";
-        break;
-      case "note":
-        document.title = "Note - Amlar";
-        break;
-      case "policy":
-        document.title = "Privacy Policy - Amlar";
-        break;
-      default:
-        document.title = "Amlar";
-    }
-  }, [page]);
 
   return (
     <footer css={footer}>
@@ -37,33 +21,37 @@ const Footer: React.FC = () => {
       </label>
       <div css={footer__content}>
         <div css={footer__list}>
-          <Link to="/note" onClick={() => setPage("note")}>
+          <Link to="/note">
             <button
               css={footer__link}
-              disabled={page === "note" ? true : false}
             >
               Note
             </button>
           </Link>
-          <Link to="/privacy-policy" onClick={() => setPage("policy")}>
+          <Link to="/privacy-policy">
             <button
               css={footer__link}
-              disabled={page === "policy" ? true : false}
             >
               Privacy Policy
             </button>
           </Link>
-          <a href="https://forms.gle/PEFMkALLPSvXumaR7" css={footer__contact} target="_blank" rel="noopener noreferrer">
+          <Link to="/contact">
+            <button
+              css={footer__link}
+            >
+              Contact
+            </button>
+          </Link>
+          {/* <a href="https://forms.gle/PEFMkALLPSvXumaR7" css={footer__contact} target="_blank" rel="noopener noreferrer">
             <span>Contact</span>
             <svg css={footer__tabIcon} viewBox="0 0 512 512" width="16"><g><path d="M96 0v416h416v-416h-416zm376 376h-336v-336h336v336zM40 472v-376h-40v416h416v-40h-40zM232.812 312.829l117.859-117.86v84.797h40v-153.078h-153.077v40h84.796l-117.859 117.859z" /></g></svg>
-          </a>
+          </a> */}
         </div>
         <div css={footer__copyWrap}>
           <p css={footer__copy}>&copy; 2020</p>
-          <Link to="/" onClick={() => setPage("top")}>
+          <Link to="/">
             <button
               css={footer__title}
-              disabled={page === "top" ? true : false}
             >
               Amlar
             </button>
@@ -135,28 +123,28 @@ const footer__link = css`
   }
 `;
 
-const footer__contact = css`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  font-weight: bold;
-  color: ${colors.moreLightOrange};
-  fill: ${colors.moreLightOrange};
-  transition: .2s;
-  &:hover {
-    color: ${colors.mostLightOrange};
-    fill: ${colors.mostLightOrange};
-  }
-  &:active {
-    color: ${colors.orange};
-    fill: ${colors.orange};
-  }
-`;
+// const footer__contact = css`
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   text-decoration: none;
+//   font-weight: bold;
+//   color: ${colors.moreLightOrange};
+//   fill: ${colors.moreLightOrange};
+//   transition: .2s;
+//   &:hover {
+//     color: ${colors.mostLightOrange};
+//     fill: ${colors.mostLightOrange};
+//   }
+//   &:active {
+//     color: ${colors.orange};
+//     fill: ${colors.orange};
+//   }
+// `;
 
-const footer__tabIcon = css`
-  margin-left: .35rem;
-`;
+// const footer__tabIcon = css`
+//   margin-left: .35rem;
+// `;
 
 const footer__copyWrap = css`
   display: flex;
