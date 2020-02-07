@@ -16,10 +16,10 @@ const Contact: React.FC = () => {
     if (name === "message") return setInput([user, mail, value]);
   };
 
-  const encode = (data: string[]) => {
+  const encode = (data: any) => {
     const formData = new FormData();
-    data.forEach((key: any) => {
-      formData.append(key, data[key]);
+    Object.keys(data).forEach((key) => {
+      formData.append(key, data[key])
     });
     return formData
   };
@@ -28,12 +28,12 @@ const Contact: React.FC = () => {
   const submit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     const name = user;
-    const data = [name, mail, message];
+    const data = { "form-name": "contact", name, mail, message };
     fetch("/", {
       method: "POST",
       body: encode(data)
     }).then(() => {
-      alert("Thank you for sending the message.");
+      alert("success!");
       history.push("/");
     }).catch(error => console.log(error));
   };
