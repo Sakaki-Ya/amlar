@@ -44,15 +44,15 @@ const SelectSoundSlider: React.FC<SelectSoundSliderProps> = memo(({
 
   const selectSound__slider = css`
     max-width: 240px;
-  margin: auto;
-  padding: 0 1rem;
-  div p {
-    overflow: visible;
-    padding-bottom: 1rem;
-  }
-  opacity: ${afterSet ? 0.5 : 1};
-  transition: .2s;
-`;
+    margin: auto;
+    padding: 0 1rem;
+    div p {
+      overflow: visible;
+      padding-bottom: 1rem;
+    }
+    opacity: ${afterSet ? 0.5 : 1};
+    transition: .2s;
+  `;
 
   const soundIcons = ["Digital alarm clock", "Cockerel", "Cuckoo", "Bell", "Laughter"];
   const renderSoundIcons = soundIcons.map((soundIcons) =>
