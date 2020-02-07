@@ -9,17 +9,17 @@ const Contact: React.FC = () => {
 
   const [input, setInput] = useState(["", "", ""]);
   const [user, mail, message] = [input[0], input[1], input[2]];
-  const checkForm = (e: { target: { name: any; value: string; }; }) => {
+  const checkForm = (e: { target: { name: string; value: string; }; }) => {
     const { name, value } = e.target;
     if (name === "name") return setInput([value, mail, message]);
     if (name === "mail" && value.match(/.+@.+\..+/)) return setInput([user, value, message]);
     if (name === "message") return setInput([user, mail, value]);
   };
 
-  const encode = (data: any) => {
+  const encode = (data: string[]) => {
     const formData = new FormData();
-    Object.keys(data).forEach((k) => {
-      formData.append(k, data[k])
+    data.forEach((key: any) => {
+      formData.append(key, data[key]);
     });
     return formData
   };
@@ -28,12 +28,12 @@ const Contact: React.FC = () => {
   const submit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     const name = user;
-    const data = { "form-name": "contact", name, mail, message };
+    const data = [name, mail, message];
     fetch("/", {
       method: "POST",
       body: encode(data)
     }).then(() => {
-      alert("success!");
+      alert("Thank you for sending the message.");
       history.push("/");
     }).catch(error => console.log(error));
   };
