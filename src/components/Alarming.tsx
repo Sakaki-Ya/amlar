@@ -20,9 +20,10 @@ const Alarming: React.FC<AlarmingProps> = memo(({
     position: absolute;
     display: flex;
     justify-content: center;
-    padding: 0;
+    align-items: center;
     border-radius: 5px;
     border: none;
+    padding: 0;
     width: 60px;
     height: 60px;
     background: ${colors.orange};
@@ -67,7 +68,7 @@ const Alarming: React.FC<AlarmingProps> = memo(({
   const [rendered, setRendered] = useState(false);
   const [hold, setHold] = useState(false);
   const transition: TransitionFn<boolean, {}> = useTransition(hold, {
-    config: config.slow,
+    config: config.molasses,
     from: { opacity: 0, transform: "translateY(100vh)" },
     enter: {
       opacity: 1,
