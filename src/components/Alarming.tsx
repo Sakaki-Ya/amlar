@@ -68,7 +68,7 @@ const Alarming: React.FC<AlarmingProps> = memo(({
   const [rendered, setRendered] = useState(false);
   const [hold, setHold] = useState(false);
   const transition: TransitionFn<boolean, {}> = useTransition(hold, {
-    config: config.molasses,
+    config: config.slow,
     from: { opacity: 0, transform: "translateY(100vh)" },
     enter: {
       opacity: 1,
