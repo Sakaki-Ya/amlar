@@ -16,12 +16,10 @@ const Contact: React.FC = () => {
     if (name === "message") return setInput([user, mail, value]);
   };
 
-  const encode = (data: any) => {
+  const encode = (data: { [key: string]: string }) => {
     const formData = new FormData();
-    Object.keys(data).forEach((key) => {
-      formData.append(key, data[key])
-    });
-    return formData
+    Object.keys(data).forEach((key) => formData.append(key, data[key]));
+    return formData;
   };
 
   const history = useHistory();
@@ -33,7 +31,7 @@ const Contact: React.FC = () => {
       method: "POST",
       body: encode(data)
     }).then(() => {
-      alert("success!");
+      alert("Thank you for sending the message.");
       history.push("/");
     }).catch(error => console.log(error));
   };
