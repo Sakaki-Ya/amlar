@@ -37,6 +37,7 @@ const Contact: React.FC = () => {
         alert("Thank you for sending the message.");
         history.push("/");
         setPage("top");
+        document.title = "Amlar";
       })
       .catch(error => {
         alert("Failed to send message. sorry.");
