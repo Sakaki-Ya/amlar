@@ -59,7 +59,9 @@ const SetTime: React.FC<InputTimeProps> = memo(
       box-shadow: 0 2px 4px ${colors.white};
       transition: 0.2s;
       &:hover {
-        background-color: ${afterSet ? colors.moreLightBlue : colors.lightOrange};
+        background-color: ${afterSet
+          ? colors.moreLightBlue
+          : colors.lightOrange};
         box-shadow: 0 2px 6px ${colors.white};
       }
       &:active {

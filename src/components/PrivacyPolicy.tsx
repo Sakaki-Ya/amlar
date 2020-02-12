@@ -145,10 +145,11 @@ const PrivacyPolicy: React.FC = () => {
       <p css={policy__text}>
         This site uses cookies to collect traffic data using the access analysis
         tool "Google Analytics".
-    </p>
+      </p>
       <p css={policy__text}>
-        Traffic data is collected anonymously and is not personally identifiable.
-    </p>
+        Traffic data is collected anonymously and is not personally
+        identifiable.
+      </p>
     </React.Fragment>
   );
 };

@@ -63,7 +63,7 @@ const Clock: React.FC = () => {
       setAfterSet(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [alarming])
+  }, [alarming]);
 
   const transition: TransitionFn<boolean, {}> = useTransition(alarming, {
     config: config.default,

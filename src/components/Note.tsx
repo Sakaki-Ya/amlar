@@ -195,10 +195,10 @@ const Note: React.FC = () => {
         <p css={note__text}>
           The behavior may change depending on the device and browser you are
           using.
-      </p>
+        </p>
         <p css={note__text}>
           We recommend that you test the operation before using it.
-      </p>
+        </p>
       </div>
       <div css={note__block}>
         <h3 css={note__h3}>Question & Answer</h3>
@@ -206,25 +206,25 @@ const Note: React.FC = () => {
         <div css={note__qaBlock}>
           <p css={note__question}>
             Q:Will the alarm work if you close the browser?
-        </p>
+          </p>
           <p css={note__text}>A:It will not work when the browser is closed.</p>
         </div>
         <div css={note__qaBlock}>
           <p css={note__question}>
             Q:Will the alarm work when you open another application?
-        </p>
+          </p>
           <p css={note__text}>
             A:The alarm works, depending on the device and browser.
-        </p>
+          </p>
         </div>
         <div css={note__qaBlock}>
           <p css={note__question}>
             Q:Will the alarm work when you put the device into sleep mode?
-        </p>
+          </p>
           <p css={note__text}>
             A:There are some devices alarm even in sleep mode, while others do
             not.
-        </p>
+          </p>
         </div>
       </div>
     </React.Fragment>

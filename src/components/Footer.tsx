@@ -1,11 +1,11 @@
 /** @jsx jsx */
-import React, { useState } from "react";
+import React, { useGlobal } from "reactn";
 import { Link } from "react-router-dom";
 import { jsx, css } from "@emotion/core";
 import colors from "./Colors";
 
 const Footer: React.FC = () => {
-  const [page, setPage] = useState("top");
+  const [page, setPage] = useGlobal("page");
 
   return (
     <footer css={footer}>
@@ -113,7 +113,7 @@ const footer__link = css`
   background: transparent;
   margin: 0 0.5rem;
   color: ${colors.moreLightOrange};
-    font-size: 1rem;
+  font-size: 1rem;
   font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   font-weight: bold;
   &:hover {
@@ -142,7 +142,7 @@ const footer__title = css`
   border: none;
   background: transparent;
   text-decoration: underline;
-    font-size: 1rem;
+  font-size: 1rem;
   font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   color: ${colors.white};
   transition: 0.2s;
