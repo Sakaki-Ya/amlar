@@ -3,8 +3,8 @@ import React, { useState, useEffect, useGlobal } from "reactn";
 import { useTransition, animated, TransitionFn, config } from "react-spring";
 import { jsx, css } from "@emotion/core";
 import SelectSoundSlider from "../containers/SelectSoundSlider";
-import SetTime from "./SetTime";
-import Alarming from "./Alarming";
+import SetTime from "../containers/SetTime";
+import Alarming from "../containers/Alarming";
 
 const silent = new Audio("silent.mp3");
 let randomPosition = [0, 0];
@@ -40,8 +40,8 @@ const Clock: React.FC = () => {
   }, [setUp]);
 
   const sound = useGlobal("sound")[0];
-  const [alarmTime, setAlarmTime] = useState("");
   const [alarming, setAlarming] = useState(false);
+  const [alarmTime, setAlarmTime] = useState("");
   useEffect(() => {
     if (!setUp) return;
     const tick = () => {
@@ -62,7 +62,7 @@ const Clock: React.FC = () => {
     };
     const timer = setInterval(() => tick(), 1000);
     return () => clearInterval(timer);
-  }, [alarming, sound, alarmTime, setUp]);
+  }, [alarmTime, alarming, setUp, sound]);
   useEffect(() => {
     if (!alarming) {
       sound.pause();
