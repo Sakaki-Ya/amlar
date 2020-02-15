@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import React, { useGlobal } from "reactn";
+import { useGlobal } from "reactn";
 import { Link } from "react-router-dom";
 import { jsx, css } from "@emotion/core";
 import colors from "./Colors";

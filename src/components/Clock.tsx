@@ -1,8 +1,8 @@
 /** @jsx jsx */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useGlobal } from "reactn";
 import { useTransition, animated, TransitionFn, config } from "react-spring";
 import { jsx, css } from "@emotion/core";
-import SelectSoundSlider from "./SelectSoundSlider";
+import SelectSoundSlider from "../containers/SelectSoundSlider";
 import SetTime from "./SetTime";
 import Alarming from "./Alarming";
 
@@ -27,40 +27,49 @@ const Clock: React.FC = () => {
     return [randomLeft, randomTop];
   };
 
-  const [inputTime, setInputTime] = useState("");
+  const [setUp, setSetUp] = useGlobal("setUp");
+  useEffect(() => {
+    if (setUp) {
+      silent.loop = true;
+      silent.play();
+      return;
+    }
+    silent.loop = false;
+    silent.pause();
+    silent.currentTime = 0;
+  }, [setUp]);
+
+  const sound = useGlobal("sound")[0];
   const [alarmTime, setAlarmTime] = useState("");
-  const [afterSet, setAfterSet] = useState(false);
-  const [sound, setSound] = useState(new Audio("classic.mp3"));
   const [alarming, setAlarming] = useState(false);
   useEffect(() => {
+    if (!setUp) return;
     const tick = () => {
       const date = new Date();
       const hours = ("0" + date.getHours()).slice(-2);
       const minutes = ("0" + date.getMinutes()).slice(-2);
       const currentTime = hours + ":" + minutes;
-      if (currentTime === alarmTime && !alarming) {
-        sound.pause();
-        sound.currentTime = 0;
-        sound.loop = true;
-        sound.play();
-        randomPosition = genRandomPosition();
-        setAlarming(true);
-        silent.loop = false;
-        silent.pause();
-        silent.currentTime = 0;
-      }
+      if (currentTime !== alarmTime || alarming) return;
+      sound.pause();
+      sound.currentTime = 0;
+      sound.loop = true;
+      sound.play();
+      randomPosition = genRandomPosition();
+      setAlarming(true);
+      silent.loop = false;
+      silent.pause();
+      silent.currentTime = 0;
     };
     const timer = setInterval(() => tick(), 1000);
     return () => clearInterval(timer);
-  }, [alarming, sound, alarmTime]);
+  }, [alarming, sound, alarmTime, setUp]);
   useEffect(() => {
     if (!alarming) {
       sound.pause();
       sound.currentTime = 0;
       sound.loop = false;
-      setInputTime("");
       setAlarmTime("");
-      setAfterSet(false);
+      setSetUp(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [alarming]);
@@ -81,22 +90,11 @@ const Clock: React.FC = () => {
 
   return (
     <React.Fragment>
-      <div css={clock__content}>
-        <SelectSoundSlider
-          sound={sound}
-          setSound={setSound}
-          afterSet={afterSet}
-        />
+      <div css={clock__content} data-testid="clock-content">
+        <SelectSoundSlider />
       </div>
       <div css={clock__content}>
-        <SetTime
-          inputTime={inputTime}
-          setInputTime={setInputTime}
-          afterSet={afterSet}
-          setAfterSet={setAfterSet}
-          setAlarmTime={setAlarmTime}
-          silent={silent}
-        />
+        <SetTime alarming={alarming} setAlarmTime={setAlarmTime} />
       </div>
       <h2 css={clock__sleep}>3. Let's sleep.</h2>
       {transition(

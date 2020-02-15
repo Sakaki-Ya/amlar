@@ -1,50 +1,24 @@
 /** @jsx jsx */
-import React, { useState, useMemo, useGlobal } from "reactn";
-import { useHistory } from "react-router-dom";
+import React, { useMemo } from "react";
 import { jsx, css } from "@emotion/core";
 import colors from "./Colors";
 
-const Contact: React.FC = () => {
-  document.title = "Contact - Amlar";
+type ContactComponentProps = {
+  input: string[];
+  checkForm: (e: {
+    target: {
+      name: string;
+      value: string;
+    };
+  }) => void;
+  submit: (e: { preventDefault: () => void }) => void;
+};
 
-  const [input, setInput] = useState(["", "", ""]);
-  const [user, mail, message] = [input[0], input[1], input[2]];
-  const checkForm = (e: { target: { name: string; value: string } }) => {
-    const { name, value } = e.target;
-    if (name === "name") return setInput([value, mail, message]);
-    if (name === "mail" && value.match(/.+@.+\..+/))
-      return setInput([user, value, message]);
-    if (name === "message") return setInput([user, mail, value]);
-  };
-
-  const encode = (data: { [key: string]: string }) => {
-    const formData = new FormData();
-    Object.keys(data).forEach(key => formData.append(key, data[key]));
-    return formData;
-  };
-
-  const setPage = useGlobal("page")[1];
-  const history = useHistory();
-  const submit = (e: { preventDefault: () => void }) => {
-    e.preventDefault();
-    const name = user;
-    const data = { "form-name": "contact", name, mail, message };
-    fetch("/", {
-      method: "POST",
-      body: encode(data)
-    })
-      .then(() => {
-        alert("Thank you for sending the message.");
-        history.push("/");
-        setPage("top");
-        document.title = "Amlar";
-      })
-      .catch(error => {
-        alert("Failed to send message. sorry.");
-        console.log(error);
-      });
-  };
-
+const ContactComponent: React.FC<ContactComponentProps> = ({
+  input,
+  checkForm,
+  submit
+}) => {
   const memoIcon = useMemo(() => {
     return (
       <svg width="286.001" viewBox="0 0 286.001 302" css={contact__icon}>
@@ -227,4 +201,4 @@ const contact__submit = css`
   }
 `;
 
-export default Contact;
+export default ContactComponent;

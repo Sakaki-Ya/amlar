@@ -44,7 +44,7 @@ const Alarming: React.FC<AlarmingProps> = memo(
         background-color: ${colors.white};
         color: ${colors.orange};
         box-shadow: none;
-        transition: 2s;
+        transition: 1.5s;
       }
       animation: stopButton 0.2s;
       @keyframes stopButton {

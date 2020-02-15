@@ -7,7 +7,7 @@ import Clock from "./Clock";
 import Note from "./Note";
 import PrivacyPolicy from "./PrivacyPolicy";
 import Footer from "./Footer";
-import Contact from "./Contact";
+import Contact from "../containers/Contact";
 
 const Main: React.FC = () => {
   const location = useLocation();
