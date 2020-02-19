@@ -6,13 +6,30 @@ const useContact = () => {
   document.title = "Contact - Amlar";
 
   const [input, setInput] = useState(["", "", ""]);
-  const [user, mail, message] = [input[0], input[1], input[2]];
+  const [inputName, inputMail, inputMessage] = [input[0], input[1], input[2]];
+  const [check, setCheck] = useState([false, false, false]);
+  const [checkName, checkMail, checkMessage] = [check[0], check[1], check[2]];
+
   const checkForm = (e: { target: { name: string; value: string } }) => {
     const { name, value } = e.target;
-    if (name === "name") return setInput([value, mail, message]);
-    if (name === "mail" && value.match(/.+@.+\..+/))
-      return setInput([user, value, message]);
-    if (name === "message") return setInput([user, mail, value]);
+    if (name === "name") {
+      if (value === "") return setCheck([false, checkMail, checkMessage]);
+      setInput([value, inputMail, inputMessage]);
+      setCheck([true, checkMail, checkMessage]);
+      return;
+    }
+    if (name === "mail") {
+      if (!value.match(/.+@.+\..+/))
+        return setCheck([checkName, false, checkMessage]);
+      setInput([inputName, value, inputMessage]);
+      setCheck([checkName, true, checkMessage]);
+      return;
+    }
+    if (name === "message") {
+      if (value === "") return setCheck([checkName, checkMail, false]);
+      setInput([inputName, inputMail, value]);
+      setCheck([checkName, checkMail, true]);
+    }
   };
 
   const encode = (data: { [key: string]: string }) => {
@@ -25,7 +42,9 @@ const useContact = () => {
   const history = useHistory();
   const submit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    const name = user;
+    const name = inputMail;
+    const mail = inputMail;
+    const message = inputMessage;
     const data = { "form-name": "contact", name, mail, message };
     fetch("/", {
       method: "POST",
@@ -42,13 +61,13 @@ const useContact = () => {
         console.log(error);
       });
   };
-  return { input, checkForm, submit };
+  return { check, checkForm, submit };
 };
 
 const ContactContainer = () => {
-  const { input, checkForm, submit } = useContact();
+  const { check, checkForm, submit } = useContact();
   return (
-    <ContactComponent input={input} checkForm={checkForm} submit={submit} />
+    <ContactComponent check={check} checkForm={checkForm} submit={submit} />
   );
 };
 

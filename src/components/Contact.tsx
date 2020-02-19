@@ -4,7 +4,7 @@ import { jsx, css } from "@emotion/core";
 import colors from "./Colors";
 
 type ContactComponentProps = {
-  input: string[];
+  check: boolean[];
   checkForm: (e: {
     target: {
       name: string;
@@ -15,7 +15,7 @@ type ContactComponentProps = {
 };
 
 const ContactComponent: React.FC<ContactComponentProps> = memo(
-  ({ input, checkForm, submit }) => {
+  ({ check, checkForm, submit }) => {
     const memoIcon = useMemo(() => {
       return (
         <svg width="286.001" viewBox="0 0 286.001 302" css={contact__icon}>
@@ -78,6 +78,7 @@ const ContactComponent: React.FC<ContactComponentProps> = memo(
             <input
               type="text"
               name="name"
+              aria-label="name"
               onChange={checkForm}
               css={contact__input}
             />
@@ -87,6 +88,7 @@ const ContactComponent: React.FC<ContactComponentProps> = memo(
             <input
               type="mail"
               name="mail"
+              aria-label="mail"
               onChange={checkForm}
               css={contact__input}
             />
@@ -95,6 +97,7 @@ const ContactComponent: React.FC<ContactComponentProps> = memo(
             <p>Message</p>
             <textarea
               name="message"
+              aria-label="message"
               onChange={checkForm}
               css={contact__input}
             />
@@ -102,10 +105,10 @@ const ContactComponent: React.FC<ContactComponentProps> = memo(
           <div css={contact__submitSection}>
             <button
               type="submit"
-              disabled={input.some(check => !check)}
+              disabled={check.some(boolean => !boolean)}
               css={contact__submit}
             >
-              Send
+              Submit
             </button>
           </div>
         </form>
