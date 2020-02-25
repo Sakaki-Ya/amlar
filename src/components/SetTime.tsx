@@ -32,6 +32,7 @@ const SetTimeComponet: React.FC<SetTimeComponetProps> = memo(
           <button
             onClick={setUp ? cancelAlarm : setAlarm}
             css={setTime__setButton}
+            aria-label="set time"
           >
             {setUp ? "Cancel" : "Set"}
           </button>

@@ -5,14 +5,14 @@ import { renderWithRouter } from "../containers/RouterTestUtil";
 
 import Contact from "../containers/Contact";
 
-describe("contact contaners", () => {
+describe("Contact contaners", () => {
   afterEach(cleanup);
   const setup = () => {
     const container = renderWithRouter(<Contact />);
     const inputName = container.getByLabelText("name");
     const inputMail = container.getByLabelText("mail");
     const inputMessage = container.getByLabelText("message");
-    const submit = container.getByText("Submit");
+    const submit = container.getByLabelText("Submit");
     return {
       inputName,
       inputMail,

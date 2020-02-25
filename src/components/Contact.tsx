@@ -86,7 +86,7 @@ const ContactComponent: React.FC<ContactComponentProps> = memo(
           <div css={contact__section}>
             <p>E-mail</p>
             <input
-              type="mail"
+              type="email"
               name="mail"
               aria-label="mail"
               onChange={checkForm}
@@ -105,6 +105,7 @@ const ContactComponent: React.FC<ContactComponentProps> = memo(
           <div css={contact__submitSection}>
             <button
               type="submit"
+              aria-label="submit"
               disabled={check.some(boolean => !boolean)}
               css={contact__submit}
             >

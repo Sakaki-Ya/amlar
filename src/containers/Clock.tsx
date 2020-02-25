@@ -68,8 +68,7 @@ const useClock = () => {
       setAlarmTime("");
       setSetUp(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [alarming]);
+  }, [alarming, setSetUp, sound]);
 
   const transition: TransitionFn<boolean, {}> = useTransition(alarming, {
     config: config.default,

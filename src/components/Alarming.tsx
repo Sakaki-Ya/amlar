@@ -16,7 +16,9 @@ const AlarmingComponent: React.FC<AlarmingComponentProps> = memo(
     const memoHeader = useMemo(() => {
       return (
         <header css={alarming__header}>
-          <h2 css={alarming__h2}>Good Morning !</h2>
+          <h2 css={alarming__h2} data-testid="alarming">
+            Good Morning !
+          </h2>
           <svg width="384.342" viewBox="0 0 384.342 265.9" css={alarming__icon}>
             <g fillRule="evenodd" clipRule="evenodd">
               <path
