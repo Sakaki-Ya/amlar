@@ -12,7 +12,7 @@ describe("Contact contaners", () => {
     const inputName = container.getByLabelText("name");
     const inputMail = container.getByLabelText("mail");
     const inputMessage = container.getByLabelText("message");
-    const submit = container.getByLabelText("Submit");
+    const submit = container.getByLabelText("submit");
     return {
       inputName,
       inputMail,
