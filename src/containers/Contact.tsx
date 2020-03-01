@@ -64,7 +64,7 @@ const useContact = () => {
   return { check, checkForm, submit };
 };
 
-const ContactContainer = () => {
+const ContactContainer: React.FC = () => {
   const { check, checkForm, submit } = useContact();
   return (
     <ContactComponent check={check} checkForm={checkForm} submit={submit} />

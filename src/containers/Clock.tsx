@@ -61,13 +61,12 @@ const useClock = () => {
     return () => clearInterval(timer);
   }, [alarmTime, alarming, setUp, sound]);
   useEffect(() => {
-    if (!alarming) {
-      sound.pause();
-      sound.currentTime = 0;
-      sound.loop = false;
-      setAlarmTime("");
-      setSetUp(false);
-    }
+    if (alarming) return;
+    sound.pause();
+    sound.currentTime = 0;
+    sound.loop = false;
+    setAlarmTime("");
+    setSetUp(false);
   }, [alarming, setSetUp, sound]);
 
   const transition: TransitionFn<boolean, {}> = useTransition(alarming, {
@@ -86,7 +85,7 @@ const useClock = () => {
   return { alarming, setAlarmTime, setAlarming, transition, randomPosition };
 };
 
-const ClockContainer = () => {
+const ClockContainer: React.FC = () => {
   const {
     alarming,
     setAlarmTime,

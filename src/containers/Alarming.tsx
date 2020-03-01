@@ -84,7 +84,7 @@ const useAlarming = ({ randomPosition, setAlarming }: useAlarmingProps) => {
   return { rendered, setHold, transition, alarming__stop };
 };
 
-const AlarmingContainer: React.StatelessComponent<useAlarmingProps> = memo(
+const AlarmingContainer: React.FC<useAlarmingProps> = memo(
   ({ randomPosition, setAlarming }) => {
     const { rendered, setHold, transition, alarming__stop } = useAlarming({
       randomPosition,

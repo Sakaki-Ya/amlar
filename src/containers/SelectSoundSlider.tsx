@@ -45,7 +45,7 @@ const useSelectSoundSlider = () => {
   return { settings, soundPreview, selectSound__slider };
 };
 
-const SelectSoundSliderContainer = () => {
+const SelectSoundSliderContainer: React.FC = () => {
   const {
     settings,
     soundPreview,

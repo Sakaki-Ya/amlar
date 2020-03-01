@@ -12,14 +12,15 @@ describe("SetTime contaners", () => {
 
   it("render Alarming", () => {
     advanceTo(new Date(2020, 1, 1, 0, 0, 0));
-    console.log(new Date());
 
     const { getByLabelText, getByTestId } = render(<Clock />);
     fireEvent.change(getByLabelText("input time"), {
       target: { value: "00:00" }
     });
     fireEvent.click(getByLabelText("set time"));
-    expect(getByTestId("alarming")).toHaveTextContent("Good Morning !");
+    const waitTimer = () =>
+      expect(getByTestId("alarming")).toHaveTextContent("Good Morning !");
+    setTimeout(waitTimer, 1000);
 
     clear();
   });

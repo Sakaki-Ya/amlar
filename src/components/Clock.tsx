@@ -31,7 +31,7 @@ const ClockComponent: React.FC<ClockComponentProps> = ({
       </div>
       <h2 css={clock__sleep}>3. Let's sleep.</h2>
       {transition(
-        (props, item): any =>
+        (props, item) =>
           item && (
             <animated.div style={props}>
               <Alarming
