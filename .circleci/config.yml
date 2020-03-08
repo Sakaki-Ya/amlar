@@ -11,7 +11,25 @@ jobs:
           steps:
             - run: yarn install
             - run: yarn test
+  deploy:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: yarn add netlify-cli
+            - run: yarn build
+            - run: yarn netlify deploy --prod -d build ${NETLIFY_AUTH_TOKEN} ${NETLIFY_SITE_ID}
+
 workflows:
-    build-and-test:
-      jobs:
-        - build-and-test
+  version: 2
+  build-and-test:
+    jobs:
+      - build-and-test
+      - deploy:
+          requires:
+            - build-and-test
+          filters:
+            branches:
+              only: master
