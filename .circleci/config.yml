@@ -3,19 +3,15 @@ orbs:
   node: circleci/node@1.1.6
 jobs:
   build-and-test:
-    executor: 
+    executor:
       name: node/default
-    steps: 
+    steps:
       - checkout
-      - node/with-cache: 
-          steps: 
+      - node/with-cache:
+          steps:
             - run: yarn install
             - run: yarn test
-workflows: 
-  build-and-test: 
-    jobs: 
+workflows:
+  build-and-test:
+    jobs:
       - build-and-test
-          filters: 
-            branches:  
-              only: 
-                - master
