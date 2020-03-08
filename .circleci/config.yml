@@ -14,11 +14,11 @@ jobs:
             - run: yarn test
             - run: yarn build
             - run: yarn netlify deploy --prod -d build ${NETLIFY_AUTH_TOKEN} ${NETLIFY_SITE_ID}
-workflows:
+workflows: 
     build-and-test:
-      jobs:
+      jobs: 
         - build-and-test
-            filters:
-              branches:
-                only:
+            filters: 
+              branches: 
+                only: 
                   - master
