@@ -15,10 +15,10 @@ jobs:
             - run: yarn build
             - run: yarn netlify deploy --prod -d build ${NETLIFY_AUTH_TOKEN} ${NETLIFY_SITE_ID}
 workflows: 
-    build-and-test:
-      jobs: 
-        - build-and-test
-            filters: 
-              branches: 
-                only: 
-                  - master
+  build-and-test:
+    jobs: 
+      - build-and-test
+          filters: 
+            branches: 
+              only: 
+                - master
