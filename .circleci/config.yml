@@ -1,27 +1,17 @@
 version: 2.1
-
+orbs:
+  node: circleci/node@1.1.6
 jobs:
-  build:
-    docker:
-      - image: circleci/node@1.1.6
-
-    working_directory: ~/repo
+  build-and-test:
+    executor:
+      name: node/default
     steps:
       - checkout
-
-      - run: yarn install
-
-      - run: yarn run test
-      - deploy:
-          name: Maybe Deploy
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              echo "Deploy Development"
-              yarn run build
-              ./node_modules/netlify-cli/bin/cli.js deploy \
-                --site-id ${DEV_SITE_ID} \
-                -p build/ \
-                --access-token ${NETLIFY_TOKEN}
-            else
-              echo "Not master branch so not deploying"
-            fi
+      - node/with-cache:
+          steps:
+            - run: npm install
+            - run: npm test
+workflows:
+  build-and-test:
+    jobs:
+      - build-and-test
