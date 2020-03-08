@@ -1,3 +1,5 @@
+import { setGlobal } from "reactn";
+
 window.matchMedia =
   window.matchMedia ||
   function() {
@@ -8,8 +10,12 @@ window.matchMedia =
     };
   };
 
-window.HTMLMediaElement.prototype.load = () => {};
+setGlobal({
+  sound: new Audio("classic.mp3"),
+  setUp: false,
+  page: "top"
+});
+
 window.HTMLMediaElement.prototype.play = () => {};
 window.HTMLMediaElement.prototype.pause = () => {};
-window.HTMLMediaElement.prototype.addTextTrack = () => {};
 window.alert = () => {};

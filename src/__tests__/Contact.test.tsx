@@ -5,7 +5,7 @@ import { renderWithRouter } from "../containers/RouterTestUtil";
 
 import Contact from "../containers/Contact";
 
-describe("Contact contaners", () => {
+describe("Contact contaners test", () => {
   afterEach(cleanup);
   const setup = () => {
     const container = renderWithRouter(<Contact />);

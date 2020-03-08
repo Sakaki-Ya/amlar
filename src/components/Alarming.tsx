@@ -260,6 +260,7 @@ const AlarmingComponent: React.FC<AlarmingComponentProps> = memo(
                 e.preventDefault();
               }}
               css={alarming__stop}
+              aria-label="stop button"
             >
               Stop
             </button>

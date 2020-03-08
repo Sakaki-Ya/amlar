@@ -1,27 +1,27 @@
-import React from "react";
+import React from "reactn";
 import "@testing-library/jest-dom/extend-expect";
-import { cleanup, render, fireEvent } from "@testing-library/react";
+import { cleanup, render, fireEvent, act } from "@testing-library/react";
 import { advanceTo, clear } from "jest-date-mock";
 
-import "../setupTests";
+import "../setupTest";
 import Clock from "../containers/Clock";
 import SetTime from "../containers/SetTime";
 
-describe("SetTime contaners", () => {
+describe("SetTime contaners test", () => {
   afterEach(cleanup);
 
   it("render Alarming", () => {
     advanceTo(new Date(2020, 1, 1, 0, 0, 0));
-
+    jest.useFakeTimers();
     const { getByLabelText, getByTestId } = render(<Clock />);
     fireEvent.change(getByLabelText("input time"), {
       target: { value: "00:00" }
     });
     fireEvent.click(getByLabelText("set time"));
-    const waitTimer = () =>
-      expect(getByTestId("alarming")).toHaveTextContent("Good Morning !");
-    setTimeout(waitTimer, 1000);
-
+    act(() => {
+      jest.advanceTimersByTime(1000);
+    });
+    expect(getByTestId("alarming")).toHaveTextContent("Good Morning !");
     clear();
   });
 
