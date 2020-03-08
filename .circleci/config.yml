@@ -10,19 +10,14 @@ jobs:
       - node/with-cache:
           steps:
             - run: yarn install
+            - run: yarn add netlify-cli
             - run: yarn test
             - run: yarn build
-            - run:
-                name: deploy
-                command: |
-                if [[ "$CIRCLE_BRANCH" = "master" ]]; then
-                node_modules/netlify-cli/bin/cli.js deploy --site-id $DEV_SITE_ID -p build/ --access-token $NETLIFY_TOKEN
-                fi
+            - run: yarn netlify deploy --prod -d build ${NETLIFY_AUTH_TOKEN} ${NETLIFY_SITE_ID}
 workflows:
-  build-and-test:
-    jobs:
-      - build-and-test
-        filters:
-          branches:
-            only:
-              - master
+  jobs:
+    - build-and-test
+      filters:
+        branches:
+          only:
+            - master
