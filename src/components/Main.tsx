@@ -3,11 +3,11 @@ import React from "react";
 import { useTransition, animated } from "react-spring";
 import { Switch, Route, Redirect, useLocation } from "react-router-dom";
 import { jsx, css } from "@emotion/core";
-import Clock from "./Clock";
+import Clock from "../containers/Clock";
 import Note from "./Note";
 import PrivacyPolicy from "./PrivacyPolicy";
 import Footer from "./Footer";
-import Contact from "./Contact";
+import Contact from "../containers/Contact";
 
 const Main: React.FC = () => {
   const location = useLocation();

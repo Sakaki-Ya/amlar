@@ -1,56 +1,23 @@
 /** @jsx jsx */
-import React, { memo } from "react";
+import React, { memo, useGlobal } from "reactn";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { jsx, css } from "@emotion/core";
+import { jsx, css, SerializedStyles } from "@emotion/core";
 import colors from "./Colors";
 
-type SelectSoundSliderProps = {
-  sound: HTMLAudioElement;
-  setSound: React.Dispatch<React.SetStateAction<HTMLAudioElement>>;
-  afterSet: boolean;
+type SelectSoundSliderComponentProps = {
+  settings: {
+    afterChange: (currentIndexNum: number) => void;
+    swipe: boolean;
+    arrows: boolean;
+  };
+  soundPreview: () => void;
+  selectSound__slider: SerializedStyles;
 };
 
-const SelectSoundSlider: React.FC<SelectSoundSliderProps> = memo(
-  ({ sound, setSound, afterSet }) => {
-    const sounds = [
-      "classic",
-      "digital",
-      "chicken",
-      "cuckoo",
-      "bell",
-      "laughter"
-    ];
-    const settings = {
-      afterChange: (currentIndexNum: number) => {
-        sound.pause();
-        sound.currentTime = 0;
-        setSound(new Audio(sounds[currentIndexNum] + ".mp3"));
-      },
-      swipe: afterSet ? false : true,
-      arrows: afterSet ? false : true
-    };
-
-    const soundPreview = () => {
-      sound.pause();
-      sound.currentTime = 0;
-      sound.loop = false;
-      sound.play();
-    };
-
-    const selectSound__slider = css`
-      max-width: 240px;
-      margin: auto;
-      padding: 0 1rem;
-      div p {
-        overflow: visible;
-        padding-bottom: 1rem;
-      }
-      opacity: ${afterSet ? 0.5 : 1};
-      transition: 0.2s;
-    `;
-
+const SelectSoundSliderComponent: React.FC<SelectSoundSliderComponentProps> = memo(
+  ({ settings, soundPreview, selectSound__slider }) => {
     const soundIcons = [
       "Digital alarm clock",
       "Cockerel",
@@ -68,6 +35,7 @@ const SelectSoundSlider: React.FC<SelectSoundSliderProps> = memo(
         <p>{soundIcons}</p>
       </div>
     ));
+    const setUp = useGlobal("setUp")[0];
 
     return (
       <React.Fragment>
@@ -225,7 +193,7 @@ const SelectSoundSlider: React.FC<SelectSoundSliderProps> = memo(
         <button
           onClick={soundPreview}
           css={selectSound__preview}
-          disabled={afterSet ? true : false}
+          disabled={setUp ? true : false}
         >
           &#x25b6; Preview
         </button>
@@ -269,4 +237,4 @@ const selectSound__preview = css`
   }
 `;
 
-export default SelectSoundSlider;
+export default SelectSoundSliderComponent;

@@ -1,76 +1,20 @@
 /** @jsx jsx */
-import React, { memo } from "react";
-import { jsx, css } from "@emotion/core";
+import React, { memo, useGlobal } from "reactn";
+import { ChangeEvent } from "react";
+import { jsx, css, SerializedStyles } from "@emotion/core";
 import colors from "./Colors";
 
-type InputTimeProps = {
+type SetTimeComponetProps = {
   inputTime: string;
-  setInputTime: React.Dispatch<React.SetStateAction<string>>;
-  afterSet: boolean;
-  setAfterSet: React.Dispatch<React.SetStateAction<boolean>>;
-  setAlarmTime: React.Dispatch<React.SetStateAction<string>>;
-  silent: HTMLAudioElement;
+  getInputTime: (e: ChangeEvent<HTMLInputElement>) => void;
+  setAlarm: () => void;
+  cancelAlarm: () => void;
+  setTime__setButton: SerializedStyles;
 };
 
-const SetTime: React.FC<InputTimeProps> = memo(
-  ({
-    inputTime,
-    setInputTime,
-    afterSet,
-    setAfterSet,
-    setAlarmTime,
-    silent
-  }) => {
-    const getInputTime = (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (e.target.value.match(/^([01]?[0-9]|2[0-3]):([0-5][0-9])$/))
-        setInputTime(e.target.value);
-    };
-    const setAlarm = () => {
-      if (inputTime.match(/^([01]?[0-9]|2[0-3]):([0-5][0-9])$/)) {
-        setAlarmTime(inputTime);
-        setAfterSet(true);
-        silent.loop = true;
-        silent.play();
-        return;
-      }
-      alert("Please enter a time.");
-    };
-
-    const cancelAlarm = () => {
-      setAfterSet(false);
-      setInputTime("");
-      setAlarmTime("");
-      silent.loop = false;
-      silent.pause();
-      silent.currentTime = 0;
-    };
-
-    const setTime__setButton = css`
-      margin: 0 0.5rem;
-      padding: 0.5rem 0.75rem;
-      background-color: ${afterSet ? colors.lightBlue : colors.darkOrange};
-      border: none;
-      border-radius: 3px;
-      white-space: nowrap;
-      color: ${colors.white};
-      font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-      font-size: 1.25rem;
-      font-weight: bold;
-      box-shadow: 0 2px 4px ${colors.white};
-      transition: 0.2s;
-      &:hover {
-        background-color: ${afterSet
-          ? colors.moreLightBlue
-          : colors.lightOrange};
-        box-shadow: 0 2px 6px ${colors.white};
-      }
-      &:active {
-        transform: translateY(2px);
-        background-color: ${afterSet ? "#00274f" : colors.moreDarkOrange};
-        color: ${colors.white};
-        box-shadow: none;
-      }
-    `;
+const SetTimeComponet: React.FC<SetTimeComponetProps> = memo(
+  ({ inputTime, getInputTime, setAlarm, cancelAlarm, setTime__setButton }) => {
+    const setUp = useGlobal("setUp")[0];
 
     return (
       <React.Fragment>
@@ -81,14 +25,16 @@ const SetTime: React.FC<InputTimeProps> = memo(
             value={inputTime}
             css={setTime__inputForm}
             onChange={getInputTime}
-            disabled={afterSet ? true : false}
+            disabled={setUp ? true : false}
             aria-label="input time"
+            data-testid="setTime"
           />
           <button
-            onClick={afterSet ? cancelAlarm : setAlarm}
+            onClick={setUp ? cancelAlarm : setAlarm}
             css={setTime__setButton}
+            aria-label="set time"
           >
-            {afterSet ? "Cancel" : "Set"}
+            {setUp ? "Cancel" : "Set"}
           </button>
         </div>
       </React.Fragment>
@@ -127,4 +73,4 @@ const setTime__inputForm = css`
   }
 `;
 
-export default SetTime;
+export default SetTimeComponet;
