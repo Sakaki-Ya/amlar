@@ -16,7 +16,7 @@
 
 ## Amlar の特徴
 
-[gif](https://user-images.githubusercontent.com/48976713/76692551-765d2000-669b-11ea-97eb-f54ffe1e003d.gif)
+![gif](https://user-images.githubusercontent.com/48976713/76692551-765d2000-669b-11ea-97eb-f54ffe1e003d.gif)
 
 ---
 
