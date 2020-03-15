@@ -5,14 +5,14 @@
 
 ## 使用している主なライブラリやツール
 
-- フレームワーク（[React](https://ja.reactjs.org/docs/getting-started.html)）
+- Webフレームワーク（[React](https://ja.reactjs.org/docs/getting-started.html)）
 - ホスティング（[Netlify](https://www.netlify.com/)）
 - グローバルステートの管理（[ReactN](https://github.com/CharlesStover/reactn)）
 - アニメーション（[react-spring](https://www.react-spring.io/)）
 - お問い合わせフォーム（[Netlify Forms](https://www.netlify.com/products/forms/)）
 - テスト（[React Testing Library](https://testing-library.com/docs/react-testing-library/intro)）
 - 自動テスト（[CircleCI](https://circleci.com/)）
-- CSS（[Emotion](https://emotion.sh/docs/introduction)）
+- CSSライブラリ（[Emotion](https://emotion.sh/docs/introduction)）
 
 ## Amlar の特徴
 
