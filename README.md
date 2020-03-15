@@ -16,6 +16,12 @@
 
 ## Amlar の特徴
 
+<div align="center">
+<img src="https://user-images.githubusercontent.com/48976713/76692551-765d2000-669b-11ea-97eb-f54ffe1e003d.gif" alt="デモ" title="デモ">
+</div>
+
+---
+
 ### 1. アラームを止めるボタン（以下ストップボタン）の位置が毎回ランダム
 
 ### 2. ストップボタンを長押しすることでアラームが止まる
