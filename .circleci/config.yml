@@ -16,7 +16,6 @@ jobs:
             - run: yarn netlify deploy --prod -d build -a ${NETLIFY_AUTH_TOKEN} -s ${NETLIFY_SITE_ID}
 
 workflows:
-  version: 2
   build-and-test:
     jobs:
       - build-and-test:
