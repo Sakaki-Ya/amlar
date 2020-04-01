@@ -6,6 +6,7 @@
 ## 使用している主なライブラリやツール
 
 - Webフレームワーク（[React](https://ja.reactjs.org/docs/getting-started.html)）
+- TypeScript
 - ホスティング（[Netlify](https://www.netlify.com/)）
 - グローバルステートの管理（[ReactN](https://github.com/CharlesStover/reactn)）
 - アニメーション（[react-spring](https://www.react-spring.io/)）
