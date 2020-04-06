@@ -5,9 +5,9 @@ import emotionReset from "emotion-reset";
 import { jsx, Global, css, SerializedStyles } from "@emotion/core";
 import colors from "./components/Colors";
 import Main from "./components/Main";
-import "./stars.css";
-import "./stars2.css";
-import "./stars3.css";
+import "./backGroundStars/stars.css";
+import "./backGroundStars/stars2.css";
+import "./backGroundStars/stars3.css";
 
 const App: React.FC = () => {
   return (
