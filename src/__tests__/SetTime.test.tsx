@@ -15,7 +15,7 @@ describe("SetTime contaners test", () => {
     jest.useFakeTimers();
     const { getByLabelText, getByTestId } = render(<Clock />);
     fireEvent.change(getByLabelText("input time"), {
-      target: { value: "00:00" }
+      target: { value: "00:00" },
     });
     fireEvent.click(getByLabelText("set time"));
     act(() => {
@@ -30,10 +30,10 @@ describe("SetTime contaners test", () => {
       <SetTime alarming={false} setAlarmTime={() => {}} />
     );
     fireEvent.change(getByLabelText("input time"), {
-      target: { value: "10:00" }
+      target: { value: "10:00" },
     });
     fireEvent.click(getByLabelText("set time"));
     fireEvent.click(getByLabelText("set time"));
-    expect(getByLabelText("input time").value).toBe("");
+    expect((getByLabelText("input time") as HTMLInputElement).value).toBe("");
   });
 });

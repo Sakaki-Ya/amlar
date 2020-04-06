@@ -18,7 +18,7 @@ describe("Contact contaners test", () => {
       inputMail,
       inputMessage,
       submit,
-      ...container
+      ...container,
     };
   };
 
@@ -27,7 +27,7 @@ describe("Contact contaners test", () => {
     fireEvent.change(inputName, { target: { value: "foo" } });
     fireEvent.change(inputMail, { target: { value: "bar@gamil." } });
     fireEvent.change(inputMessage, { target: { value: "baz" } });
-    expect(submit.disabled).toEqual(true);
+    expect((submit as HTMLButtonElement).disabled).toEqual(true);
   });
 
   it("send button not disabled", () => {
@@ -35,6 +35,6 @@ describe("Contact contaners test", () => {
     fireEvent.change(inputName, { target: { value: "foo" } });
     fireEvent.change(inputMail, { target: { value: "bar@gamil.com" } });
     fireEvent.change(inputMessage, { target: { value: "baz" } });
-    expect(submit.disabled).toEqual(false);
+    expect((submit as HTMLButtonElement).disabled).toEqual(false);
   });
 });
