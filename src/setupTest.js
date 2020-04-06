@@ -2,18 +2,18 @@ import { setGlobal } from "reactn";
 
 window.matchMedia =
   window.matchMedia ||
-  function() {
+  function () {
     return {
       matches: false,
-      addListener: function() {},
-      removeListener: function() {}
+      addListener: () => {},
+      removeListener: () => {},
     };
   };
 
 setGlobal({
   sound: new Audio("classic.mp3"),
   setUp: false,
-  page: "top"
+  page: "top",
 });
 
 window.HTMLMediaElement.prototype.play = () => {};
