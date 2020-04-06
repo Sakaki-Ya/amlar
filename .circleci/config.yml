@@ -11,6 +11,7 @@ jobs:
           steps:
             - run: yarn
             - run: yarn add @babel/helper-call-delegate
+            - run: yarn add proposal-numeric-separator
             - run: yarn test
             - run: yarn add netlify-cli
             - run: yarn build
