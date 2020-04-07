@@ -48,5 +48,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "resolutions": {
+    "@babel/preset-env": "7.9.5"
+  },
+  "devDependencies": {
+    "npm-force-resolutions": "0.0.3"
   }
 }
