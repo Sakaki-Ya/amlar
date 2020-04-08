@@ -53,6 +53,9 @@
     "@babel/preset-env": "7.9.5"
   },
   "devDependencies": {
-    "npm-force-resolutions": "0.0.3"
+    "npm-force-resolutions": "0.0.3",
+    "@babel/preset-env": "^7.9.5",
+    "@babel/compat-data": "^7.9.0",
+    "babel-loader": "^8.1.0"
   }
 }
