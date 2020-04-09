@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  node: circleci/node@2.0.1
+  node: circleci/node@1.1.6
 jobs:
   build-test-deploy:
     executor:
@@ -10,8 +10,8 @@ jobs:
       - node/with-cache:
           steps:
             - run: yarn
-            - run: yarn add netlify-cli
             - run: yarn test
+            - run: yarn add netlify-cli
             - run: yarn build
             - run: yarn netlify deploy -p -d build -a ${NETLIFY_AUTH_TOKEN} -s ${NETLIFY_SITE_ID}
 
