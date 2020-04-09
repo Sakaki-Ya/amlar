@@ -11,8 +11,8 @@ jobs:
           steps:
             - run: npm i
             - run: npm test
-            - run: npm i netlify-cli
             - run: npm run build
+            - run: sudo npm install netlify-cli -g
             - run: netlify deploy -p -d build -a ${NETLIFY_AUTH_TOKEN} -s ${NETLIFY_SITE_ID}
 
 workflows:
