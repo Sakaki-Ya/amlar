@@ -10,7 +10,6 @@
 - ホスティング（[Netlify](https://www.netlify.com/)）
 - グローバルステートの管理（[ReactN](https://github.com/CharlesStover/reactn)）
 - アニメーション（[react-spring](https://www.react-spring.io/)）
-- お問い合わせフォーム（[Netlify Forms](https://www.netlify.com/products/forms/)）
 - テスト（[React Testing Library](https://testing-library.com/docs/react-testing-library/intro)）
 - 自動テスト（[CircleCI](https://circleci.com/)）
 - CSSライブラリ（[Emotion](https://emotion.sh/docs/introduction)）
