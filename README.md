@@ -3,6 +3,8 @@
 オンライン目覚まし時計です。  
 [Amlar](https://amlar.onl/)
 
+朝に弱い友人のためと、```React```と```Typescript```に触れるために、Amlarを制作しました。
+
 ## 使用している主なライブラリやツール
 
 - Webフレームワーク（[React](https://ja.reactjs.org/docs/getting-started.html)）
